@@ -15,17 +15,11 @@ namespace Dva.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Eksempel(int firstnumber = 0, int secondnumber = 0)
         {
             ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
+            int result = firstnumber + secondnumber;
+            ViewBag.res = result;
             return View();
         }
 
