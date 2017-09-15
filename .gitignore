@@ -79,5 +79,6 @@ _[Ss]cripts
 .idea/*
 .idea
 #################
-# VS temp files #
+# Website debug #
 #################
+Dva/obj/Debug/*
