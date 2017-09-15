@@ -73,3 +73,11 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+###############
+# Rider files #
+###############
+.idea/*
+.idea
+#################
+# VS temp files #
+#################
