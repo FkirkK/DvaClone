@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 2,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "Libuv/1.10.0": {
@@ -12533,44 +12533,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marcb\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/bs/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\marcb\\Documents\\GitHub\\Dva\\Dva\\Dva.csproj",
+      "projectUniqueName": "/home/bs/code/Dva/Dva/Dva.csproj",
       "projectName": "Dva",
-      "projectPath": "C:\\Users\\marcb\\Documents\\GitHub\\Dva\\Dva\\Dva.csproj",
-      "packagesPath": "C:\\Users\\marcb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marcb\\Documents\\GitHub\\Dva\\Dva\\obj\\",
+      "projectPath": "/home/bs/code/Dva/Dva/Dva.csproj",
+      "outputPath": "/home/bs/code/Dva/Dva/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
-      "configFilePaths": [
-        "C:\\Users\\marcb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-      ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
-      "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {}
         }
-      },
-      "warningProperties": {
-        "warnAsError": [
-          "NU1605"
-        ]
       }
     },
     "frameworks": {
@@ -12578,19 +12557,13 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
+            "version": "2.0.0"
           },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
           }
-        },
-        "imports": [
-          "net461"
-        ],
-        "assetTargetFallback": true,
-        "warn": true
+        }
       }
     }
   }
