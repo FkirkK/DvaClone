@@ -78,7 +78,12 @@ _[Ss]cripts
 ###############
 .idea/*
 .idea
-#################
-# Website debug #
-#################
-Dva/obj/Debug/*
+############
+# VS files #
+############
+.vs/*
+##################
+# nuget packages #
+# Website debug  #
+##################
+Dva/obj/*
