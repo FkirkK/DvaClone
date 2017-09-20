@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
-using Dva.Models.Nonwebsite_related_logic;
+using Dva.Models.NonwebsiteRelated;
 
 namespace DvaTesting.Models.Nonwebsite_related
 {
