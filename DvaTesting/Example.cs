@@ -8,7 +8,7 @@ namespace DvaTesting
         public class AccountTest
         {
             [Test]
-            public void TransferFunds()
+            public void ShouldBeTrue()
             {
                 Assert.True(true);
             }

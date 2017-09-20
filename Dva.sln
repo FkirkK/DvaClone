@@ -5,9 +5,7 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dva", "Dva\Dva.csproj", "{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9CE354C3-7BD8-47EA-A0F8-92B053DAF3A1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvaTesting", "DvaTesting\DvaTesting.csproj", "{64C3E6BA-75A1-4965-803F-C56D5E894A5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaTesting", "DvaTesting\DvaTesting.csproj", "{64C3E6BA-75A1-4965-803F-C56D5E894A5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CE354C3-7BD8-47EA-A0F8-92B053DAF3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CE354C3-7BD8-47EA-A0F8-92B053DAF3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CE354C3-7BD8-47EA-A0F8-92B053DAF3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CE354C3-7BD8-47EA-A0F8-92B053DAF3A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64C3E6BA-75A1-4965-803F-C56D5E894A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64C3E6BA-75A1-4965-803F-C56D5E894A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C3E6BA-75A1-4965-803F-C56D5E894A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
