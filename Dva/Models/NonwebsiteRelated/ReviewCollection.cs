@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Dva.Models.Nonwebsite_related_logic
+namespace Dva.Models.NonwebsiteRelated
 {
     public class ReviewCollection : ICollection<Review>
     {
@@ -10,7 +10,7 @@ namespace Dva.Models.Nonwebsite_related_logic
         {
             get;
             set;
-        }
+        } 
 
         public int Count { get; }
 

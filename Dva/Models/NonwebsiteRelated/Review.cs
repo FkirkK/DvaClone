@@ -1,11 +1,11 @@
-﻿namespace Dva.Models.Nonwebsite_related_logic
+﻿namespace Dva.Models.NonwebsiteRelated
 {
     public class Review
     {
         public bool Positive {
             get;
             set; 
-        }
+        } 
 
         public bool Truthful
         {

@@ -10,9 +10,11 @@ namespace DvaTesting.Models.Nonwebsite_related
     class DataImporterTest
     {
             [Test]
-            public void ShouldBeTrue()
+            public void ShouldImportFilesCorrectly()
             {
-                Assert.True(true);
+                //Arrange
+
+                //Act
             }
     }
 }
