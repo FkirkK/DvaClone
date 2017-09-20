@@ -2,16 +2,13 @@
 
 namespace DvaTesting
 {
+    [TestFixture]
     public class Example
     {
-        [TestFixture]
-        public class AccountTest
+        [Test]
+        public void ShouldBeTrue()
         {
-            [Test]
-            public void ShouldBeTrue()
-            {
-                Assert.True(true);
-            }
+            Assert.True(true);
         }
     }
 }
