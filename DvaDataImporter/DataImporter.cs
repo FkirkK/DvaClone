@@ -13,16 +13,16 @@ namespace DvaDataImporter
         }
 
         // Imports all files from folder
-        public List<string> ImportData(string path)
+        public Dictionary<string, string> ImportData(string path)
         {
-            List<string> textFromFiles = new List<string>();
+            Dictionary<string, string> textFromFiles = new Dictionary<string, string>();
 
             var txtFiles = Directory.EnumerateFiles(path, "*.txt");
 
             foreach (string file in txtFiles)
             {
                 var text = File.ReadAllText(file);
-                textFromFiles.Add(text);
+                textFromFiles.Add(Path.GetFileNameWithoutExtension(file), text);
             }
 
             return textFromFiles;

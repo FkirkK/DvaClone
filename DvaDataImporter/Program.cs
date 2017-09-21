@@ -7,7 +7,7 @@ namespace DvaDataImporter
         static void Main(string[] args)
         {
             DataImporter di = new DataImporter();
-            var data = di.ImportData("../../../../TestFiles/");
+            var data = di.ImportData("../TestFiles/");
         }
     }
 }

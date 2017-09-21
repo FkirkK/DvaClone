@@ -16,11 +16,11 @@ namespace DvaTesting
             DataImporter di = new DataImporter();
 
             //Act
-            List<string> importedData = di.ImportData("../../../../TestFiles/");
+            Dictionary<string, string> importedData = di.ImportData("../../../../TestFiles/");
 
             //Assert
-            Assert.AreEqual("This is a test document.", importedData[0]);
-            Assert.AreEqual("This is also a test document.", importedData[1]);
+            Assert.AreEqual("This is a test document.", importedData["test1"]);
+            Assert.AreEqual("This is also a test document.", importedData["test2"]);
         }
     }
 }
