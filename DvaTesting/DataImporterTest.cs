@@ -39,6 +39,8 @@ namespace DvaTesting
             Assert.AreEqual(400, reviews.Count(x => x.IsPositive && !x.IsTruthful));
             Assert.AreEqual(400, reviews.Count(x => !x.IsPositive && !x.IsTruthful));
             Assert.True(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Content)));
+            Assert.True(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Title)));
+
         }
     }
 }

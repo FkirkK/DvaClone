@@ -54,7 +54,7 @@ namespace DvaDataImporter
             foreach (var filePath in filePaths)
             {
                 var text = File.ReadAllText(filePath);
-                reviews.Add(new Review(text, isTruthful, isPositive));
+                reviews.Add(new Review(text, Path.GetFileNameWithoutExtension(filePath), isTruthful, isPositive));
             }
 
             return reviews;
