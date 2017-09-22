@@ -31,7 +31,7 @@ namespace DvaTesting
             DataImporter di = new DataImporter();
 
             // Act
-            var reviews = di.ImportReviews("C:/Users/marcb/Dropbox/Skole/Universitetet/7. semester/P7/Data/OP_SPAM/op_spam_v1.4");
+            var reviews = di.ImportReviews("../../../../op_spam_v1.4");
 
             //Assert
             Assert.AreEqual(400, reviews.Count(x => x.IsPositive && x.IsTruthful));
