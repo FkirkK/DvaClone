@@ -4,7 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using DvaPythonRunner;
 
-namespace DvaTesting
+namespace DvaTest
 {
     [TestFixture]
     class PythonRunnerTest
