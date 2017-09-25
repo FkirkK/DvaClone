@@ -1,20 +1,20 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DvaTesting
+namespace DvaTest
 {
-    [TestFixture]
-    public class Example
+    [TestClass]
+    public class Examples
     {
-        [Test]
+        [TestMethod]
         public void ShouldBeTrue()
         {
-            Assert.True(true);
+            Assert.IsTrue(true);
         }
 
-        [Test]
+        [TestMethod]
         public void CodeCoverageTest()
         {
-
+            Assert.IsTrue(true);
         }
     }
 }

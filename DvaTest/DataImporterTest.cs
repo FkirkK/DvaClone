@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DvaDataImporter;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DvaTesting
+namespace DvaTest
 {
-    [TestFixture]
+    [TestClass]
     class DataImporterTest
     {
-        [Test]
+        [TestMethod]
         public void ShouldImportFilesAtPathCorrectly()
         {
             //Arrange
@@ -24,7 +24,7 @@ namespace DvaTesting
             Assert.AreEqual("This is also a test document.", importedData["test2"]);
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldImportAllReviewsCorrectly()
         {
             // Arrange
@@ -38,9 +38,15 @@ namespace DvaTesting
             Assert.AreEqual(400, reviews.Count(x => !x.IsPositive && x.IsTruthful));
             Assert.AreEqual(400, reviews.Count(x => x.IsPositive && !x.IsTruthful));
             Assert.AreEqual(400, reviews.Count(x => !x.IsPositive && !x.IsTruthful));
-            Assert.True(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Content)));
-            Assert.True(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Title)));
+            Assert.IsTrue(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Content)));
+            Assert.IsTrue(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Title)));
 
+        }
+
+        [TestMethod]
+        public void testtest()
+        {
+            Assert.IsTrue(true);
         }
     }
 }

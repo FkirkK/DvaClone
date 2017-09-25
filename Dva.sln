@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaDataImporter", "DvaDataI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaCore", "DvaCore\DvaCore.csproj", "{E6480827-3891-49B3-9190-13866476D958}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvaTest", "DvaTest\DvaTest.csproj", "{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaTest", "DvaTest\DvaTest.csproj", "{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
