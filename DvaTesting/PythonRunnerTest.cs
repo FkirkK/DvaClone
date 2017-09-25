@@ -21,7 +21,7 @@ namespace DvaTesting
 
             //Act
             string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            int result = int.Parse((string)pr.RunScript(path+"\\python.py", input1, input2));
+            int result = int.Parse((string)pr.RunScript("../../../../TestFiles/python.py", input1, input2));
 
             //Assert
             Assert.AreEqual(result,exceptedResult);
