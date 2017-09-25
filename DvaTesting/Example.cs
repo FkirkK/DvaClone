@@ -10,5 +10,11 @@ namespace DvaTesting
         {
             Assert.True(true);
         }
+
+        [Test]
+        public void CodeCoverageTest()
+        {
+
+        }
     }
 }
