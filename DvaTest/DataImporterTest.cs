@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DvaTest
 {
     [TestClass]
-    class DataImporterTest
+    public class DataImporterTest
     {
         [TestMethod]
         public void ShouldImportFilesAtPathCorrectly()
@@ -41,12 +41,6 @@ namespace DvaTest
             Assert.IsTrue(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Content)));
             Assert.IsTrue(reviews.TrueForAll(x => !string.IsNullOrEmpty(x.Title)));
 
-        }
-
-        [TestMethod]
-        public void testtest()
-        {
-            Assert.IsTrue(true);
         }
     }
 }

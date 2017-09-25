@@ -3,7 +3,7 @@
 namespace DvaTest
 {
     [TestClass]
-    public class Examples
+    public class Example
     {
         [TestMethod]
         public void ShouldBeTrue()
