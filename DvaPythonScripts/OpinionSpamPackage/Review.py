@@ -1,4 +1,4 @@
-
+import re
 
 class Review:
 
@@ -6,7 +6,8 @@ class Review:
         self.isTruthful = isTruthful
         self.isPositive = isPositive
         self.title = title
-        self.content = content
+        self.content = content.lower()
+        self.content = re.sub(r'[.,?!:;_()]*', "", self.content)
         self.fold = fold
 
     def __str__(self):
