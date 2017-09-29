@@ -8,3 +8,18 @@ class Review:
         self.title = title
         self.content = content
         self.fold = fold
+
+    def __str__(self):
+        if self.isTruthful:
+            true = "truthful"
+        else:
+            true = "deceitful"
+        if self.isPositive:
+            positive = "positive"
+        else:
+            positive = "negative"
+
+        return "Review: {title} is a {true} and {positivity} review!".format(title=self.title, true=true, positivity=positive)
+
+    def __repr__(self):
+        return self.__str__()

@@ -1,2 +1,2 @@
 from .Review import Review
-from .OpSpamReader import OpSpamReader
+#from .OpSpamReader import OpSpamReader
