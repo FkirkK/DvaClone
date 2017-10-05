@@ -1,13 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
 
 namespace DvaPythonRunner
 {
-    public class PythonRunner
+    public class PythonRunner : iPythonRunner
     {
         //Based on example from MSDN: https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
-        public object RunScript(string programString, params object[] input)
+
+        private object RunScript(string programPath, params object[] input)
         {
             // full path of python interpreter 
             string python = "../../../../Python/python.exe";
@@ -21,7 +23,7 @@ namespace DvaPythonRunner
 
             // start python app with X arguments  
             // 1st arguments is pointer to itself
-            string callString = programString;
+            string callString = programPath;
 
             foreach (var param in input)
             {
@@ -35,7 +37,14 @@ namespace DvaPythonRunner
             myProcess.StartInfo = myProcessStartInfo;
 
             // start the process 
-            myProcess.Start();
+            try
+            {
+                myProcess.Start();
+            }
+            catch (Win32Exception e)
+            {
+                throw new Exception("Unable to start process - With given arguments: " + callString + " - Our current working directory is: " + Directory.GetCurrentDirectory());
+            }
 
             // Read the standard output of the app we called.  
             // in order to avoid deadlock we will read output first 
@@ -51,6 +60,13 @@ namespace DvaPythonRunner
             myProcess.Close();
 
             return myString;
+        }
+
+        public string LinearSvm()
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var result = RunScript(@"..\..\..\..\LinearSvm.py");
+            return (string) result;
         }
     }
 }
