@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Dva.Models;
 using DvaCore.Models;
 using DvaDataImporter;
+using DvaWeb.Models;
 
-namespace Dva.Controllers
+namespace DvaWeb.Controllers
 {
     public class HomeController : Controller
     {

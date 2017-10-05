@@ -12,6 +12,6 @@
     <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
     <ProjectReference Include="..\DvaDataImporter\DvaDataImporter.csproj" />
     <ProjectReference Include="..\DvaPythonRunner\DvaPythonRunner.csproj" />
-    <ProjectReference Include="..\Dva\Dva.csproj" />
+    <ProjectReference Include="..\Dva\DvaWeb.csproj" />
   </ItemGroup>
 </Project>

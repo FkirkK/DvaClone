@@ -1,6 +1,6 @@
 using System;
 
-namespace Dva.Models
+namespace DvaWeb.Models
 {
     public class ErrorViewModel
     {
