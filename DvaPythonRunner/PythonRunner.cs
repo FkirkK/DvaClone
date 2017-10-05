@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace DvaPythonRunner
 {
-    public class PythonRunner : iPythonRunner
+    public class PythonRunner : IPythonRunner
     {
         public string LinearSvm()
         {
