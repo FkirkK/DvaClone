@@ -7,6 +7,18 @@ namespace DvaPythonRunner
 {
     public class PythonRunner : iPythonRunner
     {
+        public string LinearSvm()
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var result = RunScript(@"..\..\..\..\LinearSvm.py");
+            return (string) result;
+        }
+
+        public string RunGenericPythonScripts(string programPath, params object[] input)
+        {
+            return (string) RunScript(programPath, input);
+        }
+
         //Based on example from MSDN: https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
 
         private object RunScript(string programPath, params object[] input)
@@ -60,13 +72,6 @@ namespace DvaPythonRunner
             myProcess.Close();
 
             return myString;
-        }
-
-        public string LinearSvm()
-        {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var result = RunScript(@"..\..\..\..\LinearSvm.py");
-            return (string) result;
         }
     }
 }
