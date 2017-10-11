@@ -16,9 +16,13 @@ namespace DvaTest
         {
             //Arrange: 
             Review review = new Review("Hello this should be equal.", "Title", true, true);
+            String returnString = "";
+
+            //Act
+            returnString = review.ToString();
             
             //Assert:
-            Assert.AreEqual("Hello this should be equal.", review.ToString());
+            Assert.AreEqual("Hello this should be equal.", returnString);
         }
         
     }
