@@ -11,7 +11,6 @@ namespace DvaTest
         [Test]
         public void RunLinearSvmReturnsSvmResult()
         {
-            
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IAnalysisRunner ar = new AnalysisRunner(pr);

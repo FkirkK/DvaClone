@@ -29,7 +29,7 @@ namespace DvaPythonRunner
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 python = @"python3";
             else
-                python = @"..\..\..\..\Python/python.exe";
+                python = @"..\..\..\..\Python\python.exe";
 
 
             // Create new process start info 
@@ -55,14 +55,7 @@ namespace DvaPythonRunner
             myProcess.StartInfo = myProcessStartInfo;
 
             // start the process 
-            try
-            {
-                myProcess.Start();
-            }
-            catch (Win32Exception e)
-            {
-                throw new Exception("Unable to start process - With given arguments: " + callString + " - Our current working directory is: " + Directory.GetCurrentDirectory());
-            }
+            myProcess.Start();
 
             // Read the standard output of the app we called.  
             // in order to avoid deadlock we will read output first 
