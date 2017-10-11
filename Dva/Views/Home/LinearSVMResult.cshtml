@@ -1,0 +1,13 @@
+﻿@using DvaCore.Models
+@{
+    ViewBag.Title = "Linear Support Vector Machine";
+}
+<h2>@ViewBag.Title</h2>
+<div class="well">
+    <ul class="nav scrollable">
+        @foreach (var doc in ViewBag.Docs)
+        {
+            <li>@doc.Name</li>
+        }
+    </ul>
+</div>
