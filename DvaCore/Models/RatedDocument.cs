@@ -2,23 +2,23 @@
 {
     public class RatedDocument : Document
     {
-        public RatedDocument(string name, bool deceptive, bool rating) : base(name)
+        public RatedDocument(string name, bool labeledClassifier, bool ourClassifier) : base(name)
         {
-            Deceptive = deceptive;
-            Rating = rating;
+            LabeledClassifier = labeledClassifier;
+            OurClassifier = ourClassifier;
         }
 
-        public bool Deceptive { get; set; }
+        public bool LabeledClassifier { get; set; } //If this is true the source says that the rating is deceptive
 
-        public bool Rating { get; set; }
+        public bool OurClassifier { get; set; } //If this is true our algorithm says that the rating is deceptive
 
         public override bool Equals(object obj)
         {
             var otherDoc = (RatedDocument) obj;
             var isSame = true;
 
-            isSame &= Deceptive.Equals(otherDoc.Deceptive);
-            isSame &= Rating.Equals(otherDoc.Rating);
+            isSame &= LabeledClassifier.Equals(otherDoc.LabeledClassifier);
+            isSame &= OurClassifier.Equals(otherDoc.OurClassifier);
             isSame &= base.Equals(obj);
 
             return isSame;
