@@ -1,7 +1,7 @@
 ﻿using DvaCore.Models;
 using NUnit.Framework;
 
-namespace DvaTest
+namespace DvaTest.UnitTest
 {
     [TestFixture]
     public class LinearSvmResultParserTest

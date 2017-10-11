@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using DvaCore.Models;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
-namespace DvaTest
+namespace DvaTest.UnitTest
 {
-
     [TestFixture]
     class ReviewTest {
 

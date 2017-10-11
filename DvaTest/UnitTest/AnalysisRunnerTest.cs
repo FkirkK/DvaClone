@@ -3,7 +3,7 @@ using DvaCore.Models;
 using DvaPythonRunner;
 using NUnit.Framework;
 
-namespace DvaTest
+namespace DvaTest.UnitTest
 {
     [TestFixture]
     public class AnalysisRunnerTest

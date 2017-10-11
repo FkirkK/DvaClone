@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using DvaPythonRunner;
 using NUnit.Framework;
-using DvaPythonRunner;
 
-namespace DvaTest
+namespace DvaTest.UnitTest
 {
     [TestFixture]
     class PythonRunnerTest

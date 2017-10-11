@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DvaDataImporter;
 using NUnit.Framework;
 
-namespace DvaTest
+namespace DvaTest.UnitTest
 {
     [TestFixture]
     public class DataImporterTest
