@@ -6,13 +6,11 @@
         {
             Deceptive = deceptive;
             Rating = rating;
-            
         }
 
         public bool Deceptive { get; set; }
 
         public bool Rating { get; set; }
-
 
         public override bool Equals(object obj)
         {
