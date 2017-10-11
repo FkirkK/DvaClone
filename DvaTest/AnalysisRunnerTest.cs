@@ -9,8 +9,9 @@ namespace DvaTest
     public class AnalysisRunnerTest
     {
         [Test]
-        public void RunLinearSvmReturnsCorrectLinearSvmResult()
+        public void RunLinearSvmReturnsSvmResult()
         {
+            
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IAnalysisRunner ar = new AnalysisRunner(pr);
@@ -19,7 +20,7 @@ namespace DvaTest
             var linearSvmResult = ar.RunLinearSvm();
 
             //Assert 
-            Assert.AreEqual(linearSvmResult, new LinearSvmResult(1));
+            Assert.AreEqual(linearSvmResult.RatedDocuments.Count, 1600); // Where 1600 is the number of files read
         }
     }
 }

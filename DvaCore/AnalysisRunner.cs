@@ -14,9 +14,9 @@ namespace DvaCore
 
         public LinearSvmResult RunLinearSvm()
         {
-            //TODO: Make LinearSvm python script write a result to a file. This file should be interpreted here.
-
-            return new LinearSvmResult(1);
+            var result = _internalPythonRunner.LinearSvm();
+            
+            return new LinearSvmResult(result);
         }
     }
 }
