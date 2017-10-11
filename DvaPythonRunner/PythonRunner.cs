@@ -25,12 +25,12 @@ namespace DvaPythonRunner
         {
             // full path of python interpreter
             string python = "";
-            
-            #if WIN64
-                python = @"..\..\..\..\Python/python.exe";
-            #else
+
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
                 python = @"python3";
-            #endif
+            else
+                python = @"..\..\..\..\Python/python.exe";
+
 
             // Create new process start info 
             ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
