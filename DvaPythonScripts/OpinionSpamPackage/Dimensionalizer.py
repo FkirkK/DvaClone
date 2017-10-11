@@ -1,6 +1,5 @@
 
 
-
 class Dimensionalizer:
 
     def __init__(self):
@@ -9,12 +8,27 @@ class Dimensionalizer:
         self.numberOfNGramsInDict = 0
 
     def DimensionalizeReviewBigramPlus(self, review):
+        BigramPlusSet = self.GetBigramsPlusFromReview(review)
+
+        self.dimensionSet = self.dimensionSet.union(BigramPlusSet)
+
+
+    def DimensionalizeAllReviewsBigramPlus(self, reviewList):
+        for review in reviewList:
+            self.DimensionalizeReviewBigramPlus(review)
+        self.CreateDictionaryOfWords()
+
+    def GetBigramsPlusFromReview(self, review):
+        returnSet = set()
         splitContent = review.content.split(" ")
         splitContent = self.__RemoveAllNewlines(splitContent)
-        for i in range(0, len(splitContent)-1):
-            self.dimensionSet.add(splitContent[i])
-            self.dimensionSet.add(splitContent[i] + " " + splitContent[i+1])
-        self.dimensionSet.add(splitContent[len(splitContent)-1])  # Done to get last element not caught in loop
+
+        for i in range(0, len(splitContent) - 1):
+            returnSet.add(splitContent[i])
+            returnSet.add(splitContent[i] + " " + splitContent[i + 1])
+        returnSet.add(splitContent[len(splitContent) - 1])  # Done to get last element not caught in loop
+
+        return returnSet
 
     def __RemoveAllNewlines(self, contentList):
         returnList = []
@@ -36,5 +50,6 @@ class Dimensionalizer:
 
         # Update NGram-number before returning
         self.numberOfNGramsInDict = len(self.dimensionSet)
+
 
 

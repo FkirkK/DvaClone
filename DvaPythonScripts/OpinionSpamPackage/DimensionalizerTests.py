@@ -10,6 +10,16 @@ class DimensionalizerTests(TestCase):
         self.osReader = OpSpamReader()
         self.readReviews = self.osReader.ReadAllFiles()
 
+    def test_getbigramsplus_returns_proper_set_file_1(self):
+        # Arrange
+        expectedSetResult = 195
+
+        # Act
+        returnedSet = self.dimensionalizer.GetBigramsPlusFromReview(self.readReviews[0])
+
+        # Assert
+        self.assertEqual(len(returnedSet), expectedSetResult)
+
     def test_bigramplus_file_1_correctly(self):
         # Arrange
         expectedSetResult = 195
@@ -40,6 +50,19 @@ class DimensionalizerTests(TestCase):
 
         # Assert
         self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedTwoSetsResult)
+
+    def test_bigramplusALL_with_2_files(self):
+        # Arrange
+        expectedSetResult = 363
+        reviewList = []
+        reviewList.append(self.readReviews[0])
+        reviewList.append(self.readReviews[82])
+
+        # Act
+        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(reviewList=reviewList)
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
 
     def test_CreateDictionary_for_files_1_and_82_has_right_amount(self):
         # Arrange
