@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DvaCore;
 using Microsoft.AspNetCore.Mvc;
 using DvaCore.Models;
 using DvaDataImporter;
+using DvaPythonRunner;
 using DvaWeb.Models;
 
 namespace DvaWeb.Controllers
@@ -14,6 +16,28 @@ namespace DvaWeb.Controllers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        public IActionResult LinearSVM()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult LinearSVMResult()
+        {
+            //var runner = new AnalysisRunner(new PythonRunner());
+            //var result = runner.RunLinearSvm();
+            //ViewBag.Docs = result.RatedDocuments;
+            ViewBag.Docs = new List<RatedDocument>
+            {
+                (new RatedDocument("Hello", true, true)),
+                (new RatedDocument("It's me", true, true)),
+                (new RatedDocument("I've been wondering", true, true))
+            };
+
             return View();
         }
 
