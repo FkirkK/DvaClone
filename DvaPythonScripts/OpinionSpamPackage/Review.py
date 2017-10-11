@@ -10,7 +10,7 @@ class Review:
         self.content = re.sub(r'[.,?!:;_()]*', "", self.content)
         self.fold = fold
 
-    def __str__(self):
+    def __str__(self):  # todo: remove when going release mode - this is test code
         if self.isTruthful:
             true = "truthful"
         else:
@@ -22,5 +22,5 @@ class Review:
 
         return "Review: {title} is a {true} and {positivity} review!".format(title=self.title, true=true, positivity=positive)
 
-    def __repr__(self):
+    def __repr__(self):  # todo: remove when going release mode - this is test code
         return self.__str__()
