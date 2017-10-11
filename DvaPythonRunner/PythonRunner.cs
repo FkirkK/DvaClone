@@ -10,7 +10,7 @@ namespace DvaPythonRunner
         public string LinearSvm()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var result = RunScript(@"..\..\..\..\LinearSvm.py");
+            var result = RunScript(@"../../../../DvaPythonScripts/OpinionSpamPackageLinearSvm.py");
             return (string) result;
         }
 
@@ -23,8 +23,14 @@ namespace DvaPythonRunner
 
         private object RunScript(string programPath, params object[] input)
         {
-            // full path of python interpreter 
-            string python = "../../../../Python/python.exe";
+            // full path of python interpreter
+            string python = "";
+            
+            #if WIN64
+                python = @"..\..\..\..\Python/python.exe";
+            #else
+                python = @"python3";
+            #endif
 
             // Create new process start info 
             ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);

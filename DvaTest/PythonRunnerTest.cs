@@ -27,15 +27,5 @@ namespace DvaTest
             //Assert
             Assert.AreEqual(result, exceptedResult);
         }
-
-        [Test]
-        public void IsSvmCalculatedCorrectly()
-        {
-            //Arrange 
-            PythonRunner pr = new PythonRunner();
-            
-            //Assert
-            Assert.AreEqual("Done", pr.LinearSvm());
-        }
     }
 }
