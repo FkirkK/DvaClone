@@ -5,5 +5,5 @@ from .DimensionalizerTests import DimensionalizerTests
 from .OpSpamReaderTests import OpSpamReaderTests
 from .ClassifierResult import ClassifierResult
 from .ClassifierResultTests import ClassifierResultTests
-from .LinearSVM2 import DvaLinearSvm
+from .DvaLinearSvm import DvaLinearSvm
 from .LinearSvmTests import LinearSvmTests
