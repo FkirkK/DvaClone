@@ -1,4 +1,4 @@
-
+import numpy
 
 class Dimensionalizer:
 
@@ -29,6 +29,15 @@ class Dimensionalizer:
         returnSet.add(splitContent[len(splitContent) - 1])  # Done to get last element not caught in loop
 
         return returnSet
+
+    def CreateBigramPlusVectorForReview(self, review):
+        vectorToPredict = numpy.zeros(shape=(1, self.numberOfNGramsInDict))
+        setToPopulateVector = self.GetBigramsPlusFromReview(review)
+        for bigram in setToPopulateVector:
+            indexInVector = self.mappingDictionary[bigram]
+            vectorToPredict[0][indexInVector] = 1
+
+        return vectorToPredict
 
     def __RemoveAllNewlines(self, contentList):
         returnList = []

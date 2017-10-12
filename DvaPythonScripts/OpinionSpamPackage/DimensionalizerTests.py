@@ -109,3 +109,20 @@ class DimensionalizerTests(TestCase):
 
         # Assert
         self.assertTrue(type(index) is int)
+
+    def test_CreateVector_for_review_1(self):
+        # Arrange
+        featureCount = 96045  # Number of bigramsPlus in dataset
+        expectedVectorOnesCount = 195  # Number of 1-entries in generated vector
+        actualVectorOnesCount = 0
+
+        # Act
+        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(self.readReviews)
+        vector = self.dimensionalizer.CreateBigramPlusVectorForReview(self.readReviews[0])
+        for entry in vector[0]:
+            if entry == 1:
+                actualVectorOnesCount += 1
+
+        # Assert
+        self.assertEqual(len(vector[0]), featureCount)
+        self.assertEqual(actualVectorOnesCount, expectedVectorOnesCount)

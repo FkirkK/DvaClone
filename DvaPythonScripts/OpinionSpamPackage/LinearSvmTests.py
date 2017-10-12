@@ -27,7 +27,7 @@ class LinearSvmTests(TestCase):
         expectedValue = True
 
         # Act
-        self.dvaLinearSVM.LearnModel()
+        self.dvaLinearSVM.LearnModel(self.dvaLinearSVM.reviewList)
 
         # Assert
         self.assertEqual(type(self.dvaLinearSVM.model) is svm.LinearSVC, expectedValue)
@@ -37,13 +37,19 @@ class LinearSvmTests(TestCase):
         expectedValue = True
 
         # Act
-        self.dvaLinearSVM.LearnModel()
-        vectorToPredict = numpy.zeros(shape=(1, self.dvaLinearSVM.dimensionalizer.numberOfNGramsInDict))
-        setToPopulateVector = self.dvaLinearSVM.dimensionalizer.GetBigramsPlusFromReview(self.allReviews[0])
-        for bigram in setToPopulateVector:
-            indexInVector = self.dvaLinearSVM.dimensionalizer.mappingDictionary[bigram]
-            vectorToPredict[0][indexInVector] = 1
+        self.dvaLinearSVM.LearnModel(self.dvaLinearSVM.reviewList)
+        vectorToPredict = self.dvaLinearSVM.dimensionalizer.CreateBigramPlusVectorForReview(self.allReviews[0])
         prediction = self.dvaLinearSVM.model.predict(vectorToPredict)
 
         # Assert
         self.assertEqual(prediction, expectedValue)
+
+    def test_5_fold_validation_matches_paper_89point6_percent(self):
+        # Arrange
+        expectedValue = 0.896
+
+        # Act
+        result = self.dvaLinearSVM.Do5FoldValidation()
+
+        # Assert
+        self.assertAlmostEqual(expectedValue, result.precision, delta=0.05)

@@ -2,6 +2,7 @@ import numpy
 from sklearn import svm
 
 from OpinionSpamPackage import Dimensionalizer
+from OpinionSpamPackage import ClassifierResult
 
 
 class DvaLinearSvm:
@@ -9,12 +10,12 @@ class DvaLinearSvm:
     def __init__(self, reviewList):
         self.reviewList = reviewList
         self.dimensionalizer = Dimensionalizer()
+        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(reviewList=self.reviewList)
         self.model = None
 
-    def LearnModel(self):
+    def LearnModel(self, reviewListForLearning):
         # Prepare variables for learning model
-        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(reviewList=self.reviewList)
-        n_samples = len(self.reviewList)
+        n_samples = len(reviewListForLearning)
         n_features = len(self.dimensionalizer.mappingDictionary.keys())
 
         # Instantiate input to svm algorithm
@@ -23,19 +24,64 @@ class DvaLinearSvm:
 
         # Populate x and y
         for i in range(0, n_samples):
-            wordSet = self.dimensionalizer.GetBigramsPlusFromReview(review=self.reviewList[i])
+            wordSet = self.dimensionalizer.GetBigramsPlusFromReview(review=reviewListForLearning[i])
             for bigram in wordSet:
                 indexInRow = self.dimensionalizer.mappingDictionary[bigram]
                 x[i][indexInRow] = 1
-            y.append(self.reviewList[i].isTruthful)
+            y.append(reviewListForLearning[i].isTruthful)
 
+        # Learn and save the classifier
         classifier = svm.LinearSVC()
         classifier.fit(X=x, y=y)
-
         self.model = classifier
 
 
 
     def Do5FoldValidation(self):
-        pass
+        numberOfFolds = 5
+        listOfResults = []
+
+        for i in range(1, numberOfFolds+1):  # 1-indexing because it must be human-readable
+            learningReviews = []
+            validationReviews = []
+
+            # Split reviews based on folds
+            for review in self.reviewList:
+                if review.fold == i:
+                    validationReviews.append(review)
+                else:
+                    learningReviews.append(review)
+
+            # Learn model based on learningReviews --> self.model is set
+            self.LearnModel(reviewListForLearning=learningReviews)
+
+            # Prepare variables for prediction
+            validationReviewCount = len(validationReviews)
+            correctPredictionCount = 0
+            fakePositiveCount = 0
+            fakeNegativeCount = 0
+            classifierResultList = []
+
+            # Use model to predict validationReviews
+            for review in validationReviews:
+                reviewVector = self.dimensionalizer.CreateBigramPlusVectorForReview(review)
+                prediction = self.model.predict(reviewVector)
+                if prediction[0] == review.isTruthful:
+                    correctPredictionCount += 1
+                elif prediction[0]:
+                    fakePositiveCount += 1
+                else:
+                    fakeNegativeCount += 1
+                classifierResultList.append((review.title, review.isTruthful, prediction[0]))
+
+            classifierResult = ClassifierResult(fold=i, precision=correctPredictionCount/validationReviewCount,
+                                                fakePositives=fakePositiveCount/validationReviewCount,
+                                                fakeNegatives=fakeNegativeCount/validationReviewCount,
+                                                reviewList=classifierResultList)
+            listOfResults.append(classifierResult)
+
+        return ClassifierResult.AggregateResults(listOfResults)
+
+
+
 
