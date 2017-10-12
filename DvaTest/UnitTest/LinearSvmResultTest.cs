@@ -11,21 +11,21 @@ namespace DvaTest.UnitTest
         public void ParseStringNoDocs()
         {
             // Arrange
-            var input = "0.0, 1.0, 3.0, 2.0, 4.0, 5.5, 7.0, 0.0, 10.0";
+            var input = "0.0, 1, 3, 2.0, 4, 5, 7.0, 0, 10";
 
             // Act
             var result = new LinearSvmResult(input);
 
             // Assert
             Assert.AreEqual(result.OverallPrecision, 0.0);
-            Assert.AreEqual(result.OverallBest, 1.0);
-            Assert.AreEqual(result.OverallWorst, 3.0);
+            Assert.AreEqual(result.OverallBestFold, 1);
+            Assert.AreEqual(result.OverallWorstFold, 3);
             Assert.AreEqual(result.FalsePositives, 2.0);
-            Assert.AreEqual(result.FalsePositivesBest, 4.0);
-            Assert.AreEqual(result.FalsePositivesWorst, 5.5);
+            Assert.AreEqual(result.FalsePositivesBestFold, 4);
+            Assert.AreEqual(result.FalsePositivesWorstFold, 5);
             Assert.AreEqual(result.FalseNegatives, 7.0);
-            Assert.AreEqual(result.FalseNegativesBest, 0.0);
-            Assert.AreEqual(result.FalseNegativesWorst, 10.0);
+            Assert.AreEqual(result.FalseNegativesBestFold, 0);
+            Assert.AreEqual(result.FalseNegativesWorstFold, 10);
 
             Assert.AreEqual(result.RatedDocuments.Count, 0);
         }
@@ -34,7 +34,7 @@ namespace DvaTest.UnitTest
         public void ParseStringTenDocs()
         {
             // Arrange
-            var input = "0.0, 1.0, 3.0, 2.0, 4.0, 5.5, 7.0, 0.0, 10.0, " +
+            var input = "0.0, 1, 3, 2.0, 4, 5, 7.0, 0, 10, " +
                         "doc1, 1, 1, doc2, 0, 1, doc3, 1, 1, doc4, 1, 1, " +
                         "doc5, 1, 0, doc6, 1, 1, doc7, 0, 0, doc8, 0, 0, " +
                         "doc9, 1, 0, doc10, 0, 1";
@@ -66,7 +66,7 @@ namespace DvaTest.UnitTest
         public void EqualityFlase()
         {
             // Arrange
-            var input = "0.0, 1.0, 3.0, 2.0, 4.0, 5.5, 7.0, 0.0, 10.0, " +
+            var input = "0.0, 1, 3, 2.0, 4, 5, 7.0, 0, 10, " +
                         "doc1, 1, 1, doc2, 0, 1, doc3, 1, 1, doc4, 1, 1, " +
                         "doc5, 1, 0, doc6, 1, 1, doc7, 0, 0";
 
@@ -82,7 +82,7 @@ namespace DvaTest.UnitTest
         public void EqualityTrue()
         {
             // Arrange
-            var input = "0.0, 1.0, 3.0, 2.0, 4.0, 5.5, 7.0, 0.0, 10.0, " +
+            var input = "0.0, 1, 3, 2.0, 4, 5, 7.0, 0, 10, " +
                         "doc1,Equals 1, 1, doc2, 0, 1, doc3, 1, 1, doc4, 1, 1, " +
                         "doc5, 1, 0, doc6, 1, 1, doc7, 0, 0";
 

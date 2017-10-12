@@ -6,20 +6,24 @@ namespace DvaCore.Models
 {
     public class LinearSvmResult
     {
+        /// <summary>
+        /// Constructor for LinearSvmResult
+        /// </summary>
+        /// <param name="inputToParse">A string formatted correctly to set all of the classes properties</param>
         public LinearSvmResult(string inputToParse)
         {
             Parse(inputToParse);
         }
-
+        
         public double OverallPrecision { get; private set; }
-        public double OverallBest { get; private set; }
-        public double OverallWorst { get; private set; }
+        public int OverallBestFold { get; private set; }
+        public int OverallWorstFold { get; private set; }
         public double FalsePositives { get; private set; }
-        public double FalsePositivesBest { get; private set; }
-        public double FalsePositivesWorst { get; private set; }
+        public int FalsePositivesBestFold { get; private set; }
+        public int FalsePositivesWorstFold { get; private set; }
         public double FalseNegatives { get; private set; }
-        public double FalseNegativesBest { get; private set; }
-        public double FalseNegativesWorst { get; private set; }
+        public int FalseNegativesBestFold { get; private set; }
+        public int FalseNegativesWorstFold { get; private set; }
         public IList<RatedDocument> RatedDocuments { get; private set; }
 
         public override bool Equals(object obj)
@@ -28,14 +32,14 @@ namespace DvaCore.Models
             var isSame = true;
 
             isSame &= OverallPrecision.Equals(svmResult.OverallPrecision);
-            isSame &= OverallBest.Equals(svmResult.OverallBest);
-            isSame &= OverallWorst.Equals(svmResult.OverallWorst);
+            isSame &= OverallBestFold.Equals(svmResult.OverallBestFold);
+            isSame &= OverallWorstFold.Equals(svmResult.OverallWorstFold);
             isSame &= FalsePositives.Equals(svmResult.FalsePositives);
-            isSame &= FalsePositivesBest.Equals(svmResult.FalsePositivesBest);
-            isSame &= FalsePositivesWorst.Equals(svmResult.FalsePositivesWorst);
+            isSame &= FalsePositivesBestFold.Equals(svmResult.FalsePositivesBestFold);
+            isSame &= FalsePositivesWorstFold.Equals(svmResult.FalsePositivesWorstFold);
             isSame &= FalseNegatives.Equals(svmResult.FalseNegatives);
-            isSame &= FalseNegativesBest.Equals(svmResult.FalseNegativesBest);
-            isSame &= FalseNegativesWorst.Equals(svmResult.FalseNegativesWorst);
+            isSame &= FalseNegativesBestFold.Equals(svmResult.FalseNegativesBestFold);
+            isSame &= FalseNegativesWorstFold.Equals(svmResult.FalseNegativesWorstFold);
             isSame &= RatedDocuments.Count == svmResult.RatedDocuments.Count;
             
             if (isSame)
@@ -52,14 +56,14 @@ namespace DvaCore.Models
             var splitInput = input.Split(',');
 
             OverallPrecision = double.Parse(splitInput[0]);
-            OverallBest = double.Parse(splitInput[1]);
-            OverallWorst = double.Parse(splitInput[2]);
+            OverallBestFold = int.Parse(splitInput[1]);
+            OverallWorstFold = int.Parse(splitInput[2]);
             FalsePositives = double.Parse(splitInput[3]);
-            FalsePositivesBest = double.Parse(splitInput[4]);
-            FalsePositivesWorst = double.Parse(splitInput[5]);
+            FalsePositivesBestFold = int.Parse(splitInput[4]);
+            FalsePositivesWorstFold = int.Parse(splitInput[5]);
             FalseNegatives = double.Parse(splitInput[6]);
-            FalseNegativesBest = double.Parse(splitInput[7]);
-            FalseNegativesWorst = double.Parse(splitInput[8]);
+            FalseNegativesBestFold = int.Parse(splitInput[7]);
+            FalseNegativesWorstFold = int.Parse(splitInput[8]);
 
             var docList = new List<RatedDocument>();
             for (int i = 9; i < splitInput.Length; i+=3)

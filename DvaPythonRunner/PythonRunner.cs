@@ -10,17 +10,22 @@ namespace DvaPythonRunner
         public string LinearSvm()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var result = RunScript(@"../../../../DvaPythonScripts/OpinionSpamPackageLinearSvm.py");
+            var result = RunScript(@"../../../../DvaPythonScripts/OpinionSpamPackage/LinearSvm.py");
             return (string) result;
         }
 
+        /// <summary>
+        /// Simply just runs a script in a specific path.
+        /// </summary>
+        /// <param name="programPath">Path for python script</param>
+        /// <param name="input">Input parameters for the python script</param>
+        /// <returns>String with python results</returns>
         public string RunGenericPythonScripts(string programPath, params object[] input)
         {
             return (string) RunScript(programPath, input);
         }
 
         //Based on example from MSDN: https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
-
         private object RunScript(string programPath, params object[] input)
         {
             // full path of python interpreter
