@@ -1,4 +1,10 @@
+import os.path
+import sys
 import numpy
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+
 
 class Dimensionalizer:
 
