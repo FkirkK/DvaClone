@@ -74,3 +74,51 @@ class ClassifierResultTests(TestCase):
         self.assertEqual(self.aggregatedResult.fakeNegativesBestFold, expectedFNFold)
         self.assertEqual(self.aggregatedResult.fakePositivesBestFold, expectedFPFold)
         self.assertEqual(self.aggregatedResult.precisionBestFold, expectedPrecisionFold)
+
+    def test_print_has_correct_amount_of_fields(self):
+        # Arrange
+        expectedFieldCount = 9
+
+        # Act
+        string = self.aggregatedResult.__str__()
+        actualFieldCount = len(string.split(","))
+
+        # Assert
+        self.assertEqual(expectedFieldCount, actualFieldCount)
+
+    def test_print_has_correct_amount_of_fields_with_reviews(self):
+        # Arrange
+        expectedFieldCount = 15
+        self.aggregatedResult.reviews.append(("t_hilton_1.txt", True, False))
+        self.aggregatedResult.reviews.append(("t_hilton_5.txt", True, True))
+
+        # Act
+        string = self.aggregatedResult.__str__()
+        actualFieldCount = len(string.split(","))
+
+        # Assert
+        self.assertEqual(expectedFieldCount, actualFieldCount)
+
+    def test_prints_reviews_correctly(self):
+        # Arrange
+        expectedField9String = " t_hilton_1.txt"
+        expectedField10String = " 1"
+        expectedField11String = " 0"
+        expectedField12String = " t_hilton_5.txt"
+        expectedField13String = " 1"
+        expectedField14String = " 1"
+        self.aggregatedResult.reviews.append(("t_hilton_1.txt", True, False))
+        self.aggregatedResult.reviews.append(("t_hilton_5.txt", True, True))
+
+        # Act
+        string = self.aggregatedResult.__str__()
+        splitFields = string.split(",")
+
+        # Assert
+        self.assertEqual(expectedField9String, splitFields[9])
+        self.assertEqual(expectedField10String, splitFields[10])
+        self.assertEqual(expectedField11String, splitFields[11])
+        self.assertEqual(expectedField12String, splitFields[12])
+        self.assertEqual(expectedField13String, splitFields[13])
+        self.assertEqual(expectedField14String, splitFields[14])
+

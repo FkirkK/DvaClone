@@ -68,4 +68,20 @@ class ClassifierResult:
                                 precisionWorstFold, fakePositivesBestFold, fakePositivesWorstFold,
                                 fakeNegativesBestFold, fakeNegativesWorstFold)
 
+    def __str__(self):
+        returnString = ""
+        returnString += str(self.precision) + ", "
+        returnString += str(self.precisionBestFold) + ", "
+        returnString += str(self.precisionWorstFold) + ", "
+        returnString += str(self.fakePositives) + ", "
+        returnString += str(self.fakePositivesBestFold) + ", "
+        returnString += str(self.fakePositivesWorstFold) + ", "
+        returnString += str(self.fakeNegatives) + ", "
+        returnString += str(self.fakeNegativesBestFold) + ", "
+        returnString += str(self.fakeNegativesWorstFold) + ", "
+        for review in self.reviews:
+            returnString += review[0] + ", " + ("1" if review[1] else "0") + ", " + ("1" if review[2] else "0") + ", "
+        returnString = returnString[:-2]
+        return returnString
+
 
