@@ -8,7 +8,7 @@ from OpinionSpamPackage import OpSpamReader
 
 
 
-osReader = OpSpamReader(opSpamFolderPath=os.path.dirname(os.path.dirname(os.getcwd())) + "/op_spam_v1.4")
+osReader = OpSpamReader()
 readReviews = osReader.ReadAllFiles()
 
 DvaSVM = DvaLinearSvm(readReviews)
