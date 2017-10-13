@@ -3,8 +3,10 @@ from OpinionSpamPackage import Review
 
 class OpSpamReader:
 
-    def __init__(self, opSpamFolderPath=os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "op_spam_v1.4")):
-        self.rootPath = opSpamFolderPath
+    def __init__(self, opSpamFolderPath=os.getcwd()):
+        while os.path.split(opSpamFolderPath)[1] != "Dva":
+            opSpamFolderPath = os.path.dirname(opSpamFolderPath)
+        self.rootPath = os.path.join(opSpamFolderPath, "op_spam_v1.4")
 
     def ReadSingleFile(self, fullPath, isTruthful, isPositive, fold):
 
