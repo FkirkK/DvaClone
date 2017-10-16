@@ -4,10 +4,16 @@
 }
 <h2>@ViewBag.Title</h2>
 <div class="well">
-    <ul class="nav scrollable">
-        @foreach (var doc in ViewBag.Docs)
-        {
-            <li>@doc.Name</li>
-        }
-    </ul>
+    <div class="col-sm-4">
+        <h3>Overall Precision</h3>
+        <h4>@ViewBag.LinearSvmResult.OverallPrecision</h4>
+    </div>
+    <div class="col-sm-4">
+        <h3>False Positives</h3>
+        <h4>@ViewBag.LinearSvmResult.FalsePositives</h4>
+    </div>
+    <div class="col-sm-4">
+        <h3>False Negatives:</h3>
+        <h4>@ViewBag.LinearSvmResult.FalseNegatives</h4>
+    </div>
 </div>

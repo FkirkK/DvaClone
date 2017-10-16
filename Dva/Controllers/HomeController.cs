@@ -28,15 +28,9 @@ namespace DvaWeb.Controllers
         [HttpPost]
         public IActionResult LinearSVMResult()
         {
-            //var runner = new AnalysisRunner(new PythonRunner());
-            //var result = runner.RunLinearSvm();
-            //ViewBag.Docs = result.RatedDocuments;
-            ViewBag.Docs = new List<RatedDocument>
-            {
-                (new RatedDocument("Hello", true, true)),
-                (new RatedDocument("It's me", true, true)),
-                (new RatedDocument("I've been wondering", true, true))
-            };
+            var runner = new AnalysisRunner(new PythonRunner());
+            var result = runner.RunLinearSvm();
+            ViewBag.LinearSvmResult = result;
 
             return View();
         }
