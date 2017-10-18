@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 
 namespace DvaCore.Models
 {
@@ -53,6 +55,7 @@ namespace DvaCore.Models
 
         private void Parse(string input)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var splitInput = input.Split(',');
 
             OverallPrecision = double.Parse(splitInput[0]);
