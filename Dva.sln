@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaWeb", "Dva\DvaWeb.csproj", "{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaDataImporter", "DvaDataImporter\DvaDataImporter.csproj", "{A19F55E3-A179-4C3D-8B86-9EA9CB4661A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaCore", "DvaCore\DvaCore.csproj", "{E6480827-3891-49B3-9190-13866476D958}"
@@ -13,16 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaPythonRunner", "DvaPytho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaTest", "DvaTest\DvaTest.csproj", "{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DvaWeb", "DvaWeb\DvaWeb.csproj", "{B1347C51-CEBF-4B1C-91B2-9F9DD3F374FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BA43C8E-45DF-4184-BBEA-1AF3CA65BD27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A19F55E3-A179-4C3D-8B86-9EA9CB4661A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A19F55E3-A179-4C3D-8B86-9EA9CB4661A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19F55E3-A179-4C3D-8B86-9EA9CB4661A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE7E9A2E-33C4-4E24-A0A5-EA74F60AE38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1347C51-CEBF-4B1C-91B2-9F9DD3F374FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1347C51-CEBF-4B1C-91B2-9F9DD3F374FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1347C51-CEBF-4B1C-91B2-9F9DD3F374FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1347C51-CEBF-4B1C-91B2-9F9DD3F374FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

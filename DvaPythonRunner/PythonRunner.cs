@@ -10,8 +10,17 @@ namespace DvaPythonRunner
         public string LinearSvm()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var path = @"../../../../DvaPythonScripts/OpinionSpamPackage/LinearSvm.py";
-            var result = RunScript(@"../../../../DvaPythonScripts/OpinionSpamPackage/LinearSvm.py");
+            var path = @"\DvaPythonScripts\OpinionSpamPackage\LinearSvm.py";
+            var directoryName = Path.GetDirectoryName(currentDirectory);
+            var fileName = Path.GetFileName(directoryName);
+
+            while (fileName != "Dva")
+            {
+                directoryName = Path.GetDirectoryName(directoryName);
+                fileName = Path.GetFileName(directoryName);
+            }
+
+            var result = RunScript(directoryName + path);
             return (string) result;
         }
 
