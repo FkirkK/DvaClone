@@ -38,7 +38,7 @@ class LinearSvmTests(TestCase):
 
         # Act
         self.dvaLinearSVM.LearnModel(self.dvaLinearSVM.reviewList)
-        vectorToPredict = self.dvaLinearSVM.dimensionalizer.CreateBigramPlusVectorForReview(self.allReviews[0])
+        vectorToPredict = self.dvaLinearSVM.dimensionalizer.CreateNGramsVectorForReview(self.allReviews[0])
         prediction = self.dvaLinearSVM.model.predict(vectorToPredict)
 
         # Assert

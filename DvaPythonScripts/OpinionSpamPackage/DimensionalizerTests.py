@@ -1,12 +1,12 @@
 from unittest import TestCase
 from OpinionSpamPackage import OpSpamReader
-from OpinionSpamPackage import Dimensionalizer
+from OpinionSpamPackage import BigramPlusDimensionalizer
 
 
-class DimensionalizerTests(TestCase):
+class BigramDimensionalizerTests(TestCase):
 
     def setUp(self):
-        self.dimensionalizer = Dimensionalizer()
+        self.dimensionalizer = BigramPlusDimensionalizer()
         self.osReader = OpSpamReader()
         self.readReviews = self.osReader.ReadAllFiles()
 
@@ -15,7 +15,7 @@ class DimensionalizerTests(TestCase):
         expectedSetResult = 195
 
         # Act
-        returnedSet = self.dimensionalizer.GetBigramsPlusFromReview(self.readReviews[0])
+        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -25,7 +25,7 @@ class DimensionalizerTests(TestCase):
         expectedSetResult = 195
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
@@ -35,7 +35,7 @@ class DimensionalizerTests(TestCase):
         expectedSetResult = 180
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[82])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
 
         # Assert
         self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
@@ -45,8 +45,8 @@ class DimensionalizerTests(TestCase):
         expectedTwoSetsResult = 363
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[0])
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[82])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
 
         # Assert
         self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedTwoSetsResult)
@@ -59,7 +59,7 @@ class DimensionalizerTests(TestCase):
         reviewList.append(self.readReviews[82])
 
         # Act
-        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(reviewList=reviewList)
+        self.dimensionalizer.DimensionalizeAllReviews(reviewList=reviewList)
 
         # Assert
         self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
@@ -69,8 +69,8 @@ class DimensionalizerTests(TestCase):
         expectedNumberOfKeys = 363
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[0])
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[82])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
         self.dimensionalizer.CreateDictionaryOfWords()
 
         # Assert
@@ -81,7 +81,7 @@ class DimensionalizerTests(TestCase):
         expectedNumberOfKeys = 195
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
         self.dimensionalizer.CreateDictionaryOfWords()
 
         # Assert
@@ -92,7 +92,7 @@ class DimensionalizerTests(TestCase):
         expectedNumberOfKeysAfterNewCreation = 180
 
         # Re-act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[82])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
         self.dimensionalizer.CreateDictionaryOfWords()
 
         # Re-assert
@@ -103,7 +103,7 @@ class DimensionalizerTests(TestCase):
         index = None
 
         # Act
-        self.dimensionalizer.DimensionalizeReviewBigramPlus(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
         self.dimensionalizer.CreateDictionaryOfWords()
         index = self.dimensionalizer.mappingDictionary["hilton"]  # Word from the first review
 
@@ -117,8 +117,8 @@ class DimensionalizerTests(TestCase):
         actualVectorOnesCount = 0
 
         # Act
-        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(self.readReviews)
-        vector = self.dimensionalizer.CreateBigramPlusVectorForReview(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
+        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1

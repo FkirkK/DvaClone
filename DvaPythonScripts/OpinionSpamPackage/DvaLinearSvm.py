@@ -1,7 +1,7 @@
 import numpy
 from sklearn import svm
 
-from OpinionSpamPackage import Dimensionalizer
+from OpinionSpamPackage import BigramPlusDimensionalizer
 from OpinionSpamPackage import ClassifierResult
 
 
@@ -9,8 +9,8 @@ class DvaLinearSvm:
 
     def __init__(self, reviewList):
         self.reviewList = reviewList
-        self.dimensionalizer = Dimensionalizer()
-        self.dimensionalizer.DimensionalizeAllReviewsBigramPlus(reviewList=self.reviewList)
+        self.dimensionalizer = BigramPlusDimensionalizer()
+        self.dimensionalizer.DimensionalizeAllReviews(reviewList=self.reviewList)
         self.model = None
 
     def LearnModel(self, reviewListForLearning):
@@ -24,7 +24,7 @@ class DvaLinearSvm:
 
         # Populate x and y
         for i in range(0, n_samples):
-            wordSet = self.dimensionalizer.GetBigramsPlusFromReview(review=reviewListForLearning[i])
+            wordSet = self.dimensionalizer.nGramGetter(review=reviewListForLearning[i])
             for bigram in wordSet:
                 indexInRow = self.dimensionalizer.mappingDictionary[bigram]
                 x[i][indexInRow] = 1
@@ -64,7 +64,7 @@ class DvaLinearSvm:
 
             # Use model to predict validationReviews
             for review in validationReviews:
-                reviewVector = self.dimensionalizer.CreateBigramPlusVectorForReview(review)
+                reviewVector = self.dimensionalizer.CreateNGramsVectorForReview(review)
                 prediction = self.model.predict(reviewVector)
                 if prediction[0] == review.isTruthful:
                     correctPredictionCount += 1
