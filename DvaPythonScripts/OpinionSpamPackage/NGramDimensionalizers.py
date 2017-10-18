@@ -18,3 +18,19 @@ class BigramPlusDimensionalizer(GeneralDimensionalizer):
         returnSet.add(splitContent[len(splitContent) - 1])  # Done to get last element not caught in loop
 
         return returnSet
+
+
+class UniGramDimensionalizer(GeneralDimensionalizer):
+
+    def __init__(self):
+        super().__init__(self.GetUnigramsFromReview)
+
+    def GetUnigramsFromReview(self, review):
+        returnSet = set()
+        splitContent = review.content.split(" ")
+        splitContent = super().RemoveAllNewlines(splitContent)
+
+        for i in range(0, len(splitContent)):
+            returnSet.add(splitContent[i])
+
+        return returnSet
