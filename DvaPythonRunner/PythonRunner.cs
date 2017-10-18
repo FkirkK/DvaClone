@@ -10,6 +10,7 @@ namespace DvaPythonRunner
         public string LinearSvm()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
+            var path = @"../../../../DvaPythonScripts/OpinionSpamPackage/LinearSvm.py";
             var result = RunScript(@"../../../../DvaPythonScripts/OpinionSpamPackage/LinearSvm.py");
             return (string) result;
         }
@@ -25,7 +26,7 @@ namespace DvaPythonRunner
             return (string) RunScript(programPath, input);
         }
 
-        //Based on example from MSDN: https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
+        // Based on example from MSDN: https://code.msdn.microsoft.com/windowsdesktop/C-and-Python-interprocess-171378ee
         private object RunScript(string programPath, params object[] input)
         {
             // full path of python interpreter
@@ -68,7 +69,7 @@ namespace DvaPythonRunner
             StreamReader myStreamReader = myProcess.StandardOutput;
             string myString = myStreamReader.ReadLine();
 
-            /*if you need to read multiple lines, you might use: 
+            /* if you need to read multiple lines, you might use: 
                 string myString = myStreamReader.ReadToEnd() */
 
             // wait exit signal from the app we called and then close it. 
