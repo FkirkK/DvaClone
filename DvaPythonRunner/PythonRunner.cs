@@ -34,7 +34,7 @@ namespace DvaPythonRunner
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 python = @"python3";
             else
-                python = @"..\..\..\..\Python\python.exe";
+                python = @"python";
 
 
             // Create new process start info 
