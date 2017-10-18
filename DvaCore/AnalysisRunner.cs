@@ -9,18 +9,22 @@ namespace DvaCore
         /// Constructor for the AnalysisRunner class
         /// </summary>
         /// <param name="pr">Pythonrunner which calls the relevant scripts.</param>
-        public AnalysisRunner(IPythonRunner pr)
+        /// <param name="judge">Judge which judges a result.</param>
+        public AnalysisRunner(IPythonRunner pr, IJudge judge)
         {
             _internalPythonRunner = pr;
+            _judge = judge;
         }
         
         private readonly IPythonRunner _internalPythonRunner;
+        private readonly IJudge _judge;
 
-        public LinearSvmResult RunLinearSvm()
+        public IResult RunLinearSvm()
         {
-            var result = _internalPythonRunner.LinearSvm();
+            string analysisReturnString = _internalPythonRunner.LinearSvm();
+            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
             
-            return new LinearSvmResult(result);
+            return judgedResult;
         }
     }
 }

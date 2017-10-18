@@ -13,10 +13,11 @@ namespace DvaTest.UnitTest
         {
             //Arrange
             IPythonRunner pr = new PythonRunner();
-            IAnalysisRunner ar = new AnalysisRunner(pr);
+            IJudge j = new Judge();
+            IAnalysisRunner ar = new AnalysisRunner(pr, j);
 
             //Act
-            var linearSvmResult = ar.RunLinearSvm();
+            var linearSvmResult = (LinearSvmResult)ar.RunLinearSvm();
 
             //Assert 
             Assert.AreEqual(linearSvmResult.RatedDocuments.Count, 1600); // Where 1600 is the number of files read

@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace DvaCore.Models
 {
-    public class LinearSvmResult
+    public class LinearSvmResult : IResult
     {
         /// <summary>
         /// Constructor for LinearSvmResult
@@ -58,28 +58,34 @@ namespace DvaCore.Models
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var splitInput = input.Split(',');
 
-            OverallPrecision = double.Parse(splitInput[0]);
-            OverallBestFold = int.Parse(splitInput[1]);
-            OverallWorstFold = int.Parse(splitInput[2]);
-            FalsePositives = double.Parse(splitInput[3]);
-            FalsePositivesBestFold = int.Parse(splitInput[4]);
-            FalsePositivesWorstFold = int.Parse(splitInput[5]);
-            FalseNegatives = double.Parse(splitInput[6]);
-            FalseNegativesBestFold = int.Parse(splitInput[7]);
-            FalseNegativesWorstFold = int.Parse(splitInput[8]);
-
-            var docList = new List<RatedDocument>();
-            for (int i = 9; i < splitInput.Length; i+=3)
+            if (splitInput.Length >= 9 && splitInput.Length % 3 == 0)
             {
-                string name = splitInput[i].Trim();
-                bool deceptive = splitInput[i + 1].Trim() == "1";
-                bool rating = splitInput[i + 2].Trim() == "1";
-                
-                docList.Add(new RatedDocument(name, deceptive, rating));
+                OverallPrecision = double.Parse(splitInput[0]);
+                OverallBestFold = int.Parse(splitInput[1]);
+                OverallWorstFold = int.Parse(splitInput[2]);
+                FalsePositives = double.Parse(splitInput[3]);
+                FalsePositivesBestFold = int.Parse(splitInput[4]);
+                FalsePositivesWorstFold = int.Parse(splitInput[5]);
+                FalseNegatives = double.Parse(splitInput[6]);
+                FalseNegativesBestFold = int.Parse(splitInput[7]);
+                FalseNegativesWorstFold = int.Parse(splitInput[8]);
+
+                var docList = new List<RatedDocument>();
+                for (int i = 9; i < splitInput.Length; i += 3)
+                {
+                    string name = splitInput[i].Trim();
+                    bool deceptive = splitInput[i + 1].Trim() == "1";
+                    bool rating = splitInput[i + 2].Trim() == "1";
+
+                    docList.Add(new RatedDocument(name, deceptive, rating));
+                }
+
+                RatedDocuments = docList;
             }
-
-            RatedDocuments = docList;
-
+            else
+            {
+                throw new ArgumentException("LinearSvmResult.Parse: " + input + " is invalid.");
+            }
         }
     }
 }

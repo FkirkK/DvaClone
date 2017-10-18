@@ -8,7 +8,7 @@ namespace DvaCore
         /// <summary>
         /// Call the LinearSvmScript and interpret the results.
         /// </summary>
-        /// <returns>LinearSvmResult</returns>
-        LinearSvmResult RunLinearSvm();
+        /// <returns>IResult</returns>
+        IResult RunLinearSvm();
     }
 }
