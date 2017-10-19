@@ -5,10 +5,12 @@ from .GeneralDimensionalizer import GeneralDimensionalizer
 from .NGramDimensionalizers import UniGramDimensionalizer
 from .NGramDimensionalizers import BigramDimensionalizer
 from .NGramDimensionalizers import BigramPlusDimensionalizer
+from .NGramDimensionalizers import TrigramDimensionalizer
 
 from .DimensionalizerTests import UnigramDimensionalizerTests
 from .DimensionalizerTests import BigramDimensionalizerTests
 from .DimensionalizerTests import BigramPlusDimensionalizerTests
+from .DimensionalizerTests import TrigramDimensionalizerTests
 
 from .OpSpamReaderTests import OpSpamReaderTests
 from .ClassifierResult import ClassifierResult
