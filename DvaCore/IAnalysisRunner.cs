@@ -9,6 +9,7 @@ namespace DvaCore
         /// Call the LinearSvmScript and interpret the results.
         /// </summary>
         /// <returns>IResult</returns>
-        IResult RunLinearSvm();
+        IResult RunLinearSvmBigramPlus();
+        IResult RunLinearSvmUnigram();
     }
 }

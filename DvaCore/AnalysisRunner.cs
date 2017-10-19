@@ -19,11 +19,19 @@ namespace DvaCore
         private readonly IPythonRunner _internalPythonRunner;
         private readonly IJudge _judge;
 
-        public IResult RunLinearSvm()
+        public IResult RunLinearSvmBigramPlus()
         {
-            string analysisReturnString = _internalPythonRunner.LinearSvm();
+            string analysisReturnString = _internalPythonRunner.LinearSvmBigramPlus();
             IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
             
+            return judgedResult;
+        }
+
+        public IResult RunLinearSvmUnigram()
+        {
+            string analysisReturnString = _internalPythonRunner.LinearSvmUnigram();
+            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
+
             return judgedResult;
         }
     }

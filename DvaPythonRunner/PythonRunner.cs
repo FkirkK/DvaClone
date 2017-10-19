@@ -7,7 +7,7 @@ namespace DvaPythonRunner
 {
     public class PythonRunner : IPythonRunner
     {
-        public string LinearSvm()
+        public string LinearSvmBigramPlus()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             var path = @"\DvaPythonScripts\OpinionSpamPackage\LinearSvm.py";
@@ -20,8 +20,25 @@ namespace DvaPythonRunner
                 fileName = Path.GetFileName(directoryName);
             }
 
-            var result = RunScript(directoryName + path);
+            var result = RunScript(directoryName + path, "BigramPlus");
             return (string) result;
+        }
+
+        public string LinearSvmUnigram()
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var path = @"\DvaPythonScripts\OpinionSpamPackage\LinearSvm.py";
+            var directoryName = Path.GetDirectoryName(currentDirectory);
+            var fileName = Path.GetFileName(directoryName);
+
+            while (fileName != "Dva")
+            {
+                directoryName = Path.GetDirectoryName(directoryName);
+                fileName = Path.GetFileName(directoryName);
+            }
+
+            var result = RunScript(directoryName + path, "Unigram");
+            return (string)result;
         }
 
         /// <summary>
@@ -60,7 +77,7 @@ namespace DvaPythonRunner
 
             foreach (var param in input)
             {
-                callString += " " + (int)param;
+                callString += " " + param;
             }
 
             myProcessStartInfo.Arguments = callString;

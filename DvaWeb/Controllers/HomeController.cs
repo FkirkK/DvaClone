@@ -29,7 +29,7 @@ namespace DvaWeb.Controllers
         public IActionResult LinearSVMResult()
         {
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            IResult result = runner.RunLinearSvm();
+            IResult result = runner.RunLinearSvmBigramPlus();
             ViewBag.LinearSvmResult = result;
 
             return View();
