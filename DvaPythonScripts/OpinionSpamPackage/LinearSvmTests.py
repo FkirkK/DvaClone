@@ -2,7 +2,6 @@ from unittest import TestCase
 from OpinionSpamPackage import OpSpamReader
 from OpinionSpamPackage import DvaLinearSvm
 from sklearn import svm
-import numpy
 
 
 class LinearSvmTests(TestCase):

@@ -17,5 +17,6 @@ from .DimensionalizerTests import TrigramPlusDimensionalizerTests
 from .OpSpamReaderTests import OpSpamReaderTests
 from .ClassifierResult import ClassifierResult
 from .ClassifierResultTests import ClassifierResultTests
-from .DvaLinearSvm import DvaLinearSvm
+from .DvaGeneralSvm import DvaGeneralSvm
+from .DvaSvms import DvaLinearSvm
 from .LinearSvmTests import LinearSvmTests

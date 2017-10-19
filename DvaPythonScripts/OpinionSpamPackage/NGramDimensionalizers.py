@@ -82,6 +82,7 @@ class TrigramPlusDimensionalizer(GeneralDimensionalizer):
             returnSet.add(splitContent[i] + " " + splitContent[i+1] + " " + splitContent[i+2])
             returnSet.add(splitContent[i] + " " + splitContent[i+1])
             returnSet.add(splitContent[i])
+
         returnSet.add(splitContent[len(splitContent) - 1])
         returnSet.add(splitContent[len(splitContent) - 2])  # Picking up final grams not included in loop
         returnSet.add(splitContent[len(splitContent) - 2] + " " + splitContent[len(splitContent) - 1])

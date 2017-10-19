@@ -5,12 +5,14 @@ from OpinionSpamPackage import BigramPlusDimensionalizer
 from OpinionSpamPackage import ClassifierResult
 
 
-class DvaLinearSvm:
+class DvaGeneralSvm:
 
-    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
+    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer, SvmClass=svm.LinearSVC, SvmKernel="rbf"):
         self.reviewList = reviewList
         self.dimensionalizer = dimensionalizerClass()
         self.dimensionalizer.DimensionalizeAllReviews(reviewList=self.reviewList)
+        self.specifiedSvmClass = SvmClass
+        self.specifiedSvmKernel = SvmKernel
         self.model = None
 
     def LearnModel(self, reviewListForLearning):
@@ -31,7 +33,10 @@ class DvaLinearSvm:
             y.append(reviewListForLearning[i].isTruthful)
 
         # Learn and save the classifier
-        classifier = svm.LinearSVC()
+        if self.specifiedSvmClass == svm.LinearSVC:
+            classifier = svm.LinearSVC()
+        else:
+            classifier = svm.SVC(kernel=self.specifiedSvmKernel)
         classifier.fit(X=x, y=y)
         self.model = classifier
 
