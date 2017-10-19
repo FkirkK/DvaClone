@@ -10,7 +10,7 @@ namespace DvaPythonRunner
         public string LinearSvmBigramPlus()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var path = @"\DvaPythonScripts\OpinionSpamPackage\LinearSvm.py";
+            var path = @"/DvaPythonScripts/OpinionSpamPackage/LinearSvm.py";
             var directoryName = Path.GetDirectoryName(currentDirectory);
             var fileName = Path.GetFileName(directoryName);
 
@@ -20,14 +20,14 @@ namespace DvaPythonRunner
                 fileName = Path.GetFileName(directoryName);
             }
 
-            var result = RunScript(directoryName + path, "BigramPlus");
+            var result = RunScript(@""+directoryName + path, "BigramPlus");
             return (string) result;
         }
 
         public string LinearSvmUnigram()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var path = @"\DvaPythonScripts\OpinionSpamPackage\LinearSvm.py";
+            var path = @"/DvaPythonScripts/OpinionSpamPackage/LinearSvm.py";
             var directoryName = Path.GetDirectoryName(currentDirectory);
             var fileName = Path.GetFileName(directoryName);
 
