@@ -9,6 +9,7 @@ using DvaCore.Models;
 using DvaDataImporter;
 using DvaPythonRunner;
 using DvaWeb.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DvaWeb.Controllers
 {
@@ -18,6 +19,13 @@ namespace DvaWeb.Controllers
         {
             return View();
         }
+        
+        public IActionResult LinearSVM()
+        {
+            ViewBag.MethodName = new SelectList(new[] {
+            "LinearSVMResult", "LinearSVMResult1", "LinearSVMResult2"});
+            return View(new DummyModel());
+            }
 
         [HttpPost]
         public IActionResult LinearSVMResult(string methodName)
@@ -26,17 +34,25 @@ namespace DvaWeb.Controllers
             IResult result = runner.RunLinearSvmBigram();
             ViewBag.LinearSvmResult = result;
 
-        public IActionResult LinearSVM()
-        {
             return View();
         }
 
         [HttpPost]
-        public IActionResult LinearSVMResult()
+        public IActionResult LinearSVMResult1()
         {
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            IResult result = runner.RunLinearSvmBigramPlus();
-            ViewBag.LinearSvmResult = result;
+            //IResult result = runner.RunLinearSvm();
+            //ViewBag.LinearSvmResult = result;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult LinearSVMResult2()
+        {
+            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
+            //IResult result = runner.RunLinearSvm();
+            //ViewBag.LinearSvmResult = result;
 
             return View();
         }
