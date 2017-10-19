@@ -1,0 +1,16 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "Eksempel";
+}
+
+<h2>@ViewBag.Title</h2>
+<form method="post">
+    first number :<input id="firstnumber" name="firstnumber" type="number" /><br />
+    Second number :<input id="secondnumber" name="secondnumber" type="number" /><br />
+
+    <input id="Submit1" type="submit" value="submit" />
+    Sum = @ViewBag.res
+    <br/>
+    Text of first element in reviews = @ViewBag.reviews[0]
+</form>
