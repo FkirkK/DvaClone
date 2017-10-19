@@ -4,6 +4,7 @@ from OpinionSpamPackage import UniGramDimensionalizer
 from OpinionSpamPackage import BigramDimensionalizer
 from OpinionSpamPackage import BigramPlusDimensionalizer
 from OpinionSpamPackage import TrigramDimensionalizer
+from OpinionSpamPackage import TrigramPlusDimensionalizer
 
 
 class UnigramDimensionalizerTests(TestCase):
@@ -492,6 +493,131 @@ class TrigramDimensionalizerTests(TestCase):
         # Arrange
         featureCount = 168004  # Number of trigrams in dataset
         expectedVectorOnesCount = 118  # Number of 1-entries in generated vector
+        actualVectorOnesCount = 0
+
+        # Act
+        self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
+        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        for entry in vector[0]:
+            if entry == 1:
+                actualVectorOnesCount += 1
+
+        # Assert
+        self.assertEqual(len(vector[0]), featureCount)
+        self.assertEqual(actualVectorOnesCount, expectedVectorOnesCount)
+
+
+class TrigramPlusDimensionalizerTests(TestCase):
+
+    def setUp(self):
+        self.dimensionalizer = TrigramPlusDimensionalizer()
+        self.osReader = OpSpamReader()
+        self.readReviews = self.osReader.ReadAllFiles()
+
+    def test_get_trigramsplus_returns_proper_set_file_1(self):
+        # Arrange
+        expectedSetResult = 313
+
+        # Act
+        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+
+        # Assert
+        self.assertEqual(len(returnedSet), expectedSetResult)
+
+    def test_trigramplus_file_1_correctly(self):
+        # Arrange
+        expectedSetResult = 313
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+
+    def test_trigramplus_file_82_correctly(self):
+        # Arrange
+        expectedSetResult = 285
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+
+    def test_trigramplus_file_1_and_82_combined_correctly(self):
+        # Arrange
+        expectedTwoSetsResult = 586
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedTwoSetsResult)
+
+    def test_trigramplusALL_with_2_files(self):
+        # Arrange
+        expectedSetResult = 586
+        reviewList = []
+        reviewList.append(self.readReviews[0])
+        reviewList.append(self.readReviews[82])
+
+        # Act
+        self.dimensionalizer.DimensionalizeAllReviews(reviewList=reviewList)
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+
+    def test_CreateDictionary_for_files_1_and_82_has_right_amount(self):
+        # Arrange
+        expectedNumberOfKeys = 586
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
+        self.dimensionalizer.CreateDictionaryOfWords()
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeys)
+
+    def test_CreateDictionary_deletes_old_dictionary(self):
+        # Arrange
+        expectedNumberOfKeys = 313
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.CreateDictionaryOfWords()
+
+        # Assert
+        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeys)
+
+        # Re-arrange
+        self.dimensionalizer.dimensionSet = set()  # Delete the current dimensionset
+        expectedNumberOfKeysAfterNewCreation = 285
+
+        # Re-act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[82])
+        self.dimensionalizer.CreateDictionaryOfWords()
+
+        # Re-assert
+        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeysAfterNewCreation)
+
+    def test_dictionary_maps_words_to_integers(self):
+        # Arrange
+        index = None
+
+        # Act
+        self.dimensionalizer.DimensionalizeReview(self.readReviews[0])
+        self.dimensionalizer.CreateDictionaryOfWords()
+        index = self.dimensionalizer.mappingDictionary["hilton"]  # Word from the first review
+
+        # Assert
+        self.assertTrue(type(index) is int)
+
+    def test_CreateVector_for_review_1(self):
+        # Arrange
+        featureCount = 264049  # Number of trigramsplus in dataset
+        expectedVectorOnesCount = 313  # Number of 1-entries in generated vector
         actualVectorOnesCount = 0
 
         # Act
