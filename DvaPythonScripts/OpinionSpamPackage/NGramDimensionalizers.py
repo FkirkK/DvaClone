@@ -2,24 +2,6 @@ import numpy
 from OpinionSpamPackage import GeneralDimensionalizer
 
 
-class BigramPlusDimensionalizer(GeneralDimensionalizer):
-
-    def __init__(self):
-        super().__init__(self.GetBigramsPlusFromReview)
-
-    def GetBigramsPlusFromReview(self, review):
-        returnSet = set()
-        splitContent = review.content.split(" ")
-        splitContent = super().RemoveAllNewlines(splitContent)
-
-        for i in range(0, len(splitContent) - 1):
-            returnSet.add(splitContent[i])
-            returnSet.add(splitContent[i] + " " + splitContent[i + 1])
-        returnSet.add(splitContent[len(splitContent) - 1])  # Done to get last element not caught in loop
-
-        return returnSet
-
-
 class UniGramDimensionalizer(GeneralDimensionalizer):
 
     def __init__(self):
@@ -35,6 +17,7 @@ class UniGramDimensionalizer(GeneralDimensionalizer):
 
         return returnSet
 
+
 class BigramDimensionalizer(GeneralDimensionalizer):
 
     def __init__(self):
@@ -47,5 +30,23 @@ class BigramDimensionalizer(GeneralDimensionalizer):
 
         for i in range(0, len(splitContent) - 1):
             returnSet.add(splitContent[i] + " " + splitContent[i + 1])
+
+        return returnSet
+
+
+class BigramPlusDimensionalizer(GeneralDimensionalizer):
+
+    def __init__(self):
+        super().__init__(self.GetBigramsPlusFromReview)
+
+    def GetBigramsPlusFromReview(self, review):
+        returnSet = set()
+        splitContent = review.content.split(" ")
+        splitContent = super().RemoveAllNewlines(splitContent)
+
+        for i in range(0, len(splitContent) - 1):
+            returnSet.add(splitContent[i])
+            returnSet.add(splitContent[i] + " " + splitContent[i + 1])
+        returnSet.add(splitContent[len(splitContent) - 1])  # Done to get last element not caught in loop
 
         return returnSet

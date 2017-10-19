@@ -6,9 +6,9 @@ from .NGramDimensionalizers import UniGramDimensionalizer
 from .NGramDimensionalizers import BigramDimensionalizer
 from .NGramDimensionalizers import BigramPlusDimensionalizer
 
-from .DimensionalizerTests import BigramPlusDimensionalizerTests
 from .DimensionalizerTests import UnigramDimensionalizerTests
 from .DimensionalizerTests import BigramDimensionalizerTests
+from .DimensionalizerTests import BigramPlusDimensionalizerTests
 
 from .OpSpamReaderTests import OpSpamReaderTests
 from .ClassifierResult import ClassifierResult
