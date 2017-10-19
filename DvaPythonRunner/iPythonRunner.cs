@@ -8,5 +8,8 @@
         /// <returns>String with linear svm result (should be correctly formatted)</returns>
         string LinearSvmBigramPlus();
         string LinearSvmUnigram();
+        string LinearSvmBigram();
+        string LinearSvmTrigram();
+        string LinearSvmTrigramPlus();
     }
 }

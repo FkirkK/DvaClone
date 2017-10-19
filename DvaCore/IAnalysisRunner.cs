@@ -11,5 +11,8 @@ namespace DvaCore
         /// <returns>IResult</returns>
         IResult RunLinearSvmBigramPlus();
         IResult RunLinearSvmUnigram();
+        IResult RunLinearSvmBigram();
+        IResult RunLinearSvmTrigram();
+        IResult RunLinearSvmTrigramPlus();
     }
 }

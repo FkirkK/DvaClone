@@ -34,5 +34,29 @@ namespace DvaCore
 
             return judgedResult;
         }
+
+        public IResult RunLinearSvmBigram()
+        {
+            string analysisReturnString = _internalPythonRunner.LinearSvmBigram();
+            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
+
+            return judgedResult;
+        }
+
+        public IResult RunLinearSvmTrigram()
+        {
+            string analysisReturnString = _internalPythonRunner.LinearSvmTrigram();
+            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
+
+            return judgedResult;
+        }
+
+        public IResult RunLinearSvmTrigramPlus()
+        {
+            string analysisReturnString = _internalPythonRunner.LinearSvmTrigramPlus();
+            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
+
+            return judgedResult;
+        }
     }
 }
