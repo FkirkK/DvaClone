@@ -7,9 +7,9 @@ from OpinionSpamPackage import ClassifierResult
 
 class DvaLinearSvm:
 
-    def __init__(self, reviewList):
+    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
         self.reviewList = reviewList
-        self.dimensionalizer = BigramPlusDimensionalizer()
+        self.dimensionalizer = dimensionalizerClass()
         self.dimensionalizer.DimensionalizeAllReviews(reviewList=self.reviewList)
         self.model = None
 
@@ -25,8 +25,8 @@ class DvaLinearSvm:
         # Populate x and y
         for i in range(0, n_samples):
             wordSet = self.dimensionalizer.nGramGetter(review=reviewListForLearning[i])
-            for bigram in wordSet:
-                indexInRow = self.dimensionalizer.mappingDictionary[bigram]
+            for ngram in wordSet:
+                indexInRow = self.dimensionalizer.mappingDictionary[ngram]
                 x[i][indexInRow] = 1
             y.append(reviewListForLearning[i].isTruthful)
 
