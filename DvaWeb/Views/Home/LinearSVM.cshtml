@@ -7,12 +7,11 @@
 <h2>@ViewBag.Title</h2>
 
 
-
-@(Html.DropDownListFor(x => x.MethodName, null))
+<!--(Html.DropDownListFor(x => x.MethodName, null))-->
 
 
 <form method="post">
-    <input type="hidden" id="MethodName" name="MethodName" value="@ViewBag.MethodName.SelectedValue"/>
+    <!--<input type="hidden" id="MethodName" name="MethodName" value="ViewBag.MethodName.SelectedValue"/>-->
     <input id="Submit1" type="submit" value="Start" formaction="LinearSVMResult"/>
 </form>
 

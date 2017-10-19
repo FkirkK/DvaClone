@@ -22,9 +22,10 @@ namespace DvaWeb.Controllers
         
         public IActionResult LinearSVM()
         {
-            ViewBag.MethodName = new SelectList(new[] {
-            "LinearSVMResult", "LinearSVMResult1", "LinearSVMResult2"});
-            return View(new DummyModel());
+            //ViewBag.MethodName = new SelectList(new[] {
+            //"LinearSVMResult", "LinearSVMResult1", "LinearSVMResult2"});
+            //return View(new DummyModel());
+            return View();
             }
 
         [HttpPost]
