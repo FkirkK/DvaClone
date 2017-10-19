@@ -34,3 +34,18 @@ class UniGramDimensionalizer(GeneralDimensionalizer):
             returnSet.add(splitContent[i])
 
         return returnSet
+
+class BigramDimensionalizer(GeneralDimensionalizer):
+
+    def __init__(self):
+        super().__init__(self.GetBigramsFromReview)
+
+    def GetBigramsFromReview(self, review):
+        returnSet = set()
+        splitContent = review.content.split(" ")
+        splitContent = super().RemoveAllNewlines(splitContent)
+
+        for i in range(0, len(splitContent) - 1):
+            returnSet.add(splitContent[i] + " " + splitContent[i + 1])
+
+        return returnSet
