@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using DvaCore.Models;
 using DvaDataImporter;
 using DvaPythonRunner;
-using DvaWeb.Models;
+using DvaWebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DvaWeb.Controllers
+namespace DvaWebApp.Controllers
 {
     public class HomeController : Controller
     {
