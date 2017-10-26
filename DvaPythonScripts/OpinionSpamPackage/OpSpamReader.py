@@ -34,8 +34,10 @@ class OpSpamReader:
             currentFoldPath = os.path.join(fullPath, "fold{nr}".format(nr=i))
             # The below expression discovers all files in the fold path
             files = [f for f in os.listdir(currentFoldPath) if os.path.isfile(os.path.join(currentFoldPath, f))]
-
+            foldReviews = []
             for file in files:
-                returnList.append(self.ReadSingleFile(os.path.join(currentFoldPath, file), isTruthful, isPositive, i))
+                foldReviews.append(self.ReadSingleFile(os.path.join(currentFoldPath, file), isTruthful, isPositive, i))
+            foldReviews = sorted(foldReviews, key=lambda review: review.title)
+            returnList.extend(foldReviews)
         return returnList
 
