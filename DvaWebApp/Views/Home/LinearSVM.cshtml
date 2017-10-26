@@ -1,4 +1,4 @@
-﻿@model DvaWebApp.Models.DummyModel
+﻿@model DvaWebApp.Models.AlgorithmSettingsModel
 
 @{
     ViewBag.Title = "Linear Support Vector Machine";
@@ -7,11 +7,11 @@
 <h2>@ViewBag.Title</h2>
 
 
-<!--(Html.DropDownListFor(x => x.MethodName, null))-->
-
-
 <form method="post">
-    <!--<input type="hidden" id="MethodName" name="MethodName" value="ViewBag.MethodName.SelectedValue"/>-->
-    <input id="Submit1" type="submit" value="Start" formaction="LinearSVMResult"/>
+    <div class="col-md-4 container-fluid">
+        @(Html.DropDownListFor(x => x.SelectedAlgorithm, Model.AlgorithmList, "Select Algorithm", new { @class = "form-control" }))
+    </div>
+
+    <input id="Submit1" type="submit" class="btn btn-default" value="Start" formaction="LinearSVMResult"/>
 </form>
 
