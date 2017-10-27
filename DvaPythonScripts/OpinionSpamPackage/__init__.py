@@ -19,4 +19,8 @@ from .ClassifierResult import ClassifierResult
 from .ClassifierResultTests import ClassifierResultTests
 from .DvaGeneralSvm import DvaGeneralSvm
 from .DvaSvms import DvaLinearSvm
+from .DvaSvms import DvaPolySvm
+from .DvaSvms import DvaRbfSvm
+from .DvaSvms import DvaSigmoidSvm
+
 from .LinearSvmTests import LinearSvmTests

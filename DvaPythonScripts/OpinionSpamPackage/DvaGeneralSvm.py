@@ -7,13 +7,12 @@ from OpinionSpamPackage import ClassifierResult
 
 class DvaGeneralSvm:
 
-    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer, SvmClass=svm.LinearSVC, SvmKernel="rbf"):
+    def __init__(self, reviewList, classifier, dimensionalizerClass=BigramPlusDimensionalizer):
         self.reviewList = reviewList
         self.dimensionalizer = dimensionalizerClass()
         self.dimensionalizer.DimensionalizeAllReviews(reviewList=self.reviewList)
-        self.specifiedSvmClass = SvmClass
-        self.specifiedSvmKernel = SvmKernel
         self.model = None
+        self.__classifier__ = classifier
 
     def LearnModel(self, reviewListForLearning):
         # Prepare variables for learning model
@@ -33,14 +32,7 @@ class DvaGeneralSvm:
             y.append(reviewListForLearning[i].isTruthful)
 
         # Learn and save the classifier
-        if self.specifiedSvmClass == svm.LinearSVC:
-            classifier = svm.LinearSVC()
-        else:
-            classifier = svm.SVC(kernel=self.specifiedSvmKernel)
-        classifier.fit(X=x, y=y)
-        self.model = classifier
-
-
+        self.model = self.__classifier__.fit(X=x, y=y)
 
     def Do5FoldValidation(self):
         numberOfFolds = 5
@@ -86,7 +78,3 @@ class DvaGeneralSvm:
             listOfResults.append(classifierResult)
 
         return ClassifierResult.AggregateResults(listOfResults)
-
-
-
-
