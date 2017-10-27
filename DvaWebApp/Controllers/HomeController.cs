@@ -22,50 +22,40 @@ namespace DvaWebApp.Controllers
         
         public IActionResult LinearSVM()
         {
-            //ViewBag.MethodName = new SelectList(new[] {
-            //"LinearSVMResult", "LinearSVMResult1", "LinearSVMResult2"});
-            //return View(new DummyModel());
-            return View();
+            AlgorithmSettingsModel model = new AlgorithmSettingsModel();
+            model.AlgorithmList = new SelectList(new[] { "Linear SVM (Unigram)", "Linear SVM (Bigram)", "Linear SVM (Trigram)", "Linear SVM (Bigram+)", "Linear SVM (Trigram+)" });
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult LinearSVMResult(AlgorithmSettingsModel asm)
+        {
+            string selectedAlgorithm = asm.SelectedAlgorithm;
+            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
+            IResult result = null;
+
+            switch (selectedAlgorithm)
+            {
+                case "Linear SVM (Unigram)":
+                    result = runner.RunLinearSvmUnigram();
+                    break;
+                case "Linear SVM (Bigram)":
+                    result = runner.RunLinearSvmBigram();
+                    break;
+                case "Linear SVM (Trigram)":
+                    result = runner.RunLinearSvmTrigram();
+                    break;
+                case "Linear SVM (Bigram+)":
+                    result = runner.RunLinearSvmBigramPlus();
+                    break;
+                case "Linear SVM (Trigram+)":
+                    result = runner.RunLinearSvmTrigramPlus();
+                    break;
+                default:
+                    return Error();
             }
-
-        [HttpPost]
-        public IActionResult LinearSVMResult(string methodName)
-        {
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            IResult result = runner.RunLinearSvmBigram();
+            
             ViewBag.LinearSvmResult = result;
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult LinearSVMResult1()
-        {
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            //IResult result = runner.RunLinearSvm();
-            //ViewBag.LinearSvmResult = result;
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult LinearSVMResult2()
-        {
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            //IResult result = runner.RunLinearSvm();
-            //ViewBag.LinearSvmResult = result;
-
-            return View();
-        }
-
-        public IActionResult Eksempel(int firstnumber = 0, int secondnumber = 0)
-        {
-            ViewData["Message"] = "Your application description page.";
-            int result = firstnumber + secondnumber;
-            ViewBag.res = result;
-
-            DataImporter di = new DataImporter();
-            ViewBag.reviews = di.ImportReviews(@"C:\Users\marcb\Documents\GitHub\Dva\op_spam_v1.4");
 
             return View();
         }
