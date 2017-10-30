@@ -24,4 +24,7 @@ from .DvaSvms import DvaRbfSvm
 from .DvaSvms import DvaSigmoidSvm
 from .DvaSvmsTests import DvaSvmsTests
 
+from .DvaClassifierTrees import DvaClassifierTree
+from .DvaClassifierTreesTests import DvaClassifierTreeTests
+
 from .LinearSvmTests import LinearSvmTests
