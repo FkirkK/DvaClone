@@ -1,5 +1,6 @@
 ﻿using DvaCore;
 using DvaCore.Models;
+using System;
 
 namespace DvaAnalysis
 {
@@ -19,44 +20,27 @@ namespace DvaAnalysis
         private readonly IPythonRunner _internalPythonRunner;
         private readonly IJudge _judge;
 
-        public IResult RunLinearSvmBigramPlus()
+        public IResult RunAnalysis(AnalysisConfiguration config)
         {
-            string analysisReturnString = _internalPythonRunner.LinearSvmBigramPlus();
+            string analysisReturnString = RunConfiguration(config);
             IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
-            
             return judgedResult;
         }
 
-        public IResult RunLinearSvmUnigram()
+        private string RunConfiguration(AnalysisConfiguration config)
         {
-            string analysisReturnString = _internalPythonRunner.LinearSvmUnigram();
-            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
-
-            return judgedResult;
+            switch (config.ConfigurationType)
+            {
+                case ConfigurationType.PythonRunner:
+                    return RunPythonRunner(config);
+                default:
+                    throw new ArgumentException("Unknown configuration type.");
+            }
         }
 
-        public IResult RunLinearSvmBigram()
+        private string RunPythonRunner(AnalysisConfiguration config)
         {
-            string analysisReturnString = _internalPythonRunner.LinearSvmBigram();
-            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
-
-            return judgedResult;
-        }
-
-        public IResult RunLinearSvmTrigram()
-        {
-            string analysisReturnString = _internalPythonRunner.LinearSvmTrigram();
-            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
-
-            return judgedResult;
-        }
-
-        public IResult RunLinearSvmTrigramPlus()
-        {
-            string analysisReturnString = _internalPythonRunner.LinearSvmTrigramPlus();
-            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
-
-            return judgedResult;
+            return _internalPythonRunner.RunAnalysis((PythonConfiguration)config);
         }
     }
 }
