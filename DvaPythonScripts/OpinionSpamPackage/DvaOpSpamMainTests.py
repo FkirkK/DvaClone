@@ -4,7 +4,7 @@ from OpinionSpamPackage import DvaLinearSvm
 from sklearn import svm
 
 
-class LinearSvmTests(TestCase):
+class DvaOpSpamMainTests(TestCase):
 
     def setUp(self):
         self.osReader = OpSpamReader()

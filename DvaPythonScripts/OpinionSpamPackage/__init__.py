@@ -22,9 +22,10 @@ from .DvaSvms import DvaLinearSvm
 from .DvaSvms import DvaPolySvm
 from .DvaSvms import DvaRbfSvm
 from .DvaSvms import DvaSigmoidSvm
+from .DvaSvms import DvaSvmLinear
 from .DvaSvmsTests import DvaSvmsTests
 
 from .DvaClassifierTrees import DvaClassifierTree
 from .DvaClassifierTreesTests import DvaClassifierTreeTests
 
-from .LinearSvmTests import LinearSvmTests
+from .DvaOpSpamMainTests import DvaOpSpamMainTests
