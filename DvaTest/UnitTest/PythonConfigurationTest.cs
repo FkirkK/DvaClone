@@ -14,6 +14,7 @@ namespace DvaTest.UnitTest
         [TestCase(Classification.SVCPolynomial, BagOfWords.Trigram)]
         [TestCase(Classification.SVCRbf, BagOfWords.TrigramPlus)]
         [TestCase(Classification.SVCSigmoid, BagOfWords.Unigram)]
+        [TestCase(Classification.DecisionTree, BagOfWords.Unigram)]
         public void CanSetConfiguration(Classification clas, BagOfWords bow)
         {
             //Arrange

@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from OpinionSpamPackage import DvaLinearSvm, DvaSvmLinear, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm
+from OpinionSpamPackage import DvaLinearSvm, DvaSvmLinear, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, DvaClassifierTree
 from OpinionSpamPackage import OpSpamReader
 from OpinionSpamPackage import UniGramDimensionalizer
 from OpinionSpamPackage import BigramDimensionalizer
@@ -42,6 +42,9 @@ def RunAnalysis():
         DvaSVM = DvaRbfSvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
     elif sys.argv[1] == "SVCSigmoid":
         DvaSVM = DvaSigmoidSvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
+    elif sys.argv[1] == "DecisionTree":
+        DvaSVM = DvaClassifierTree(readReviews, dim)
+
     else:
         print("Classifier not recognized.")
         return None

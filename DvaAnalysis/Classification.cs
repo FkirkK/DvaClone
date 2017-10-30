@@ -10,6 +10,7 @@ namespace DvaAnalysis
         SVCPolynomial,
         SVCRbf,
         SVCSigmoid,
-        LinearSVC
+        LinearSVC,
+        DecisionTree
     };
 }

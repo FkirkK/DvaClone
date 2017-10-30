@@ -18,7 +18,7 @@ namespace DvaWebApp.Controllers
         public IActionResult LinearSVM()
         {
             AlgorithmSettingsModel model = new AlgorithmSettingsModel();
-            model.AlgorithmList = new SelectList(new[] { "Linear SVM (Unigram)", "Linear SVM (Bigram)", "Linear SVM (Trigram)", "Linear SVM (Bigram+)", "Linear SVM (Trigram+)" });
+            model.AlgorithmList = new SelectList(new[] { "Linear SVM (Unigram)", "Linear SVM (Bigram)", "Linear SVM (Trigram)", "Linear SVM (Bigram+)", "Linear SVM (Trigram+)", "Decicion Tree (Unigram)" });
             return View(model);
         }
 
@@ -50,6 +50,10 @@ namespace DvaWebApp.Controllers
                     break;
                 case "Linear SVM (Trigram+)":
                     config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.TrigramPlus);
+                    result = runner.RunAnalysis(config);
+                    break;
+                case "Decicion Tree (Unigram)":
+                    config = new PythonConfiguration(Classification.DecisionTree, BagOfWords.Unigram);
                     result = runner.RunAnalysis(config);
                     break;
                 default:
