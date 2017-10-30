@@ -68,7 +68,7 @@ namespace DvaTest.AcceptanceTest
             Assert.AreEqual(0.783, linearSvmResult.OverallPrecision, 0.001);
         }
 
-        /* 6
+        /* 4
         * This is an acceptance test for running trigramplus with a linear svc classifier
         */
         [Test]
