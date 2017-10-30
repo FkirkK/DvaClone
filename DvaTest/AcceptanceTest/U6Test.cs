@@ -46,7 +46,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
 
             //Assert
-            Assert.AreEqual(0.828, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.829, linearSvmResult.OverallPrecision, 0.001);
         }
 
         /* 3
@@ -65,7 +65,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
 
             //Assert
-            Assert.AreEqual(0.782, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.783, linearSvmResult.OverallPrecision, 0.001);
         }
 
         /* 6
