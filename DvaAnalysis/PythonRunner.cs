@@ -6,40 +6,15 @@ namespace DvaAnalysis
 {
     public class PythonRunner : IPythonRunner
     {
-        public string RunAnalysis(Classification classType)
+        public string RunAnalysis(PythonConfiguration config)
         {
-            throw new NotImplementedException();
-        }
-
-        public string LinearSvmBigramPlus()
-        {
-            return (string)RunScript(FindScriptFolder(), "BigramPlus");
-        }
-
-        public string LinearSvmUnigram()
-        {
-            return (string)RunScript(FindScriptFolder(), "Unigram");
-        }
-        
-        public string LinearSvmBigram()
-        {
-            return (string)RunScript(FindScriptFolder(), "Bigram");
-        }
-
-        public string LinearSvmTrigram()
-        {
-            return (string)RunScript(FindScriptFolder(), "Trigram");
-        }
-
-        public string LinearSvmTrigramPlus()
-        {
-            return (string)RunScript(FindScriptFolder(), "TrigramPlus");
+            return (string)RunScript(FindScriptFolder(), config.GetArguments());
         }
 
         private string FindScriptFolder()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
-            var path = @"/DvaPythonScripts/OpinionSpamPackage/LinearSvm.py";
+            var path = @"/DvaPythonScripts/OpinionSpamPackage/DvaOpSpamMain.py";
             var directoryName = Path.GetDirectoryName(currentDirectory);
             var fileName = Path.GetFileName(directoryName);
 
