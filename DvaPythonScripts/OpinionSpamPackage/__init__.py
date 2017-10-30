@@ -22,5 +22,6 @@ from .DvaSvms import DvaLinearSvm
 from .DvaSvms import DvaPolySvm
 from .DvaSvms import DvaRbfSvm
 from .DvaSvms import DvaSigmoidSvm
+from .DvaSvmsTests import DvaSvmsTests
 
 from .LinearSvmTests import LinearSvmTests
