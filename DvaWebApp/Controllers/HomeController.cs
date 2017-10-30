@@ -28,23 +28,29 @@ namespace DvaWebApp.Controllers
             string selectedAlgorithm = asm.SelectedAlgorithm;
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
             IResult result = null;
+            PythonConfiguration config;
 
             switch (selectedAlgorithm)
             {
                 case "Linear SVM (Unigram)":
-                    result = runner.RunLinearSvmUnigram();
+                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Unigram);
+                    result = runner.RunAnalysis(config);
                     break;
                 case "Linear SVM (Bigram)":
-                    result = runner.RunLinearSvmBigram();
+                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Bigram);
+                    result = runner.RunAnalysis(config);
                     break;
                 case "Linear SVM (Trigram)":
-                    result = runner.RunLinearSvmTrigram();
+                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Trigram);
+                    result = runner.RunAnalysis(config);
                     break;
                 case "Linear SVM (Bigram+)":
-                    result = runner.RunLinearSvmBigramPlus();
+                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.BigramPlus);
+                    result = runner.RunAnalysis(config);
                     break;
                 case "Linear SVM (Trigram+)":
-                    result = runner.RunLinearSvmTrigramPlus();
+                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.TrigramPlus);
+                    result = runner.RunAnalysis(config);
                     break;
                 default:
                     return Error();
