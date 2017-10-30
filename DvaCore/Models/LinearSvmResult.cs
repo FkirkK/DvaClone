@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading;
 
 namespace DvaCore.Models
@@ -27,6 +31,8 @@ namespace DvaCore.Models
         public int FalseNegativesBestFold { get; private set; }
         public int FalseNegativesWorstFold { get; private set; }
         public IList<RatedDocument> RatedDocuments { get; private set; }
+        [JsonIgnore]
+        public string RatedDocumentsJson { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -86,6 +92,11 @@ namespace DvaCore.Models
             {
                 throw new ArgumentException("LinearSvmResult.Parse: " + input + " is invalid.");
             }
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

@@ -6,5 +6,6 @@ namespace DvaCore.Models
 {
     public interface IResult
     {
+        string ToJson();
     }
 }

@@ -1,5 +1,8 @@
-﻿namespace DvaCore.Models
+﻿using Newtonsoft.Json;
+
+namespace DvaCore.Models
 {
+    [JsonObject]
     public class RatedDocument : Document
     {
         /// <summary>

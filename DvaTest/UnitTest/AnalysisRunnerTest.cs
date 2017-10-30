@@ -14,7 +14,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new LocalAnalysisRunner(pr, j);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmBigramPlus();
@@ -30,7 +30,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new LocalAnalysisRunner(pr, j);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmUnigram();
@@ -45,7 +45,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new LocalAnalysisRunner(pr, j);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmBigram();
@@ -60,7 +60,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new LocalAnalysisRunner(pr, j);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmTrigram();
@@ -75,7 +75,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new LocalAnalysisRunner(pr, j);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmTrigramPlus();

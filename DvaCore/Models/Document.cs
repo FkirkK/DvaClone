@@ -1,5 +1,9 @@
-﻿namespace DvaCore.Models
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
+
+namespace DvaCore.Models
 {
+    [JsonObject]
     public class Document
     {
         /// <summary>
