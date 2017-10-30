@@ -1,4 +1,4 @@
-﻿using DvaPythonRunner;
+﻿using DvaAnalysis;
 using NUnit.Framework;
 
 namespace DvaTest.UnitTest

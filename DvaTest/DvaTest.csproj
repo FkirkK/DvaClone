@@ -12,8 +12,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DvaAnalysis\DvaAnalysis.csproj" />
     <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
     <ProjectReference Include="..\DvaDataImporter\DvaDataImporter.csproj" />
-    <ProjectReference Include="..\DvaPythonRunner\DvaPythonRunner.csproj" />
   </ItemGroup>
 </Project>

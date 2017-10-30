@@ -1,6 +1,6 @@
-﻿using DvaCore;
+﻿using DvaAnalysis;
+using DvaCore;
 using DvaCore.Models;
-using DvaPythonRunner;
 using NUnit.Framework;
 
 namespace DvaTest.UnitTest

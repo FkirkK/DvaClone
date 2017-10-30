@@ -2,7 +2,4 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DvaPythonRunner\DvaPythonRunner.csproj" />
-  </ItemGroup>
 </Project>
