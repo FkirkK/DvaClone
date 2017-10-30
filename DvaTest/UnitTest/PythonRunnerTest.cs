@@ -23,5 +23,20 @@ namespace DvaTest.UnitTest
             //Assert
             Assert.AreEqual(result, exceptedResult);
         }
+
+        [Test]
+        public void RunPythonWithMultipleArguments()
+        {
+            //Arrange
+            PythonRunner pr = new PythonRunner();
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Unigram);
+
+            //Act
+            string result = pr.RunAnalysis(config);
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotEmpty(result);
+        }
     }
 }
