@@ -33,15 +33,15 @@ def RunAnalysis():
 
     # Determine which algorithm to run
     if sys.argv[1] == "LinearSVC":
-        DvaSVM = DvaLinearSvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
+        DvaSVM = DvaLinearSvm(readReviews, dim)
     elif sys.argv[1] == "SVCLinear":
-        DvaSVM = DvaSvmLinear(readReviews, DetermineDimensionalizer(sys.argv[2]))
+        DvaSVM = DvaSvmLinear(readReviews, dim)
     elif sys.argv[1] == "SVCPolynomial":
-        DvaSVM = DvaPolySvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
+        DvaSVM = DvaPolySvm(readReviews, dim)
     elif sys.argv[1] == "SVCRbf":
-        DvaSVM = DvaRbfSvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
+        DvaSVM = DvaRbfSvm(readReviews, dim)
     elif sys.argv[1] == "SVCSigmoid":
-        DvaSVM = DvaSigmoidSvm(readReviews, DetermineDimensionalizer(sys.argv[2]))
+        DvaSVM = DvaSigmoidSvm(readReviews, dim)
     elif sys.argv[1] == "DecisionTree":
         DvaSVM = DvaClassifierTree(readReviews, dim)
 
