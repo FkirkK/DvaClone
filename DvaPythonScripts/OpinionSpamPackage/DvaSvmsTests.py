@@ -1,5 +1,6 @@
 from unittest import TestCase
-from OpinionSpamPackage import TrigramDimensionalizer, DvaLinearSvm, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, Review
+from OpinionSpamPackage import TrigramDimensionalizer, DvaLinearSvm, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, Review, \
+    DvaSvmLinear
 from sklearn import svm
 
 
@@ -24,3 +25,7 @@ class DvaSvmsTests(TestCase):
     def test_svm_sets_sigmoid_parameters_correctly(self):
         curSVM = DvaSigmoidSvm(self.reviewList, self.dimensionalizerClass)
         self.assertEqual("sigmoid", curSVM.__classifier__.kernel)
+
+    def test_svm_sets_svm_linear_parameters_correctly(self):
+        curSVM = DvaSvmLinear(self.reviewList, self.dimensionalizerClass)
+        self.assertEqual("linear", curSVM.__classifier__.kernel)

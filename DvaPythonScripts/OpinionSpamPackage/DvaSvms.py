@@ -21,3 +21,9 @@ class DvaRbfSvm(DvaGeneralClassifier):
 class DvaSigmoidSvm(DvaGeneralClassifier):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
         super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="sigmoid"))
+
+
+class DvaSvmLinear(DvaGeneralClassifier):
+    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
+        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass,
+                         classifier=svm.SVC(kernel="linear"))
