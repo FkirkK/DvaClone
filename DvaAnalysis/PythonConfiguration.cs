@@ -6,10 +6,10 @@ namespace DvaAnalysis
 {
     public class PythonConfiguration : AnalysisConfiguration
     {
-        public PythonConfiguration(Classification clas, BagOfWords bow) : base(ConfigurationType.PythonRunner)
+        public PythonConfiguration(Classification classification, FeatureSet featureSet) : base(ConfigurationType.PythonRunner)
         {
-            Classification = clas;
-            BagOfWords = bow;
+            Classification = classification;
+            FeatureSet = featureSet;
         }
 
         internal object[] GetArguments()
@@ -17,13 +17,13 @@ namespace DvaAnalysis
             object[] arguments = new object[2];
 
             arguments[0] = Classification.ToString();
-            arguments[1] = BagOfWords.ToString();
+            arguments[1] = FeatureSet.ToString();
 
             return arguments;
         }
 
         public Classification Classification { get; }
 
-        public BagOfWords BagOfWords { get; }
+        public FeatureSet FeatureSet { get; }
     }
 }

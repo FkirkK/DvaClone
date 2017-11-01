@@ -21,7 +21,7 @@ namespace DvaTest.AcceptanceTest
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
             IAnalysisRunner ar = new AnalysisRunner(pr, j);
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Unigram);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
@@ -40,7 +40,7 @@ namespace DvaTest.AcceptanceTest
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
             IAnalysisRunner ar = new AnalysisRunner(pr, j);
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Bigram);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Bigram);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
@@ -59,7 +59,7 @@ namespace DvaTest.AcceptanceTest
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
             IAnalysisRunner ar = new AnalysisRunner(pr, j);
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Trigram);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Trigram);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
@@ -78,7 +78,7 @@ namespace DvaTest.AcceptanceTest
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
             IAnalysisRunner ar = new AnalysisRunner(pr, j);
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.TrigramPlus);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.TrigramPlus);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);

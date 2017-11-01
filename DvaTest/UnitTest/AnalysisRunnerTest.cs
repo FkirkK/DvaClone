@@ -16,7 +16,7 @@ namespace DvaTest.UnitTest
             IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
             IAnalysisRunner ar = new AnalysisRunner(pr, j);
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.BigramPlus);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 
             //Act
             var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);

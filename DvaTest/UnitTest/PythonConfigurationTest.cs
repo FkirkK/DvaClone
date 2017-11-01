@@ -9,13 +9,13 @@ namespace DvaTest.UnitTest
     [TestFixture]
     class PythonConfigurationTest
     {
-        [TestCase(Classification.LinearSVC, BagOfWords.Bigram)]
-        [TestCase(Classification.SVCLinear, BagOfWords.BigramPlus)]
-        [TestCase(Classification.SVCPolynomial, BagOfWords.Trigram)]
-        [TestCase(Classification.SVCRbf, BagOfWords.TrigramPlus)]
-        [TestCase(Classification.SVCSigmoid, BagOfWords.Unigram)]
-        [TestCase(Classification.DecisionTree, BagOfWords.Unigram)]
-        public void CanSetConfiguration(Classification clas, BagOfWords bow)
+        [TestCase(Classification.LinearSVC, FeatureSet.Bigram)]
+        [TestCase(Classification.SVCLinear, FeatureSet.BigramPlus)]
+        [TestCase(Classification.SVCPolynomial, FeatureSet.Trigram)]
+        [TestCase(Classification.SVCRbf, FeatureSet.TrigramPlus)]
+        [TestCase(Classification.SVCSigmoid, FeatureSet.Unigram)]
+        [TestCase(Classification.DecisionTree, FeatureSet.Unigram)]
+        public void CanSetConfiguration(Classification clas, FeatureSet bow)
         {
             //Arrange
             PythonConfiguration pc = new PythonConfiguration(clas, bow);
@@ -24,7 +24,7 @@ namespace DvaTest.UnitTest
 
             //Assert
             Assert.AreEqual(clas, pc.Classification);
-            Assert.AreEqual(bow, pc.BagOfWords);
+            Assert.AreEqual(bow, pc.FeatureSet);
         }
     }
 }

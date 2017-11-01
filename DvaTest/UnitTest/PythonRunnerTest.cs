@@ -29,7 +29,7 @@ namespace DvaTest.UnitTest
         {
             //Arrange
             PythonRunner pr = new PythonRunner();
-            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Unigram);
+            PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
 
             //Act
             string result = pr.RunAnalysis(config);
