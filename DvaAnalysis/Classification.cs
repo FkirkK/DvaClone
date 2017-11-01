@@ -12,5 +12,5 @@ namespace DvaAnalysis
         SVCSigmoid,
         LinearSVC,
         DecisionTree
-    };
+    }
 }

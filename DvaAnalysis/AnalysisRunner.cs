@@ -23,6 +23,10 @@ namespace DvaAnalysis
         public IResult RunAnalysis(AnalysisConfiguration config)
         {
             string analysisReturnString = RunConfiguration(config);
+
+            if(analysisReturnString == null)
+                throw new Exception("The analysis result was null");
+
             IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
             return judgedResult;
         }
