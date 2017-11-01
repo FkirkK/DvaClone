@@ -31,7 +31,7 @@ namespace DvaWebApp.Controllers
         public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
             FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.SelectedFeatureSet);
-            Classification selectedClassification = (Classification)Enum.Parse(typeof(Classification), asm.SelectedClassification);
+            Classification selectedClassification = (Classification) Enum.Parse(typeof(Classification), asm.SelectedClassification);
 
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
             PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);

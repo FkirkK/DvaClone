@@ -31,13 +31,13 @@
             <h4>Select classification: </h4>
         </div>
         <div class="col-md-4">
-            @(Html.DropDownListFor(x => x.SelectedFeatureSet, Model.ClassificationList, "Select Classification", new {@class = "form-control", @id = "ClassificationDropDown"}))
+            @(Html.DropDownListFor(x => x.SelectedClassification, Model.ClassificationList, "Select Classification", new {@class = "form-control", @id = "ClassificationDropDown"}))
         </div>
     </div><br/>
     <div class="row">
         <div class="col-md-7 col-md-offset-2"></div>
         <div class="col-md-1">
-            <input id="Submit" type="submit" class="btn btn-default pull-right" value="Start" formaction="LinearSVMResult" disabled="disabled"/>
+            <input id="Submit" type="submit" class="btn btn-default pull-right" value="Start" formaction="DeceptionAnalysisResult" disabled="disabled"/>
         </div>
     </div>
 </form>
