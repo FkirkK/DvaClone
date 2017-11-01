@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using DvaCore;
 using Microsoft.AspNetCore.Mvc;
 using DvaCore.Models;
@@ -15,51 +16,26 @@ namespace DvaWebApp.Controllers
             return View();
         }
         
-        public IActionResult LinearSVM()
+        public IActionResult DeceptionAnalysis()
         {
-            AlgorithmSettingsModel model = new AlgorithmSettingsModel();
-            model.AlgorithmList = new SelectList(new[] { "Linear SVM (Unigram)", "Linear SVM (Bigram)", "Linear SVM (Trigram)", "Linear SVM (Bigram+)", "Linear SVM (Trigram+)", "Decicion Tree (Unigram)" });
+            AlgorithmSettingsModel model = new AlgorithmSettingsModel
+            {
+                ClassificationList = new SelectList(Enum.GetNames(typeof(Classification))),
+                FeatureSetList = new SelectList(Enum.GetNames(typeof(FeatureSet)))
+            };
+
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult LinearSVMResult(AlgorithmSettingsModel asm)
+        public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
-            string selectedAlgorithm = asm.SelectedAlgorithm;
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            IResult result = null;
-            PythonConfiguration config;
+            FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.SelectedFeatureSet);
+            Classification selectedClassification = (Classification)Enum.Parse(typeof(Classification), asm.SelectedClassification);
 
-            switch (selectedAlgorithm)
-            {
-                case "Linear SVM (Unigram)":
-                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Unigram);
-                    result = runner.RunAnalysis(config);
-                    break;
-                case "Linear SVM (Bigram)":
-                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Bigram);
-                    result = runner.RunAnalysis(config);
-                    break;
-                case "Linear SVM (Trigram)":
-                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.Trigram);
-                    result = runner.RunAnalysis(config);
-                    break;
-                case "Linear SVM (Bigram+)":
-                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.BigramPlus);
-                    result = runner.RunAnalysis(config);
-                    break;
-                case "Linear SVM (Trigram+)":
-                    config = new PythonConfiguration(Classification.LinearSVC, BagOfWords.TrigramPlus);
-                    result = runner.RunAnalysis(config);
-                    break;
-                case "Decicion Tree (Unigram)":
-                    config = new PythonConfiguration(Classification.DecisionTree, BagOfWords.Unigram);
-                    result = runner.RunAnalysis(config);
-                    break;
-                default:
-                    return Error();
-            }
-            
+            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
+            PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);
+            var result = runner.RunAnalysis(config);
             ViewBag.LinearSvmResult = result;
 
             return View();
