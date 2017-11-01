@@ -1,12 +1,12 @@
 ﻿
 namespace DvaAnalysis
 {
-    public enum BagOfWords
+    public enum FeatureSet
     {
         Unigram,
         Bigram,
         BigramPlus,
         Trigram,
         TrigramPlus
-    };
+    }
 }
