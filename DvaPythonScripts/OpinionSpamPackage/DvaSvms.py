@@ -10,7 +10,7 @@ class DvaLinearSvm(DvaGeneralClassifier):
 
 class DvaPolySvm(DvaGeneralClassifier):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
-        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="polynomial"))
+        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="poly"))
 
 
 class DvaRbfSvm(DvaGeneralClassifier):
