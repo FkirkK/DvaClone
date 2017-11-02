@@ -6,6 +6,7 @@ using DvaCore.Models;
 using DvaWebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DvaAnalysis;
+using System.Collections.Generic;
 
 namespace DvaWebApp.Controllers
 {
@@ -16,13 +17,24 @@ namespace DvaWebApp.Controllers
             return View();
         }
         
-        public IActionResult DeceptionAnalysis()
+        public IActionResult DeceptionInitialSettings()
+        {
+            return View(new DeceptionInitialSettingsModel());
+        }
+
+        [HttpPost]
+        public IActionResult DeceptionAnalysis(DeceptionInitialSettingsModel dism)
         {
             AlgorithmSettingsModel model = new AlgorithmSettingsModel
             {
-                ClassificationList = new SelectList(Enum.GetNames(typeof(Classification))),
-                FeatureSetList = new SelectList(Enum.GetNames(typeof(FeatureSet)))
+                AlgorithmSettings = new List<SingleAlgorithmSettings>()
             };
+
+            for (int i = 0; i < int.Parse(dism.SelectedAlgorithmCount); i++)
+            {
+                model.AlgorithmSettings.Add(new SingleAlgorithmSettings());
+            }
+
 
             return View(model);
         }
@@ -30,8 +42,8 @@ namespace DvaWebApp.Controllers
         [HttpPost]
         public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
-            FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.SelectedFeatureSet);
-            Classification selectedClassification = (Classification) Enum.Parse(typeof(Classification), asm.SelectedClassification);
+            FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.AlgorithmSettings[0].SelectedFeatureSet);
+            Classification selectedClassification = (Classification) Enum.Parse(typeof(Classification), asm.AlgorithmSettings[0].SelectedClassification);
 
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
             PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);

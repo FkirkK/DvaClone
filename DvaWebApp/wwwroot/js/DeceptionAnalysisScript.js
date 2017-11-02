@@ -1,19 +1,26 @@
-﻿$(document).on('change', '#FeatureDropDown', function () {
-    var FeatureValue = $('#FeatureDropDown').val();
-    var ClassificationValue = $('#ClassificationDropDown').val();
+﻿var algoCount;
 
-    if (FeatureValue !== "" && ClassificationValue !== "")
-        $('#Submit').removeAttr('disabled');
-    else 
-        $('#Submit').attr('disabled', 'disabled');
-});
+function SetAlgoCount(count) {
+    algoCount = Number(count);
+}
 
-$(document).on('change', '#ClassificationDropDown', function () {
-    var FeatureValue = $('#FeatureDropDown').val();
-    var ClassificationValue = $('#ClassificationDropDown').val();
+$(document).on('change', function () {
+    var IsAnyDropDownEmpty = false;
 
-    if (FeatureValue !== "" && ClassificationValue !== "")
+    for (var i = 1; i <= algoCount; i++) {
+        var FeatureValue = $('#FeatureDropDown'+i).val();
+        var ClassificationValue = $('#ClassificationDropDown'+i).val();
+
+        if (FeatureValue === "" || ClassificationValue === "")
+        {
+            IsAnyDropDownEmpty = true;
+            break;
+        }
+    }
+
+    if (!IsAnyDropDownEmpty)
         $('#Submit').removeAttr('disabled');
     else
         $('#Submit').attr('disabled', 'disabled');
+    
 });
