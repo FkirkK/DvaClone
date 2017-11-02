@@ -1,4 +1,5 @@
-﻿using DvaCore.Models;
+﻿using System.Collections.Generic;
+using DvaCore.Models;
 using NUnit.Framework;
 
 namespace DvaTest.UnitTest
@@ -15,6 +16,27 @@ namespace DvaTest.UnitTest
 
             // Act
             var result = new LinearSvmResult(input);
+
+            // Assert
+            Assert.AreEqual(result.OverallPrecision, 0.0);
+            Assert.AreEqual(result.OverallBestFold, 1);
+            Assert.AreEqual(result.OverallWorstFold, 3);
+            Assert.AreEqual(result.FalsePositives, 2.0);
+            Assert.AreEqual(result.FalsePositivesBestFold, 4);
+            Assert.AreEqual(result.FalsePositivesWorstFold, 5);
+            Assert.AreEqual(result.FalseNegatives, 7.0);
+            Assert.AreEqual(result.FalseNegativesBestFold, 0);
+            Assert.AreEqual(result.FalseNegativesWorstFold, 10);
+
+            Assert.AreEqual(result.RatedDocuments.Count, 0);
+        }
+        
+        [Test]
+        public void ParseStringNoDocsAltCtor()
+        {
+            // Arrange
+            // Act
+            var result = new LinearSvmResult(0.0, 1, 3, 2.0, 4, 5, 7, 0, 10, new List<RatedDocument>());
 
             // Assert
             Assert.AreEqual(result.OverallPrecision, 0.0);

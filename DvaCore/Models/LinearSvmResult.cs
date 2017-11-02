@@ -20,6 +20,24 @@ namespace DvaCore.Models
         {
             Parse(inputToParse);
         }
+
+        [JsonConstructor]
+        public LinearSvmResult(double overallPrecision, int overallBestFold, int overallWorstFold, double falsePositives,
+            int falsePositivesBestFold, int falsePositivesWorstFold, double falseNegatives, int falseNegativesBestFold,
+            int falseNegativesWorstFold, IList<RatedDocument> ratedDocuments)
+        {
+            OverallPrecision = overallPrecision;
+            OverallBestFold = overallBestFold;
+            OverallWorstFold = overallWorstFold;
+            FalsePositives = falsePositives;
+            FalsePositivesBestFold = falsePositivesBestFold;
+            FalsePositivesWorstFold = falsePositivesWorstFold;
+            FalseNegatives = falseNegatives;
+            FalseNegativesBestFold = falseNegativesBestFold;
+            FalseNegativesWorstFold = falseNegativesWorstFold;
+            RatedDocuments = ratedDocuments;
+
+        }
         
         public double OverallPrecision { get; private set; }
         public int OverallBestFold { get; private set; }
@@ -31,13 +49,15 @@ namespace DvaCore.Models
         public int FalseNegativesBestFold { get; private set; }
         public int FalseNegativesWorstFold { get; private set; }
         public IList<RatedDocument> RatedDocuments { get; private set; }
-        [JsonIgnore]
-        public string RatedDocumentsJson { get; set; }
 
+        
         public override bool Equals(object obj)
         {
-            var svmResult = (LinearSvmResult) obj;
+            var svmResult = obj as LinearSvmResult;
             var isSame = true;
+
+            if (svmResult == null)
+                return false;
 
             isSame &= OverallPrecision.Equals(svmResult.OverallPrecision);
             isSame &= OverallBestFold.Equals(svmResult.OverallBestFold);
