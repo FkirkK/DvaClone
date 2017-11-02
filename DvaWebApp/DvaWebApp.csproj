@@ -9,6 +9,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DvaAnalysis\DvaAnalysis.csproj" />
     <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
     <ProjectReference Include="..\DvaDataImporter\DvaDataImporter.csproj" />
   </ItemGroup>
