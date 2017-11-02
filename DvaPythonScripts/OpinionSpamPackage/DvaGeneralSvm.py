@@ -5,7 +5,7 @@ from OpinionSpamPackage import BigramPlusDimensionalizer
 from OpinionSpamPackage import ClassifierResult
 
 
-class DvaGeneralClassifier:
+class DvaGeneralSvm:
 
     def __init__(self, reviewList, classifier, dimensionalizerClass=BigramPlusDimensionalizer):
         self.reviewList = reviewList

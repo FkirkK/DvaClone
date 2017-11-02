@@ -8,10 +8,7 @@ namespace DvaWebApp.Models
 {
     public class AlgorithmSettingsModel
     {
-        public SelectList FeatureSetList { get; set; }
-        public SelectList ClassificationList { get; set; }
-        public string SelectedFeatureSet { get; set; }
-        public string SelectedClassification { get; set; }
-
+        public SelectList AlgorithmList { get; set; }
+        public string SelectedAlgorithm { get; set; }
     }
 }

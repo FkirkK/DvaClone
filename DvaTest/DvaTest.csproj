@@ -13,8 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DvaAnalysisServer\DvaAnalysisServer.csproj" />
-    <ProjectReference Include="..\DvaAnalysis\DvaAnalysis.csproj" />
     <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
     <ProjectReference Include="..\DvaDataImporter\DvaDataImporter.csproj" />
+    <ProjectReference Include="..\DvaPythonRunner\DvaPythonRunner.csproj" />
   </ItemGroup>
 </Project>

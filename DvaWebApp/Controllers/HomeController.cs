@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using DvaCore;
 using Microsoft.AspNetCore.Mvc;
 using DvaCore.Models;
+using DvaDataImporter;
+using DvaPythonRunner;
 using DvaWebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DvaAnalysis;
 
 namespace DvaWebApp.Controllers
 {
@@ -16,26 +20,41 @@ namespace DvaWebApp.Controllers
             return View();
         }
         
-        public IActionResult DeceptionAnalysis()
+        public IActionResult LinearSVM()
         {
-            AlgorithmSettingsModel model = new AlgorithmSettingsModel
-            {
-                ClassificationList = new SelectList(Enum.GetNames(typeof(Classification))),
-                FeatureSetList = new SelectList(Enum.GetNames(typeof(FeatureSet)))
-            };
-
+            AlgorithmSettingsModel model = new AlgorithmSettingsModel();
+            model.AlgorithmList = new SelectList(new[] { "Linear SVM (Unigram)", "Linear SVM (Bigram)", "Linear SVM (Trigram)", "Linear SVM (Bigram+)", "Linear SVM (Trigram+)" });
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
+        public IActionResult LinearSVMResult(AlgorithmSettingsModel asm)
         {
-            FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.SelectedFeatureSet);
-            Classification selectedClassification = (Classification) Enum.Parse(typeof(Classification), asm.SelectedClassification);
-
+            string selectedAlgorithm = asm.SelectedAlgorithm;
             IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
-            PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);
-            var result = runner.RunAnalysis(config);
+            IResult result = null;
+
+            switch (selectedAlgorithm)
+            {
+                case "Linear SVM (Unigram)":
+                    result = runner.RunLinearSvmUnigram();
+                    break;
+                case "Linear SVM (Bigram)":
+                    result = runner.RunLinearSvmBigram();
+                    break;
+                case "Linear SVM (Trigram)":
+                    result = runner.RunLinearSvmTrigram();
+                    break;
+                case "Linear SVM (Bigram+)":
+                    result = runner.RunLinearSvmBigramPlus();
+                    break;
+                case "Linear SVM (Trigram+)":
+                    result = runner.RunLinearSvmTrigramPlus();
+                    break;
+                default:
+                    return Error();
+            }
+            
             ViewBag.LinearSvmResult = result;
 
             return View();

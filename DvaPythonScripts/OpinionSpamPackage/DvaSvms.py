@@ -1,29 +1,23 @@
-from OpinionSpamPackage import DvaGeneralClassifier
+from OpinionSpamPackage import DvaGeneralSvm
 from OpinionSpamPackage import BigramPlusDimensionalizer
 from sklearn import svm
 
 
-class DvaLinearSvm(DvaGeneralClassifier):
+class DvaLinearSvm(DvaGeneralSvm):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
         super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.LinearSVC())
 
 
-class DvaPolySvm(DvaGeneralClassifier):
+class DvaPolySvm(DvaGeneralSvm):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
-        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="poly"))
+        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="polynomial"))
 
 
-class DvaRbfSvm(DvaGeneralClassifier):
+class DvaRbfSvm(DvaGeneralSvm):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
         super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="rbf"))
 
 
-class DvaSigmoidSvm(DvaGeneralClassifier):
+class DvaSigmoidSvm(DvaGeneralSvm):
     def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
         super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass, classifier=svm.SVC(kernel="sigmoid"))
-
-
-class DvaSvmLinear(DvaGeneralClassifier):
-    def __init__(self, reviewList, dimensionalizerClass=BigramPlusDimensionalizer):
-        super().__init__(reviewList=reviewList, dimensionalizerClass=dimensionalizerClass,
-                         classifier=svm.SVC(kernel="linear"))
