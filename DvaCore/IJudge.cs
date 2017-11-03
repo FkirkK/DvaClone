@@ -7,6 +7,7 @@ namespace DvaCore
 {
     public interface IJudge
     {
-        IResult judgeResults(IResult result);
+        IResult judgeResult(IResult result);
+        IResult judgeResults(List<IResult> result);
     }
 }

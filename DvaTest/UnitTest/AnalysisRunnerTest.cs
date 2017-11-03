@@ -2,6 +2,7 @@
 using DvaCore;
 using DvaCore.Models;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace DvaTest.UnitTest
 {
@@ -13,17 +14,35 @@ namespace DvaTest.UnitTest
         public void RunLinearSvmBigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            IPythonRunner pr = new PythonRunner();
             IJudge j = new Judge();
-            IAnalysisRunner ar = new AnalysisRunner(pr, j);
+            IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config);
+            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
 
             //Assert 
             Assert.AreEqual(linearSvmResult.RatedDocuments.Count, 1600); // Where 1600 is the number of files read
             Assert.AreEqual(0.859, linearSvmResult.OverallPrecision, 0.001);
         }
+
+        [Test]
+        public void Run3LinearSvmsInSequence()
+        {
+            //Arrange
+            IJudge j = new MajorityJudge();
+            IAnalysisRunner ar = new AnalysisRunner();
+            PythonConfiguration config1 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
+            PythonConfiguration config2 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
+            PythonConfiguration config3 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
+
+            //Act
+            var result = (LinearSvmResult)ar.RunAnalysis(new List<AnalysisConfiguration>() { config1, config2, config3 }, j);
+
+            //Assert
+            Assert.AreEqual(0.859, result.OverallPrecision, 0.001);
+        }
+
+
     }
 }

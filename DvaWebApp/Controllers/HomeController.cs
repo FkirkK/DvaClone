@@ -45,9 +45,9 @@ namespace DvaWebApp.Controllers
             FeatureSet selectedFeatureSet = (FeatureSet) Enum.Parse(typeof(FeatureSet), asm.AlgorithmSettings[0].SelectedFeatureSet);
             Classification selectedClassification = (Classification) Enum.Parse(typeof(Classification), asm.AlgorithmSettings[0].SelectedClassification);
 
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
+            IAnalysisRunner runner = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);
-            var result = runner.RunAnalysis(config);
+            var result = runner.RunAnalysis(new List<AnalysisConfiguration>() { config }, new Judge()); //TODO: Use the actual choice of judge
             ViewBag.LinearSvmResult = result;
 
             return View();

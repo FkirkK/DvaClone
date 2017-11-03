@@ -16,6 +16,28 @@ namespace DvaCore.Models
         {
             Parse(inputToParse);
         }
+
+        public LinearSvmResult(List<RatedDocument> docList)
+        {
+            int correctCount = 0;
+            int falsePositiveCount = 0;
+            int falseNegativeCount = 0;
+
+            foreach (RatedDocument doc in docList)
+            {
+                if (doc.LabeledClassifier == doc.OurClassifier)
+                    correctCount++;
+                else if (doc.LabeledClassifier == false && doc.OurClassifier == true)
+                    falsePositiveCount++;
+                else if (doc.LabeledClassifier == true && doc.OurClassifier == false)
+                    falseNegativeCount++;
+            }
+
+            OverallPrecision = (double)correctCount / (double)docList.Count;
+            FalsePositives = (double)falsePositiveCount / (double)docList.Count;
+            FalseNegatives = (double)falseNegativeCount / (double)docList.Count;
+            RatedDocuments = docList;
+        }
         
         public double OverallPrecision { get; private set; }
         public int OverallBestFold { get; private set; }
