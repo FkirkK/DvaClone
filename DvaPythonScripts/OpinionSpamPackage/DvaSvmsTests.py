@@ -16,7 +16,7 @@ class DvaSvmsTests(TestCase):
 
     def test_svm_sets_poly_parameters_correctly(self):
         curSVM = DvaPolySvm(self.reviewList, self.dimensionalizerClass)
-        self.assertEqual("polynomial", curSVM.__classifier__.kernel)
+        self.assertEqual("poly", curSVM.__classifier__.kernel)
 
     def test_svm_sets_rbf_parameters_correctly(self):
         curSVM = DvaRbfSvm(self.reviewList, self.dimensionalizerClass)
