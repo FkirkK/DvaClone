@@ -57,16 +57,10 @@ namespace DvaAnalysisServer
                 case AnalysisModules.Bigram:
                     var temp = (LinearSvmResult)ar.RunLinearSvmBigram();
                     Console.WriteLine("Making json");
-
-                    JsonSerializerSettings settings = new JsonSerializerSettings();
-                    settings.Converters.Add(new LinearSvmResultConverter());
-                    settings.Formatting = Formatting.Indented;
-                    //var stringDocs = JsonConvert.SerializeObject(temp.RatedDocuments);
-                    //temp.RatedDocumentsJson = stringDocs;
-                    var jsonObject = JsonConvert.SerializeObject(temp, settings);
-                    //var returnValue = ar.RunLinearSvmBigram().ToJson();
-                    Console.WriteLine(jsonObject);
-                    return jsonObject;
+                    
+                    var returnValue = temp.ToJson();
+                    Console.WriteLine(returnValue);
+                    return returnValue;
                 case AnalysisModules.BigramPlus:
                     break;
                 case AnalysisModules.Unigram:
@@ -79,37 +73,6 @@ namespace DvaAnalysisServer
                     break;
             }
             return null;
-        }
-    }
-
-    public class LinearSvmResultConverter : JsonConverter
-    {
-        public override bool CanConvert(Type objectType)
-        {
-            return (objectType == typeof(LinearSvmResult));
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            LinearSvmResult tempValue = (LinearSvmResult)value;
-            //res.RatedDocuments = tempValue.RatedDocuments;
-            //IList<RatedDocument> ratedDocs = tempValue.RatedDocuments;
-            writer.WriteStartObject();
-            writer.WritePropertyName("OverallPrecision");
-            serializer.Serialize(writer, tempValue.OverallPrecision);
-
-            writer.WritePropertyName("RatedDocuments");
-            //foreach (RatedDocument doc in ratedDocs)
-            //{
-            //    serializer.Serialize(writer, doc);
-            //}
-            serializer.Serialize(writer, tempValue.RatedDocuments);
-            writer.WriteEndObject();
         }
     }
 }
