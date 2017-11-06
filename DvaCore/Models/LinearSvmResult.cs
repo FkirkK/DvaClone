@@ -30,7 +30,10 @@ namespace DvaCore.Models
 
         public override bool Equals(object obj)
         {
-            var svmResult = (LinearSvmResult) obj;
+            var svmResult = obj as LinearSvmResult;
+            if (svmResult == null)
+                return false;
+            
             var isSame = true;
 
             isSame &= OverallPrecision.Equals(svmResult.OverallPrecision);
