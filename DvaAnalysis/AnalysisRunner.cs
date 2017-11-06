@@ -1,6 +1,7 @@
 ﻿using DvaCore;
 using DvaCore.Models;
 using System;
+using System.Collections.Generic;
 
 namespace DvaAnalysis
 {
@@ -9,25 +10,38 @@ namespace DvaAnalysis
         /// <summary>
         /// Constructor for the AnalysisRunner class
         /// </summary>
-        /// <param name="pr">Pythonrunner which calls the relevant scripts.</param>
-        /// <param name="judge">Judge which judges a result.</param>
-        public AnalysisRunner(IPythonRunner pr, IJudge judge)
+        public AnalysisRunner()
         {
-            _internalPythonRunner = pr;
-            _judge = judge;
+            
         }
-        
-        private readonly IPythonRunner _internalPythonRunner;
-        private readonly IJudge _judge;
 
-        public IResult RunAnalysis(AnalysisConfiguration config)
+        public IResult RunAnalysis(AnalysisConfiguration config, IJudge judge)
         {
             string analysisReturnString = RunConfiguration(config);
 
-            if(analysisReturnString == null)
+            if (analysisReturnString == null)
                 throw new Exception("The analysis result was null");
 
-            IResult judgedResult = _judge.judgeResults(new LinearSvmResult(analysisReturnString));
+            
+            IResult judgedResult = judge.judgeResult(new LinearSvmResult(analysisReturnString));
+            return judgedResult;
+        }
+
+        public IResult RunAnalysis(List<AnalysisConfiguration> configs, IJudge judge)
+        {
+            List<IResult> ResultList = new List<IResult>();
+            foreach (var config in configs)
+            {
+                string analysisReturnString = RunConfiguration(config);
+
+                if (analysisReturnString == null)
+                    throw new Exception("The analysis result was null");
+
+                ResultList.Add(new LinearSvmResult(analysisReturnString));
+            }
+            
+
+            IResult judgedResult = judge.judgeResults(ResultList);
             return judgedResult;
         }
 
@@ -44,7 +58,7 @@ namespace DvaAnalysis
 
         private string RunPythonRunner(AnalysisConfiguration config)
         {
-            return _internalPythonRunner.RunAnalysis((PythonConfiguration)config);
+            return new PythonRunner().RunAnalysis((PythonConfiguration)config);
         }
     }
 }
