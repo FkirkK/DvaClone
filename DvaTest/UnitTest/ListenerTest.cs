@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading;
 
@@ -18,20 +19,54 @@ namespace DvaTest.UnitTest
     {
         private Process server;
 
+        
+        /*
         [SetUp]
         public void Setup()
         {
-            //server = RunServer();
-            Thread.Sleep(1000);
+            server = RunServer();
+            Thread.Sleep(500);
         }
-
+*/
         [TearDown]
         public void Teardown()
         {
             server.Kill();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
 
+
+
+        [TestCase("a")]
+        [TestCase("127.a.0.1")]
+        public void ClientHandlesInvalidIp(string ip)
+        {
+            Assert.Throws<FormatException>( () => new Client(ip, 1));
+        }
+        
+        [TestCase(IPEndPoint.MinPort-1)]
+        [TestCase(IPEndPoint.MaxPort+1)]
+        public void ClientHandlesInvalidport(int port)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>( () => new Client("127.0.0.1", port));
+        }
+
+        [Test]
+        public void ClientCanConnectToServer()
+        {
+            server = RunServer();
+            Thread.Sleep(500);
+            
+            Assert.DoesNotThrow(() => new Client());
+        }
+        
+        [Test]
+        public void ClientCannotConnectToServer()
+        {
+            server.Kill();
+            Assert.Throws<UnableToConnectException>(() => new Client());
+        }
+        
         [Test]
         public void SendResponseUponInvalidServerRequest()
         {
@@ -59,11 +94,15 @@ namespace DvaTest.UnitTest
             IAnalysisRunner ar = new RemoteAnalysisRunner(j);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunLinearSvmBigram();
-
+            var linearSvmResult = ar.RunLinearSvmBigram();
+            var convertedSvmResult = linearSvmResult as LinearSvmResult;
+            
+            
+            if(convertedSvmResult == null)
+                throw  new Exception("Unable to convert linearSvmResult to linearSvmResult");
 
             //Assert
-            Assert.AreEqual(expectedOutput, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(expectedOutput, convertedSvmResult.OverallPrecision, 0.001);
         }
 
         private static Process RunServer()
@@ -77,7 +116,13 @@ namespace DvaTest.UnitTest
 
             // start python app with X arguments  
             // 1st arguments is pointer to itself
-            string callString = @"C:\Users\Stelle\Documents\GitHub\Dva\DvaAnalysisServer\bin\Debug\netcoreapp2.0\DvaAnalysisServer.dll";
+            
+            //#if Debug
+            string callString = @"/home/bs/code/Dva/DvaAnalysisServer/bin/Debug/netcoreapp2.0/publish/DvaAnalysisServer.dll";
+            //#else
+            //string callString = @"/home/bs/code/Dva/DvaAnalysisServer/bin/Debug/netcoreapp2.0/DvaAnalysisServer.dll";
+            //#endif
+            
             
             myProcessStartInfo.Arguments = callString;
 
@@ -89,5 +134,7 @@ namespace DvaTest.UnitTest
             myProcess.Start();
             return myProcess;
         }
+        
+        
     }
 }

@@ -31,7 +31,7 @@ namespace DvaWebApp.Controllers
         public IActionResult LinearSVMResult(AlgorithmSettingsModel asm)
         {
             string selectedAlgorithm = asm.SelectedAlgorithm;
-            IAnalysisRunner runner = new AnalysisRunner(new PythonRunner(), new Judge());
+            IAnalysisRunner runner = new LocalAnalysisRunner(new PythonRunner(), new Judge());
             IResult result = null;
 
             switch (selectedAlgorithm)

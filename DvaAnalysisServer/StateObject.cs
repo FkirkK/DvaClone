@@ -10,7 +10,7 @@ namespace DvaAnalysisServer
         public StateObject(Socket socket)
         {
             Socket = socket;
-            Buffer = new byte[10240];
+            Buffer = new byte[1024000];
         }
     }
 }

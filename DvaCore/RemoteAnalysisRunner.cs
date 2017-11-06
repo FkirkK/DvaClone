@@ -25,9 +25,11 @@ namespace DvaCore
         {
             Client client = new Client(ip, port);
             string resultString = client.SendMessageAndWaitForRespons(AnalysisModules.Bigram.ToString());
-            LinearSvmResult result;
-            //JsonConvert.PopulateObject(resultString, result);
-            return _judge.judgeResults(JsonConvert.DeserializeObject<LinearSvmResult>(resultString));
+
+            var deserializedObject = JsonConvert.DeserializeObject<LinearSvmResult>(resultString);
+            
+            
+            return _judge.judgeResults(deserializedObject);
         }
 
         public IResult RunLinearSvmBigramPlus()

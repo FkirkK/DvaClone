@@ -6,7 +6,7 @@ namespace DvaTest.UnitTest
     [TestFixture]
     class PythonRunnerTest
     {
-        [TestCase(1,2,3)]
+        [TestCase(1, 2, 3)]
         [TestCase(4, 8, 12)]
         [TestCase(5, 10, 15)]
         [TestCase(100, 200, 300)]

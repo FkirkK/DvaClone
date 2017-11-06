@@ -1,23 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace DvaAnalysisClient
 {
     public class Client
     {
-        private string _ip;
-        private int _port;
+        private IPAddress _ip = null;
+        private IPEndPoint _endPoint = null;
         private Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        private byte[] buffer = new byte[10240];
+        private byte[] buffer = new byte[1024000];
 
         public Client(string ip, int port)
         {
-            _ip = ip;
-            _port = port;
+            if (! IPAddress.TryParse(ip, out _ip))
+                throw new FormatException("Invalid ip: " + ip);
+
+            if (port < IPEndPoint.MinPort || port > IPEndPoint.MaxPort)
+                throw new ArgumentOutOfRangeException("Invalid port: " + port);
+            
+            _endPoint = new IPEndPoint(_ip, port);
+
             LoopConnect();
+        }
+
+
+        public Client() : this("127.0.0.1", 13337)
+        {
         }
 
         public string SendMessageAndWaitForRespons(string message)
@@ -32,16 +45,13 @@ namespace DvaAnalysisClient
 
         private void LoopConnect()
         {
-            while (!socket.Connected)
+            try
             {
-                try
-                {
-                    socket.Connect(new IPEndPoint(IPAddress.Loopback, _port));
-                }
-                catch (Exception)
-                {
-
-                }
+                socket.Connect(_endPoint);
+            }
+            catch (SocketException e)
+            {
+                throw new UnableToConnectException("Unable to connect to server.", e);
             }
         }
     }
