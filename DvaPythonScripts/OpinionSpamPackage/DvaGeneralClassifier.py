@@ -9,8 +9,7 @@ class DvaGeneralClassifier:
 
     def __init__(self, reviewList, classifier, dimensionalizerClass=BigramPlusDimensionalizer):
         self.reviewList = reviewList
-        self.dimensionalizer = dimensionalizerClass()
-        self.dimensionalizer.DimensionalizeAllReviews(reviewList=self.reviewList)
+        self.dimensionalizer = dimensionalizerClass(reviewList=self.reviewList)
         self.model = None
         self.__classifier__ = classifier
 

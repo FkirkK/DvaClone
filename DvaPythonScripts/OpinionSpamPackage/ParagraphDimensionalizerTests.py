@@ -2,6 +2,8 @@ from unittest import TestCase
 from gensim.models import doc2vec
 from collections import namedtuple
 
+from OpinionSpamPackage.ParagraphDimensionalizer import ParagraphDimensionalizer
+
 
 class ParagraphDimensionalizerTests(TestCase):
 
@@ -23,4 +25,16 @@ class ParagraphDimensionalizerTests(TestCase):
         # Assert
         self.assertEqual(5, len(model.docvecs[0]))
         self.assertEqual(5, len(model.docvecs[1]))
+
+    def test_can_dimensionalize_review(self):
+        # Arrange
+        reviewList = []
+        reviewList.append("This is the great and awesome sentence. 1t has potential to build a wall. The 1t of this sentence is over 9000.")
+        reviewList.append("This is a good sentence made to poke to the bear.")
+
+        pd = ParagraphDimensionalizer(reviewList)
+
+        # Act
+
+
 

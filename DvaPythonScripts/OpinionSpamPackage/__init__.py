@@ -7,12 +7,14 @@ from .NGramDimensionalizers import BigramDimensionalizer
 from .NGramDimensionalizers import BigramPlusDimensionalizer
 from .NGramDimensionalizers import TrigramDimensionalizer
 from .NGramDimensionalizers import TrigramPlusDimensionalizer
+from .ParagraphDimensionalizer import ParagraphDimensionalizer
 
 from .DimensionalizerTests import UnigramDimensionalizerTests
 from .DimensionalizerTests import BigramDimensionalizerTests
 from .DimensionalizerTests import BigramPlusDimensionalizerTests
 from .DimensionalizerTests import TrigramDimensionalizerTests
 from .DimensionalizerTests import TrigramPlusDimensionalizerTests
+from .ParagraphDimensionalizerTests import ParagraphDimensionalizerTests
 
 from .OpSpamReaderTests import OpSpamReaderTests
 from .ClassifierResult import ClassifierResult

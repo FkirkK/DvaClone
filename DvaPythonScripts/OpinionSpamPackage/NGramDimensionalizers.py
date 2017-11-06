@@ -19,8 +19,8 @@ class UniGramDimensionalizer(GeneralDimensionalizer):
 
 class BigramDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetBigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetBigramsFromReview, reviewList)
 
     def GetBigramsFromReview(self, review):
         returnSet = set()
@@ -35,8 +35,8 @@ class BigramDimensionalizer(GeneralDimensionalizer):
 
 class BigramPlusDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetBigramsPlusFromReview)
+    def __init__(self, revieList):
+        super().__init__(self.GetBigramsPlusFromReview, reviewList=revieList)
 
     def GetBigramsPlusFromReview(self, review):
         returnSet = set()
@@ -53,8 +53,8 @@ class BigramPlusDimensionalizer(GeneralDimensionalizer):
 
 class TrigramDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetTrigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetTrigramsFromReview, reviewList)
 
     def GetTrigramsFromReview(self, review):
         returnSet = set()
@@ -69,8 +69,8 @@ class TrigramDimensionalizer(GeneralDimensionalizer):
 
 class TrigramPlusDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetTrigramsPlusFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetTrigramsPlusFromReview, reviewList)
 
     def GetTrigramsPlusFromReview(self, review):
         returnSet = set()

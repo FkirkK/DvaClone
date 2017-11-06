@@ -3,20 +3,21 @@ import numpy
 
 class GeneralDimensionalizer:
 
-    def __init__(self, featureFunction):
+    def __init__(self, featureFunction, reviewList):
         self.dimensionSet = set()
         self.mappingDictionary = {}  # Remember to call CreateDictionaryOfWords in dimensionalizeAll method
         self.numberOfNGramsInDict = 0
         self.featureGetter = featureFunction
+        self.__DimensionalizeAllReviews(reviewList=reviewList)
 
-    def DimensionalizeReview(self, review):
+    def __DimensionalizeReview(self, review):
         nGramSet = self.featureGetter(review)
 
         self.dimensionSet = self.dimensionSet.union(nGramSet)
 
-    def DimensionalizeAllReviews(self, reviewList):
+    def __DimensionalizeAllReviews(self, reviewList):
         for review in reviewList:
-            self.DimensionalizeReview(review)
+            self.__DimensionalizeReview(review)
         self.CreateDictionaryOfWords()
 
     def CreateVectorForReview(self, review):
