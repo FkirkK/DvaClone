@@ -3,14 +3,14 @@ import numpy
 
 class GeneralDimensionalizer:
 
-    def __init__(self, nGramFunction):
+    def __init__(self, featureFunction):
         self.dimensionSet = set()
         self.mappingDictionary = {}  # Remember to call CreateDictionaryOfWords in dimensionalizeAll method
         self.numberOfNGramsInDict = 0
-        self.nGramGetter = nGramFunction
+        self.featureGetter = featureFunction
 
     def DimensionalizeReview(self, review):
-        nGramSet = self.nGramGetter(review)
+        nGramSet = self.featureGetter(review)
 
         self.dimensionSet = self.dimensionSet.union(nGramSet)
 
@@ -19,9 +19,9 @@ class GeneralDimensionalizer:
             self.DimensionalizeReview(review)
         self.CreateDictionaryOfWords()
 
-    def CreateNGramsVectorForReview(self, review):
+    def CreateVectorForReview(self, review):
         vectorToPredict = numpy.zeros(shape=(1, self.numberOfNGramsInDict))
-        setToPopulateVector = self.nGramGetter(review)
+        setToPopulateVector = self.featureGetter(review)
         for nGram in setToPopulateVector:
             indexInVector = self.mappingDictionary[nGram]
             vectorToPredict[0][indexInVector] = 1

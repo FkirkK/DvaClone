@@ -19,7 +19,7 @@ class UnigramDimensionalizerTests(TestCase):
         expectedSetResult = 82
 
         # Act
-        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -122,7 +122,7 @@ class UnigramDimensionalizerTests(TestCase):
 
         # Act
         self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
-        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1
@@ -144,7 +144,7 @@ class BigramDimensionalizerTests(TestCase):
         expectedSetResult = 113
 
         # Act
-        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -247,7 +247,7 @@ class BigramDimensionalizerTests(TestCase):
 
         # Act
         self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
-        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1
@@ -269,7 +269,7 @@ class BigramPlusDimensionalizerTests(TestCase):
         expectedSetResult = 195
 
         # Act
-        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -372,7 +372,7 @@ class BigramPlusDimensionalizerTests(TestCase):
 
         # Act
         self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
-        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1
@@ -394,7 +394,7 @@ class TrigramDimensionalizerTests(TestCase):
         expectedSetResult = 118
 
         # Act
-        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -497,7 +497,7 @@ class TrigramDimensionalizerTests(TestCase):
 
         # Act
         self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
-        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1
@@ -519,7 +519,7 @@ class TrigramPlusDimensionalizerTests(TestCase):
         expectedSetResult = 313
 
         # Act
-        returnedSet = self.dimensionalizer.nGramGetter(self.readReviews[0])
+        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
@@ -622,7 +622,7 @@ class TrigramPlusDimensionalizerTests(TestCase):
 
         # Act
         self.dimensionalizer.DimensionalizeAllReviews(self.readReviews)
-        vector = self.dimensionalizer.CreateNGramsVectorForReview(self.readReviews[0])
+        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1

@@ -1,4 +1,3 @@
-import numpy
 from OpinionSpamPackage import GeneralDimensionalizer
 
 

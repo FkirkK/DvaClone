@@ -25,7 +25,7 @@ class DvaGeneralClassifier:
 
         # Populate x and y
         for i in range(0, n_samples):
-            wordSet = self.dimensionalizer.nGramGetter(review=reviewListForLearning[i])
+            wordSet = self.dimensionalizer.featureGetter(review=reviewListForLearning[i])
             for ngram in wordSet:
                 indexInRow = self.dimensionalizer.mappingDictionary[ngram]
                 x[i][indexInRow] = 1
@@ -61,7 +61,7 @@ class DvaGeneralClassifier:
 
             # Use model to predict validationReviews
             for review in validationReviews:
-                reviewVector = self.dimensionalizer.CreateNGramsVectorForReview(review)
+                reviewVector = self.dimensionalizer.CreateVectorForReview(review)
                 prediction = self.model.predict(reviewVector)
                 if prediction[0] == review.isTruthful:
                     correctPredictionCount += 1
