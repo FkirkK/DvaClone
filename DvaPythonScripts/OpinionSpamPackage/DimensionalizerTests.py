@@ -9,107 +9,48 @@ from OpinionSpamPackage import TrigramPlusDimensionalizer
 
 class UnigramDimensionalizerTests(TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.osReader = OpSpamReader()
         self.readReviews = self.osReader.ReadAllFiles()
-        self.dimensionalizer = UniGramDimensionalizer(self.readReviews)
 
     def test_getunigrams_returns_proper_set_file_1(self):
         # Arrange
         expectedSetResult = 82
+        uniGramDimensionalizer = UniGramDimensionalizer([self.readReviews[0]])
 
         # Act
-        returnedSet = self.dimensionalizer.featureGetter(self.readReviews[0])
+        returnedSet = uniGramDimensionalizer.featureGetter(self.readReviews[0])
 
         # Assert
         self.assertEqual(len(returnedSet), expectedSetResult)
 
     def test_unigram_file_1_correctly(self):
-        # Arrange
-        expectedSetResult = 82
-
-        # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[0])
-
-        # Assert
-        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+        validateDimensionalizerSetSize(self, UniGramDimensionalizer, [self.readReviews[0]], expectedSetResult=82)
 
     def test_unigram_file_82_correctly(self):
-        # Arrange
-        expectedSetResult = 79
-
-        # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[82])
-
-        # Assert
-        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+        validateDimensionalizerSetSize(self, UniGramDimensionalizer, [self.readReviews[82]], expectedSetResult=79)
 
     def test_unigram_file_1_and_82_combined_correctly(self):
-        # Arrange
-        expectedTwoSetsResult = 150
-
-        # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[0])
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[82])
-
-        # Assert
-        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedTwoSetsResult)
-
-    def test_unigramALL_with_2_files(self):
-        # Arrange
-        expectedSetResult = 150
-        reviewList = []
-        reviewList.append(self.readReviews[0])
-        reviewList.append(self.readReviews[82])
-
-        # Act
-        self.dimensionalizer.__DimensionalizeAllReviews__(reviewList=reviewList)
-
-        # Assert
-        self.assertEqual(len(self.dimensionalizer.dimensionSet), expectedSetResult)
+        validateDimensionalizerSetSize(self, UniGramDimensionalizer, [self.readReviews[0], self.readReviews[82]], expectedSetResult=150)
 
     def test_CreateDictionary_for_files_1_and_82_has_right_amount(self):
         # Arrange
         expectedNumberOfKeys = 150
+        uniGramDimensionalizer = UniGramDimensionalizer([self.readReviews[0], self.readReviews[82]])
 
         # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[0])
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[82])
-        self.dimensionalizer.CreateDictionaryOfWords()
 
         # Assert
-        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeys)
-
-    def test_CreateDictionary_deletes_old_dictionary(self):
-        # Arrange
-        expectedNumberOfKeys = 82
-
-        # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[0])
-        self.dimensionalizer.CreateDictionaryOfWords()
-
-        # Assert
-        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeys)
-
-        # Re-arrange
-        self.dimensionalizer.dimensionSet = set()  # Delete the current dimensionset
-        expectedNumberOfKeysAfterNewCreation = 79
-
-        # Re-act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[82])
-        self.dimensionalizer.CreateDictionaryOfWords()
-
-        # Re-assert
-        self.assertEqual(len(self.dimensionalizer.mappingDictionary.keys()), expectedNumberOfKeysAfterNewCreation)
+        self.assertEqual(len(uniGramDimensionalizer.mappingDictionary.keys()), expectedNumberOfKeys)
 
     def test_dictionary_maps_words_to_integers(self):
         # Arrange
         index = None
+        uniGramDimensionalizer = UniGramDimensionalizer([self.readReviews[0]])
 
         # Act
-        self.dimensionalizer.__DimensionalizeReview__(self.readReviews[0])
-        self.dimensionalizer.CreateDictionaryOfWords()
-        index = self.dimensionalizer.mappingDictionary["hilton"]  # Word from the first review
+        index = uniGramDimensionalizer.mappingDictionary["hilton"]  # Word from the first review
 
         # Assert
         self.assertTrue(type(index) is int)
@@ -119,10 +60,10 @@ class UnigramDimensionalizerTests(TestCase):
         featureCount = 11933  # Number of unigrams in dataset
         expectedVectorOnesCount = 82  # Number of 1-entries in generated vector
         actualVectorOnesCount = 0
+        uniGramDimensionalizer = UniGramDimensionalizer(self.readReviews)
 
         # Act
-        self.dimensionalizer.__DimensionalizeAllReviews__(self.readReviews)
-        vector = self.dimensionalizer.CreateVectorForReview(self.readReviews[0])
+        vector = uniGramDimensionalizer.CreateVectorForReview(self.readReviews[0])
         for entry in vector[0]:
             if entry == 1:
                 actualVectorOnesCount += 1
@@ -630,3 +571,11 @@ class TrigramPlusDimensionalizerTests(TestCase):
         # Assert
         self.assertEqual(len(vector[0]), featureCount)
         self.assertEqual(actualVectorOnesCount, expectedVectorOnesCount)
+
+
+def validateDimensionalizerSetSize(testClassInstance, DimensionalizerClass, reviewList, expectedSetResult):
+    # Act
+    dimensionalizer = DimensionalizerClass(reviewList)
+
+    # Assert
+    testClassInstance.assertEqual(len(dimensionalizer.dimensionSet), expectedSetResult)
