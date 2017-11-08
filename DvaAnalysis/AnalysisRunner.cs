@@ -23,13 +23,13 @@ namespace DvaAnalysis
                 throw new Exception("The analysis result was null");
 
             
-            IResult judgedResult = judge.judgeResult(new ClassifierResult(analysisReturnString));
+            IResult judgedResult = judge.JudgeResult(new ClassifierResult(analysisReturnString));
             return judgedResult;
         }
 
         public IResult RunAnalysis(List<AnalysisConfiguration> configs, IJudge judge)
         {
-            List<IResult> ResultList = new List<IResult>();
+            List<IResult> resultList = new List<IResult>();
             foreach (var config in configs)
             {
                 string analysisReturnString = RunConfiguration(config);
@@ -37,11 +37,11 @@ namespace DvaAnalysis
                 if (analysisReturnString == null)
                     throw new Exception("The analysis result was null");
 
-                ResultList.Add(new ClassifierResult(analysisReturnString));
+                resultList.Add(new ClassifierResult(analysisReturnString));
             }
             
 
-            IResult judgedResult = judge.judgeResults(ResultList);
+            IResult judgedResult = judge.JudgeResults(resultList);
             return judgedResult;
         }
 
