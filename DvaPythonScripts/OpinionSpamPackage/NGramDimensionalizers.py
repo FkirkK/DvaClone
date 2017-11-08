@@ -35,8 +35,8 @@ class BigramDimensionalizer(GeneralDimensionalizer):
 
 class BigramPlusDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self, revieList):
-        super().__init__(self.GetBigramsPlusFromReview, reviewList=revieList)
+    def __init__(self, reviewList):
+        super().__init__(self.GetBigramsPlusFromReview, reviewList=reviewList)
 
     def GetBigramsPlusFromReview(self, review):
         returnSet = set()
