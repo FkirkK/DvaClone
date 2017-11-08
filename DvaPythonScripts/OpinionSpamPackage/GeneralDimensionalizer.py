@@ -8,16 +8,16 @@ class GeneralDimensionalizer:
         self.mappingDictionary = {}  # Remember to call CreateDictionaryOfWords in dimensionalizeAll method
         self.numberOfNGramsInDict = 0
         self.featureGetter = featureFunction
-        self.__DimensionalizeAllReviews(reviewList=reviewList)
+        self.__DimensionalizeAllReviews__(reviewList=reviewList)
 
-    def __DimensionalizeReview(self, review):
+    def __DimensionalizeReview__(self, review):
         nGramSet = self.featureGetter(review)
 
         self.dimensionSet = self.dimensionSet.union(nGramSet)
 
-    def __DimensionalizeAllReviews(self, reviewList):
+    def __DimensionalizeAllReviews__(self, reviewList):
         for review in reviewList:
-            self.__DimensionalizeReview(review)
+            self.__DimensionalizeReview__(review)
         self.CreateDictionaryOfWords()
 
     def CreateVectorForReview(self, review):

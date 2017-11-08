@@ -3,8 +3,8 @@ from OpinionSpamPackage import GeneralDimensionalizer
 
 class UniGramDimensionalizer(GeneralDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetUnigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetUnigramsFromReview, reviewList)
 
     def GetUnigramsFromReview(self, review):
         returnSet = set()
