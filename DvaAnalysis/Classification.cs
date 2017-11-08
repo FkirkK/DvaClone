@@ -11,6 +11,9 @@ namespace DvaAnalysis
         SVCRbf,
         SVCSigmoid,
         LinearSVC,
-        DecisionTree
+        DecisionTree,
+        NaiveBayes,
+        MultiLayerPerceptron,
+        NearestNeighbors
     }
 }
