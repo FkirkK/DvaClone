@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from OpinionSpamPackage import DvaLinearSvm, DvaSvmLinear, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, DvaClassifierTree, DvaNaiveBayesClassifier, DvaMLPClassifier
+from OpinionSpamPackage import DvaLinearSvm, DvaSvmLinear, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, DvaClassifierTree, DvaNaiveBayesClassifier, DvaMLPClassifier, DvaNearestNeighborsClassifier
 from OpinionSpamPackage import OpSpamReader
 from OpinionSpamPackage import UniGramDimensionalizer
 from OpinionSpamPackage import BigramDimensionalizer
@@ -48,6 +48,8 @@ def RunAnalysis():
         DvaSVM = DvaNaiveBayesClassifier(readReviews, dim)
     elif sys.argv[1] == "MultiLayerPerceptron":
         DvaSVM = DvaMLPClassifier(readReviews, dim)
+    elif sys.argv[1] == "NearestNeighbors":
+        DvaSVM = DvaNearestNeighborsClassifier(readReviews, dim)
 
     else:
         print("Classifier not recognized.")
