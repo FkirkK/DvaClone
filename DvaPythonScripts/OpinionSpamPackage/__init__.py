@@ -30,4 +30,13 @@ from .DvaSvmsTests import DvaSvmsTests
 from .DvaClassifierTrees import DvaClassifierTree
 from .DvaClassifierTreesTests import DvaClassifierTreeTests
 
+from .DvaNeuralNetworks import DvaMLPClassifier
+from .DvaNeuralNetworksTests import DvaMLPClassifierTests
+
+from .DvaNaiveBayes import DvaNaiveBayesClassifier
+from .DvaNaiveBayesTests import DvaNaiveBayesClassifierTests
+
+from .DvaNearestNeighbors import DvaNearestNeighborsClassifier
+from .DvaNearestNeighborsTests import DvaNearestNeighborsTests
+
 from .DvaOpSpamMainTests import DvaOpSpamMainTests
