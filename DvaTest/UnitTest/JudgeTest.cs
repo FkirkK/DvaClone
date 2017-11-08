@@ -14,12 +14,12 @@ namespace DvaTest.UnitTest
         public void CheckIfSameObjectIsReturnedDummyJudge()
         {
             //Arrange
-            IResult expectedResult = new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
+            IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
             IJudge judge = new Judge();
 
             //Act
-            actualResult = judge.judgeResult(new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );
+            actualResult = judge.judgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -29,12 +29,12 @@ namespace DvaTest.UnitTest
         public void CheckIfSameObjectIsReturnedMajorityJudge()
         {
             //Arrange
-            IResult expectedResult = new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
+            IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
             IJudge judge = new MajorityJudge();
 
             //Act
-            actualResult = judge.judgeResult(new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
+            actualResult = judge.judgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -44,11 +44,11 @@ namespace DvaTest.UnitTest
         public void CheckIfSingleResultIsReturnedMajorityJudge()
         {
             //Arrange
-            IResult expectedResult = new LinearSvmResult("1.0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
+            IResult expectedResult = new ClassifierResult("1.0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
             IResult actualResult;
-            IResult input1 = new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
-            IResult input2 = new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0");
-            IResult input3 = new LinearSvmResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
+            IResult input1 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
+            IResult input2 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0");
+            IResult input3 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
             IJudge judge = new MajorityJudge();
 
             //Act

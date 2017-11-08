@@ -23,7 +23,7 @@ namespace DvaTest.AcceptanceTest
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
+            var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
             Assert.AreEqual(0.840, linearSvmResult.OverallPrecision, 0.001);
@@ -41,7 +41,7 @@ namespace DvaTest.AcceptanceTest
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Bigram);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
+            var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
             Assert.AreEqual(0.829, linearSvmResult.OverallPrecision, 0.001);
@@ -59,7 +59,7 @@ namespace DvaTest.AcceptanceTest
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Trigram);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
+            var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
             Assert.AreEqual(0.783, linearSvmResult.OverallPrecision, 0.001);
@@ -77,7 +77,7 @@ namespace DvaTest.AcceptanceTest
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.TrigramPlus);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
+            var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
             Assert.AreEqual(0.861, linearSvmResult.OverallPrecision, 0.001);

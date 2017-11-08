@@ -19,7 +19,7 @@ namespace DvaTest.UnitTest
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 
             //Act
-            var linearSvmResult = (LinearSvmResult)ar.RunAnalysis(config, j);
+            var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert 
             Assert.AreEqual(linearSvmResult.RatedDocuments.Count, 1600); // Where 1600 is the number of files read
@@ -37,7 +37,7 @@ namespace DvaTest.UnitTest
             PythonConfiguration config3 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 
             //Act
-            var result = (LinearSvmResult)ar.RunAnalysis(new List<AnalysisConfiguration>() { config1, config2, config3 }, j);
+            var result = (ClassifierResult)ar.RunAnalysis(new List<AnalysisConfiguration>() { config1, config2, config3 }, j);
 
             //Assert
             Assert.AreEqual(0.859, result.OverallPrecision, 0.001);

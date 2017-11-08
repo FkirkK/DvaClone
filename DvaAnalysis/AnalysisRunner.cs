@@ -23,7 +23,7 @@ namespace DvaAnalysis
                 throw new Exception("The analysis result was null");
 
             
-            IResult judgedResult = judge.judgeResult(new LinearSvmResult(analysisReturnString));
+            IResult judgedResult = judge.judgeResult(new ClassifierResult(analysisReturnString));
             return judgedResult;
         }
 
@@ -37,7 +37,7 @@ namespace DvaAnalysis
                 if (analysisReturnString == null)
                     throw new Exception("The analysis result was null");
 
-                ResultList.Add(new LinearSvmResult(analysisReturnString));
+                ResultList.Add(new ClassifierResult(analysisReturnString));
             }
             
 
