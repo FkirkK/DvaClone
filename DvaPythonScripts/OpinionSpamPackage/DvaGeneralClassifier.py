@@ -13,43 +13,41 @@ class DvaGeneralClassifier:
         self.model = None
         self.__classifier__ = classifier
 
-    def LearnModel(self, reviewListForLearning):
-        # Prepare variables for learning model
-        n_samples = len(reviewListForLearning)
-        n_features = len(self.dimensionalizer.mappingDictionary.keys())
-
-        # Instantiate input to svm algorithm
-        x = numpy.zeros(shape=(n_samples, n_features))  # x will contain all document vectors for training
+    def LearnModel(self, reviewIndexList):
+        # Instantiate input to classifier algorithm
+        x = self.dimensionalizer.GetFeatureSet(reviewIndexList=reviewIndexList)  # x contains all document vectors for training
         y = []  # y will contain classification-value for training vectors
 
-        # Populate x and y
-        for i in range(0, n_samples):
-            wordSet = self.dimensionalizer.featureGetter(review=reviewListForLearning[i])
-            for ngram in wordSet:
-                indexInRow = self.dimensionalizer.mappingDictionary[ngram]
-                x[i][indexInRow] = 1
-            y.append(reviewListForLearning[i].isTruthful)
+        # Populate y
+        for index in reviewIndexList:
+            y.append(self.reviewList[index].isTruthful)
 
         # Learn and save the classifier
         self.model = self.__classifier__.fit(X=x, y=y)
+
+    # Constructs a list of which reviews to learn the model on
+    def __ConstructReviewIndexListFromFolds(self, foldsToInclude):
+        reviewIndexList = []
+
+        i = 0
+        for review in self.reviewList:
+            if review.fold in foldsToInclude:
+                reviewIndexList.append(i)
+            i += 1
+
+        return reviewIndexList
 
     def Do5FoldValidation(self):
         numberOfFolds = 5
         listOfResults = []
 
         for i in range(1, numberOfFolds+1):  # 1-indexing because it must be human-readable
-            learningReviews = []
-            validationReviews = []
-
-            # Split reviews based on folds
-            for review in self.reviewList:
-                if review.fold == i:
-                    validationReviews.append(review)
-                else:
-                    learningReviews.append(review)
+            reviewIndexListForValidation = self.__ConstructReviewIndexListFromFolds([i])
+            reviewIndexListForTraining = self.__ConstructReviewIndexListFromFolds([j for j in range(1, numberOfFolds+1) if j != i])
+            validationReviews = [review for review in self.reviewList if review.fold == i]
 
             # Learn model based on learningReviews --> self.model is set
-            self.LearnModel(reviewListForLearning=learningReviews)
+            self.LearnModel(reviewIndexList=reviewIndexListForTraining)
 
             # Prepare variables for prediction
             validationReviewCount = len(validationReviews)
@@ -59,8 +57,9 @@ class DvaGeneralClassifier:
             classifierResultList = []
 
             # Use model to predict validationReviews
-            for review in validationReviews:
-                reviewVector = self.dimensionalizer.CreateVectorForReview(review)
+            for reviewIndex in reviewIndexListForValidation:
+                review = self.reviewList[reviewIndex]
+                reviewVector = self.dimensionalizer.GetFeatureSet(reviewIndexList=[reviewIndex])
                 prediction = self.model.predict(reviewVector)
                 if prediction[0] == review.isTruthful:
                     correctPredictionCount += 1

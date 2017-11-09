@@ -1,5 +1,6 @@
 import re
 
+
 class Review:
 
     def __init__(self, isTruthful, isPositive, title, content, fold):
