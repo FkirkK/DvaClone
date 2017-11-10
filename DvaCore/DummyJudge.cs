@@ -5,7 +5,7 @@ using DvaCore.Models;
 
 namespace DvaCore
 {
-    public class Judge : IJudge
+    public class DummyJudge : IJudge
     {
         public IResult JudgeResult(IResult result)
         {

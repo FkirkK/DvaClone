@@ -7,15 +7,15 @@
     <div class="container-fluid">
         <div class="col-sm-4">
             <h3>Overall Precision</h3>
-            <h4>@(Math.Round(ViewBag.LinearSvmResult.OverallPrecision * 100, 1) + "%")</h4>
+            <h4>@(Math.Round(ViewBag.ClassifierResult.OverallPrecision * 100, 1) + "%")</h4>
         </div>
         <div class="col-sm-4">
             <h3>False Positives</h3>
-            <h4>@(Math.Round(ViewBag.LinearSvmResult.FalsePositives * 100, 1) + "%")</h4>
+            <h4>@(Math.Round(ViewBag.ClassifierResult.FalsePositives * 100, 1) + "%")</h4>
         </div>
         <div class="col-sm-4">
             <h3>False Negatives</h3>
-            <h4>@(Math.Round(ViewBag.LinearSvmResult.FalseNegatives * 100, 1) + "%")</h4>
+            <h4>@(Math.Round(ViewBag.ClassifierResult.FalseNegatives * 100, 1) + "%")</h4>
         </div>
     </div>
 </div>

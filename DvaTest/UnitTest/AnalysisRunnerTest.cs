@@ -14,7 +14,7 @@ namespace DvaTest.UnitTest
         public void RunLinearSvmBigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new Judge();
+            IJudge j = new DummyJudge();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 

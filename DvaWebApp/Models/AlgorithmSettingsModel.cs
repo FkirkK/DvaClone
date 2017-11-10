@@ -9,8 +9,14 @@ namespace DvaWebApp.Models
 {
     public class AlgorithmSettingsModel
     {
+        public AlgorithmSettingsModel()
+        {
+            AlgorithmSettings = new List<SingleAlgorithmSettings>();
+        }
         public List<SingleAlgorithmSettings> AlgorithmSettings { get; set; }
+        public string SelectedJudge { get; set; }
     }
+
     public class SingleAlgorithmSettings
     {
         public SingleAlgorithmSettings()
@@ -23,5 +29,6 @@ namespace DvaWebApp.Models
         public SelectList ClassificationList { get; set; }
         public string SelectedFeatureSet { get; set; }
         public string SelectedClassification { get; set; }
+        public double SelectedWeight { get; set; }
     }
 }

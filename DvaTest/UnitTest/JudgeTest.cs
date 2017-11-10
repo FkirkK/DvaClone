@@ -16,7 +16,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
-            IJudge judge = new Judge();
+            IJudge judge = new DummyJudge();
 
             //Act
             actualResult = judge.JudgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );

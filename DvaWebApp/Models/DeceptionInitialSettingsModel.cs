@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DvaAnalysis;
 
 namespace DvaWebApp.Models
 {
@@ -10,7 +11,7 @@ namespace DvaWebApp.Models
     {
         public DeceptionInitialSettingsModel()
         {
-            JudgeList = new SelectList(new string[] { "Judge1" });
+            JudgeList = new SelectList(Enum.GetNames(typeof(Judge)));
         }
         public SelectList JudgeList { get; set; }
         public string SelectedJudge { get; set; }
