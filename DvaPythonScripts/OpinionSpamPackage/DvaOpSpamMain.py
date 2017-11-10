@@ -22,6 +22,9 @@ def DetermineDimensionalizer(dim):
         return TrigramDimensionalizer
     elif dim == "TrigramPlus":
         return TrigramPlusDimensionalizer
+    elif dim == "Doc2Vec":
+        print("Not Implemented Yet Exception!")
+        return None
     else:
         return None
 

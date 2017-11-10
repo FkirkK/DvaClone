@@ -6,18 +6,18 @@ using System.Threading;
 
 namespace DvaCore.Models
 {
-    public class LinearSvmResult : IResult
+    public class ClassifierResult : IResult
     {
         /// <summary>
-        /// Constructor for LinearSvmResult
+        /// Constructor for ClassifierResult
         /// </summary>
         /// <param name="inputToParse">A string formatted correctly to set all of the classes properties</param>
-        public LinearSvmResult(string inputToParse)
+        public ClassifierResult(string inputToParse)
         {
             Parse(inputToParse);
         }
 
-        public LinearSvmResult(List<RatedDocument> docList)
+        public ClassifierResult(List<RatedDocument> docList)
         {
             int correctCount = 0;
             int falsePositiveCount = 0;
@@ -52,7 +52,7 @@ namespace DvaCore.Models
 
         public override bool Equals(object obj)
         {
-            var svmResult = obj as LinearSvmResult;
+            var svmResult = obj as ClassifierResult;
             if (svmResult == null)
                 return false;
             
@@ -109,7 +109,7 @@ namespace DvaCore.Models
             }
             else
             {
-                throw new ArgumentException("LinearSvmResult.Parse: " + input + " is invalid.");
+                throw new ArgumentException("ClassifierResult.Parse: " + input + " is invalid.");
             }
         }
     }

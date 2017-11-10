@@ -7,6 +7,7 @@ namespace DvaAnalysis
         Bigram,
         BigramPlus,
         Trigram,
-        TrigramPlus
+        TrigramPlus,
+        Doc2Vec
     }
 }

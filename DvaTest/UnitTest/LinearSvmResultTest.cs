@@ -14,7 +14,7 @@ namespace DvaTest.UnitTest
             var input = "0.0, 1, 3, 2.0, 4, 5, 7.0, 0, 10";
 
             // Act
-            var result = new LinearSvmResult(input);
+            var result = new ClassifierResult(input);
 
             // Assert
             Assert.AreEqual(result.OverallPrecision, 0.0);
@@ -40,7 +40,7 @@ namespace DvaTest.UnitTest
                         "doc9, 1, 0, doc10, 0, 1";
 
             // Act
-            var result = new LinearSvmResult(input);
+            var result = new ClassifierResult(input);
 
             // Assert
             Assert.AreEqual(result.RatedDocuments.Count, 10);
@@ -71,8 +71,8 @@ namespace DvaTest.UnitTest
                         "doc5, 1, 0, doc6, 1, 1, doc7, 0, 0";
 
             // Act
-            var result = new LinearSvmResult(input);
-            var result2 = new LinearSvmResult(input + ", doc8, 0, 1");
+            var result = new ClassifierResult(input);
+            var result2 = new ClassifierResult(input + ", doc8, 0, 1");
 
             // Assert
             Assert.AreNotEqual(result, result2);
@@ -87,8 +87,8 @@ namespace DvaTest.UnitTest
                         "doc5, 1, 0, doc6, 1, 1, doc7, 0, 0";
 
             // Act
-            var result = new LinearSvmResult(input + ", doc8, 0, 1");
-            var result2 = new LinearSvmResult(input + ", doc8, 0, 1");
+            var result = new ClassifierResult(input + ", doc8, 0, 1");
+            var result2 = new ClassifierResult(input + ", doc8, 0, 1");
 
             // Assert
             Assert.AreEqual(result, result2);

@@ -8,14 +8,14 @@ namespace DvaCore
 {
     public class MajorityJudge : IJudge
     {
-        public IResult judgeResult(IResult result)
+        public IResult JudgeResult(IResult result)
         {
             return result;
         }
 
-        public IResult judgeResults(List<IResult> result)
+        public IResult JudgeResults(List<IResult> result)
         {
-            var castedResult = result.Cast<LinearSvmResult>().ToList(); //TODO: Remove IResult interface
+            var castedResult = result.Cast<ClassifierResult>().ToList(); //TODO: Remove IResult interface
             List<RatedDocument> judgedDocuments = new List<RatedDocument>();
 
 
@@ -36,7 +36,7 @@ namespace DvaCore
                                                       (truthfulCount > deceitfulCount)));
             }
 
-            return new LinearSvmResult(judgedDocuments);
+            return new ClassifierResult(judgedDocuments);
         }
     }
 }
