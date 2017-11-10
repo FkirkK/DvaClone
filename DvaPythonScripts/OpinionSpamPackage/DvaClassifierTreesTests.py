@@ -13,7 +13,7 @@ class DvaClassifierTreeTests(TestCase):
         # Arrange
 
         # Act
-        self.classifierTree.LearnModel(self.allReviews)
+        self.classifierTree.LearnModelForAllReviews()
 
         # Assert
         self.assertTrue(self.classifierTree.model is not None)

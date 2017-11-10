@@ -3,6 +3,7 @@ from gensim.models import doc2vec
 from collections import namedtuple
 
 
+
 class ParagraphDimensionalizerTests(TestCase):
 
     def test_can_make_paragraph_vectors(self):

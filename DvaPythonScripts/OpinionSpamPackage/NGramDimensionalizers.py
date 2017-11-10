@@ -1,10 +1,10 @@
-from OpinionSpamPackage import GeneralDimensionalizer
+from OpinionSpamPackage import GeneralNGramDimensionalizer
 
 
-class UniGramDimensionalizer(GeneralDimensionalizer):
+class UniGramDimensionalizer(GeneralNGramDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetUnigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetUnigramsFromReview, reviewList)
 
     def GetUnigramsFromReview(self, review):
         returnSet = set()
@@ -17,10 +17,10 @@ class UniGramDimensionalizer(GeneralDimensionalizer):
         return returnSet
 
 
-class BigramDimensionalizer(GeneralDimensionalizer):
+class BigramDimensionalizer(GeneralNGramDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetBigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetBigramsFromReview, reviewList)
 
     def GetBigramsFromReview(self, review):
         returnSet = set()
@@ -33,10 +33,10 @@ class BigramDimensionalizer(GeneralDimensionalizer):
         return returnSet
 
 
-class BigramPlusDimensionalizer(GeneralDimensionalizer):
+class BigramPlusDimensionalizer(GeneralNGramDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetBigramsPlusFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetBigramsPlusFromReview, reviewList=reviewList)
 
     def GetBigramsPlusFromReview(self, review):
         returnSet = set()
@@ -51,10 +51,10 @@ class BigramPlusDimensionalizer(GeneralDimensionalizer):
         return returnSet
 
 
-class TrigramDimensionalizer(GeneralDimensionalizer):
+class TrigramDimensionalizer(GeneralNGramDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetTrigramsFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetTrigramsFromReview, reviewList)
 
     def GetTrigramsFromReview(self, review):
         returnSet = set()
@@ -67,10 +67,10 @@ class TrigramDimensionalizer(GeneralDimensionalizer):
         return returnSet
 
 
-class TrigramPlusDimensionalizer(GeneralDimensionalizer):
+class TrigramPlusDimensionalizer(GeneralNGramDimensionalizer):
 
-    def __init__(self):
-        super().__init__(self.GetTrigramsPlusFromReview)
+    def __init__(self, reviewList):
+        super().__init__(self.GetTrigramsPlusFromReview, reviewList)
 
     def GetTrigramsPlusFromReview(self, review):
         returnSet = set()

@@ -13,7 +13,7 @@ class DvaNearestNeighborsTests(TestCase):
         # Arrange
 
         # Act
-        self.nNClassifier.LearnModel(self.allReviews)
+        self.nNClassifier.LearnModelForAllReviews()
 
         # Assert
         self.assertTrue(self.nNClassifier.model is not None)
