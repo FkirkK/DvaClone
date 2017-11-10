@@ -14,7 +14,7 @@ class DvaGeneralClassifier:
         self.__classifier__ = classifier
 
     def LearnModelForAllReviews(self):
-        self.LearnModel(range(0, len(self.reviewList)-1))
+        self.LearnModel(list(range(0, len(self.reviewList))))
 
     def LearnModel(self, reviewIndexList):
         # Instantiate input to classifier algorithm
