@@ -13,7 +13,7 @@ class DvaNaiveBayesClassifierTests(TestCase):
         # Arrange
 
         # Act
-        self.naiveBayesClassifier.LearnModel(self.allReviews)
+        self.naiveBayesClassifier.LearnModelForAllReviews()
 
         # Assert
         self.assertTrue(self.naiveBayesClassifier.model is not None)

@@ -15,7 +15,7 @@ class GeneralDimensionalizerTests(TestCase):
         pd = ParagraphDimensionalizer(reviewList)
 
         # Act
-        matrix = pd.getFeatureSet(rangeMin, pd.rowLength-1)
+        matrix = pd.GetFeatureSet(range(0, len(reviewList)-1))
 
         # Assert
         self.assertEqual((2, 100), matrix.shape)
@@ -30,7 +30,7 @@ class GeneralDimensionalizerTests(TestCase):
         pd = ParagraphDimensionalizer(reviewList)
 
         # Act
-        matrix = pd.getFeatureSet(rangeMin, 0)
+        matrix = pd.GetFeatureSet([0])
 
         # Assert
         self.assertEqual((1, 100), matrix.shape)

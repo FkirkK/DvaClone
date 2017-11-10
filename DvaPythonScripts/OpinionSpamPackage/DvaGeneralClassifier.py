@@ -13,6 +13,9 @@ class DvaGeneralClassifier:
         self.model = None
         self.__classifier__ = classifier
 
+    def LearnModelForAllReviews(self):
+        self.LearnModel(range(0, len(self.reviewList)-1))
+
     def LearnModel(self, reviewIndexList):
         # Instantiate input to classifier algorithm
         x = self.dimensionalizer.GetFeatureSet(reviewIndexList=reviewIndexList)  # x contains all document vectors for training

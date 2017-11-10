@@ -33,7 +33,7 @@ class UnigramDimensionalizerTests(TestCase):
         validateMappingOfWords(self, UniGramDimensionalizer, [self.readReviews[0]], "hilton")
 
     def test_CreateVector_for_review_1(self):
-        validateVectorForReview(self, UniGramDimensionalizer, featureCount=11933, expectedVectorOnesCount=82)
+        validateVectorSizeReview(self, UniGramDimensionalizer, featureCount=11933, expectedVectorOnesCount=82)
 
 
 class BigramDimensionalizerTests(TestCase):
@@ -62,7 +62,7 @@ class BigramDimensionalizerTests(TestCase):
         validateMappingOfWords(self, BigramDimensionalizer, [self.readReviews[0]], "some pizzas")
 
     def test_CreateVector_for_review_1(self):
-        validateVectorForReview(self, BigramDimensionalizer, featureCount=84112, expectedVectorOnesCount=113)
+        validateVectorSizeReview(self, BigramDimensionalizer, featureCount=84112, expectedVectorOnesCount=113)
 
 
 class BigramPlusDimensionalizerTests(TestCase):
@@ -91,7 +91,7 @@ class BigramPlusDimensionalizerTests(TestCase):
         validateMappingOfWords(self, BigramPlusDimensionalizer, [self.readReviews[0]], "hilton")
 
     def test_CreateVector_for_review_1(self):
-        validateVectorForReview(self, BigramPlusDimensionalizer, featureCount=96045, expectedVectorOnesCount=195)
+        validateVectorSizeReview(self, BigramPlusDimensionalizer, featureCount=96045, expectedVectorOnesCount=195)
 
 
 class TrigramDimensionalizerTests(TestCase):
@@ -120,7 +120,7 @@ class TrigramDimensionalizerTests(TestCase):
         validateMappingOfWords(self, TrigramDimensionalizer, [self.readReviews[0]], "ordered some pizzas")
 
     def test_CreateVector_for_review_1(self):
-        validateVectorForReview(self, TrigramDimensionalizer, featureCount=168004, expectedVectorOnesCount=118)
+        validateVectorSizeReview(self, TrigramDimensionalizer, featureCount=168004, expectedVectorOnesCount=118)
 
 
 class TrigramPlusDimensionalizerTests(TestCase):
@@ -149,7 +149,7 @@ class TrigramPlusDimensionalizerTests(TestCase):
         validateMappingOfWords(self, TrigramPlusDimensionalizer, [self.readReviews[0]], "hilton")
 
     def test_CreateVector_for_review_1(self):
-        validateVectorForReview(self, TrigramPlusDimensionalizer, featureCount=264049, expectedVectorOnesCount=313)
+        validateVectorSizeReview(self, TrigramPlusDimensionalizer, featureCount=264049, expectedVectorOnesCount=313)
 
 
 def validateLengthOfFeature(testClassInstance, Dimensionalizer, expectedSetResult):
@@ -192,13 +192,13 @@ def validateMappingOfWords(testClassInstance, Dimensionalizer, reviewList, wordT
 
 # FeatureCount is the number of n-grams in dataset
 # ExpectedVectorOnesCount is the number of 1-entries in generated vector
-def validateVectorForReview(testClassInstance, Dimensionalizer, featureCount, expectedVectorOnesCount):
+def validateVectorSizeReview(testClassInstance, Dimensionalizer, featureCount, expectedVectorOnesCount):
     # Arrange
     actualVectorOnesCount = 0
     dimensionalizer = Dimensionalizer(testClassInstance.readReviews)
 
     # Act
-    vector = dimensionalizer.CreateVectorForReview(testClassInstance.readReviews[0])
+    vector = dimensionalizer.GetFeatureSet([0])
     for entry in vector[0]:
         if entry == 1:
             actualVectorOnesCount += 1

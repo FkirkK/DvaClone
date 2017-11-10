@@ -2,6 +2,7 @@ from .Review import Review
 from .OpSpamReader import OpSpamReader
 
 from .GeneralDimensionalizer import GeneralDimensionalizer
+from .GeneralNGramDimensionalizer import GeneralNGramDimensionalizer
 from .NGramDimensionalizers import UniGramDimensionalizer
 from .NGramDimensionalizers import BigramDimensionalizer
 from .NGramDimensionalizers import BigramPlusDimensionalizer
@@ -9,6 +10,7 @@ from .NGramDimensionalizers import TrigramDimensionalizer
 from .NGramDimensionalizers import TrigramPlusDimensionalizer
 from .ParagraphDimensionalizer import ParagraphDimensionalizer
 
+from .GeneralDimensionalizerTests import GeneralDimensionalizerTests
 from .DimensionalizerTests import UnigramDimensionalizerTests
 from .DimensionalizerTests import BigramDimensionalizerTests
 from .DimensionalizerTests import BigramPlusDimensionalizerTests

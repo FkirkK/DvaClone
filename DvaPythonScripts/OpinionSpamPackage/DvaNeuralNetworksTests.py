@@ -13,7 +13,7 @@ class DvaMLPClassifierTests(TestCase):
         # Arrange
 
         # Act
-        self.mLPClassifier.LearnModel(self.allReviews)
+        self.mLPClassifier.LearnModelForAllReviews()
 
         # Assert
         self.assertTrue(self.mLPClassifier.model is not None)

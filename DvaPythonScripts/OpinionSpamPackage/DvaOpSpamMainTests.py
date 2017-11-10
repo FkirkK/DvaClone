@@ -26,7 +26,7 @@ class DvaOpSpamMainTests(TestCase):
         expectedValue = True
 
         # Act
-        self.dvaLinearSVM.LearnModel(self.dvaLinearSVM.reviewList)
+        self.dvaLinearSVM.LearnModelForAllReviews()
 
         # Assert
         self.assertEqual(type(self.dvaLinearSVM.model) is svm.LinearSVC, expectedValue)
@@ -36,7 +36,7 @@ class DvaOpSpamMainTests(TestCase):
         expectedValue = True
 
         # Act
-        self.dvaLinearSVM.LearnModel(self.dvaLinearSVM.reviewList)
+        self.dvaLinearSVM.LearnModelForAllReviews()
         vectorToPredict = self.dvaLinearSVM.dimensionalizer.CreateVectorForReview(self.allReviews[0])
         prediction = self.dvaLinearSVM.model.predict(vectorToPredict)
 
