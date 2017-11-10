@@ -37,7 +37,7 @@ class DvaOpSpamMainTests(TestCase):
 
         # Act
         self.dvaLinearSVM.LearnModelForAllReviews()
-        vectorToPredict = self.dvaLinearSVM.dimensionalizer.CreateVectorForReview(self.allReviews[0])
+        vectorToPredict = self.dvaLinearSVM.dimensionalizer.GetFeatureSet([0])
         prediction = self.dvaLinearSVM.model.predict(vectorToPredict)
 
         # Assert
