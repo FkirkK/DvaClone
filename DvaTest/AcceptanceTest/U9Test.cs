@@ -18,7 +18,7 @@ namespace DvaTest.AcceptanceTest
         [SetUp]
         public void SetUp()
         {
-            j = new Judge();
+            j = new DummyJudge();
             ar = new AnalysisRunner();
         }
 

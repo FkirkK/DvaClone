@@ -18,7 +18,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmUnigramReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new Judge();
+            IJudge j = new DummyJudge();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
 
@@ -36,7 +36,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmBigramReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new Judge();
+            IJudge j = new DummyJudge();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Bigram);
 
@@ -54,7 +54,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmTrigramReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new Judge();
+            IJudge j = new DummyJudge();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Trigram);
 
@@ -72,7 +72,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmTrigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new Judge();
+            IJudge j = new DummyJudge();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.TrigramPlus);
 
