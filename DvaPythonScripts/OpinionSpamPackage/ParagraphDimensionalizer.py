@@ -2,6 +2,7 @@ from collections import namedtuple
 
 import numpy
 from gensim.models import doc2vec
+from gensim.models.doc2vec import TaggedDocument
 
 from OpinionSpamPackage import GeneralDimensionalizer
 
@@ -15,14 +16,15 @@ class ParagraphDimensionalizer(GeneralDimensionalizer):
 
     def __ConvertReviewsToDocToVecDocuments(self, reviewList):
         documentList = []
-        analyzedDocument = namedtuple('AnalyzedDocument', 'words tags')  # Named tuple with typename and fieldnames
 
         tag = 0
-        myTags = [tag]  # Customizable tag
+        myTags = [1]
+        myTags[0] = tag  # Customizable tag
         for review in reviewList:
             content = self.RemoveAllNewlines(review.content.split())
-            documentList.append(analyzedDocument(content, myTags))
-            myTags[0] = tag + 1
+            documentList.append(TaggedDocument(words=content, tags=myTags))
+            tag += 1
+            myTags[0] = tag
 
         return documentList
 
