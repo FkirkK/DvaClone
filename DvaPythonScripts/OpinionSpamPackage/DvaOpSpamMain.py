@@ -38,34 +38,34 @@ def RunAnalysis():
 
     # Determine which algorithm to run
     if sys.argv[1] == "LinearSVC":
-        DvaSVM = DvaLinearSvm(readReviews, dim)
+        classifier = DvaLinearSvm(readReviews, dim)
     elif sys.argv[1] == "SVCLinear":
-        DvaSVM = DvaSvmLinear(readReviews, dim)
+        classifier = DvaSvmLinear(readReviews, dim)
     elif sys.argv[1] == "SVCPolynomial":
-        DvaSVM = DvaPolySvm(readReviews, dim)
+        classifier = DvaPolySvm(readReviews, dim)
     elif sys.argv[1] == "SVCRbf":
-        DvaSVM = DvaRbfSvm(readReviews, dim)
+        classifier = DvaRbfSvm(readReviews, dim)
     elif sys.argv[1] == "SVCSigmoid":
-        DvaSVM = DvaSigmoidSvm(readReviews, dim)
+        classifier = DvaSigmoidSvm(readReviews, dim)
     elif sys.argv[1] == "DecisionTree":
-        DvaSVM = DvaClassifierTree(readReviews, dim)
+        classifier = DvaClassifierTree(readReviews, dim)
     elif sys.argv[1] == "NaiveBayes":
-        DvaSVM = DvaNaiveBayesClassifier(readReviews, dim)
+        classifier = DvaNaiveBayesClassifier(readReviews, dim)
     elif sys.argv[1] == "MultiLayerPerceptron":
-        DvaSVM = DvaMLPClassifier(readReviews, dim)
+        classifier = DvaMLPClassifier(readReviews, dim)
     elif sys.argv[1] == "NearestNeighbors":
-        DvaSVM = DvaNearestNeighborsClassifier(readReviews, dim)
+        classifier = DvaNearestNeighborsClassifier(readReviews, dim)
     elif sys.argv[1] == "AdaBoost":
-        DvaSVM = DvaAdaBoostClassifier(readReviews, dim)
+        classifier = DvaAdaBoostClassifier(readReviews, dim)
     elif sys.argv[1] == "Bagging":
-        DvaSVM = DvaBaggingClassifier(readReviews, dim)
+        classifier = DvaBaggingClassifier(readReviews, dim)
 
     else:
         print("Classifier not recognized.")
         return None
 
     # Use dimensionalizer to get results and return these
-    classifierResult = DvaSVM.Do5FoldValidation()
+    classifierResult = classifier.Do5FoldValidation()
     print(classifierResult)
 
 
