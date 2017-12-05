@@ -56,9 +56,6 @@ namespace DvaWebApp.Controllers
 
             switch (selectedCommittee)
             {
-                case Committee.DummyCommittee:
-                    committee = new DummyCommittee();
-                    break;
                 case Committee.MajorityCommittee:
                     committee = new MajorityCommittee();
                     break;

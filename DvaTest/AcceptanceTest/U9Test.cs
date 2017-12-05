@@ -18,7 +18,7 @@ namespace DvaTest.AcceptanceTest
         [SetUp]
         public void SetUp()
         {
-            j = new DummyCommittee();
+            j = new MajorityCommittee();
             ar = new AnalysisRunner();
         }
 

@@ -14,7 +14,7 @@ namespace DvaTest.UnitTest
         public void RunLinearSvmBigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            ICommittee j = new DummyCommittee();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 

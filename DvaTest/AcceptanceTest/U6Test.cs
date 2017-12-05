@@ -18,7 +18,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmUnigramReturnsCorrectSvmResult()
         {
             //Arrange
-            ICommittee j = new DummyCommittee();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
 
@@ -36,7 +36,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmBigramReturnsCorrectSvmResult()
         {
             //Arrange
-            ICommittee j = new DummyCommittee();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Bigram);
 
@@ -54,7 +54,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmTrigramReturnsCorrectSvmResult()
         {
             //Arrange
-            ICommittee j = new DummyCommittee();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Trigram);
 
@@ -72,7 +72,7 @@ namespace DvaTest.AcceptanceTest
         public void RunLinearSvmTrigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            ICommittee j = new DummyCommittee();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.TrigramPlus);
 

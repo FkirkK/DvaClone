@@ -16,7 +16,7 @@ namespace DvaTest.UnitTest
             //Arrange
             IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
-            ICommittee committee = new DummyCommittee();
+            ICommittee committee = new MajorityCommittee();
 
             //Act
             actualResult = committee.ClassifyResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );
