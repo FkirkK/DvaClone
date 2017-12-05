@@ -3,7 +3,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from OpinionSpamPackage import DvaLinearSvm, DvaSvmLinear, DvaPolySvm, DvaRbfSvm, DvaSigmoidSvm, DvaClassifierTree, \
-    DvaNaiveBayesClassifier, DvaMLPClassifier, DvaNearestNeighborsClassifier, ParagraphDimensionalizer
+    DvaNaiveBayesClassifier, DvaMLPClassifier, DvaNearestNeighborsClassifier, ParagraphDimensionalizer, \
+    DvaAdaBoostClassifier, DvaBaggingClassifier
 from OpinionSpamPackage import OpSpamReader
 from OpinionSpamPackage import UniGramDimensionalizer
 from OpinionSpamPackage import BigramDimensionalizer
@@ -54,6 +55,10 @@ def RunAnalysis():
         DvaSVM = DvaMLPClassifier(readReviews, dim)
     elif sys.argv[1] == "NearestNeighbors":
         DvaSVM = DvaNearestNeighborsClassifier(readReviews, dim)
+    elif sys.argv[1] == "AdaBoost":
+        DvaSVM = DvaAdaBoostClassifier(readReviews, dim)
+    elif sys.argv[1] == "Bagging":
+        DvaSVM = DvaBaggingClassifier(readReviews, dim)
 
     else:
         print("Classifier not recognized.")

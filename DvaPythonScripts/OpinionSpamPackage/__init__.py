@@ -1,5 +1,6 @@
 from .Review import Review
 from .OpSpamReader import OpSpamReader
+from .OpSpamReaderTests import OpSpamReaderTests
 
 from .GeneralDimensionalizer import GeneralDimensionalizer
 from .GeneralNGramDimensionalizer import GeneralNGramDimensionalizer
@@ -18,7 +19,7 @@ from .DimensionalizerTests import TrigramDimensionalizerTests
 from .DimensionalizerTests import TrigramPlusDimensionalizerTests
 from .ParagraphDimensionalizerTests import ParagraphDimensionalizerTests
 
-from .OpSpamReaderTests import OpSpamReaderTests
+
 from .ClassifierResult import ClassifierResult
 from .ClassifierResultTests import ClassifierResultTests
 from .DvaGeneralClassifier import DvaGeneralClassifier
@@ -40,5 +41,8 @@ from .DvaNaiveBayesTests import DvaNaiveBayesClassifierTests
 
 from .DvaNearestNeighbors import DvaNearestNeighborsClassifier
 from .DvaNearestNeighborsTests import DvaNearestNeighborsTests
+
+from .DvaEnsembleClassifiers import DvaAdaBoostClassifier, DvaBaggingClassifier
+from .DvaEnsembleClassifierTests import DvaAdaBoostClassifierTests, DvaBaggingClassifierTests
 
 from .DvaOpSpamMainTests import DvaOpSpamMainTests
