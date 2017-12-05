@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DvaCore.Models;
+using DvaAnalysis.Models;
 using System.Linq;
 
-namespace DvaCore
+namespace DvaAnalysis.Committees
 {
-    public class MajorityJudge : IJudge
+    public class MajorityCommittee : ICommittee
     {
-        public IResult JudgeResult(IResult result)
+        public IResult ClassifyResult(IResult result)
         {
             return result;
         }
 
-        public IResult JudgeResults(List<IResult> result)
+        public IResult ClassifyResults(List<IResult> result)
         {
             var castedResult = result.Cast<ClassifierResult>().ToList(); //TODO: Remove IResult interface
-            List<RatedDocument> judgedDocuments = new List<RatedDocument>();
+            List<RatedDocument> ClassifiedDocuments = new List<RatedDocument>();
 
 
             for (int i = 0; i < castedResult[0].RatedDocuments.Count; i++)
@@ -31,12 +31,12 @@ namespace DvaCore
                         deceitfulCount++;
                 }
 
-                judgedDocuments.Add(new RatedDocument(castedResult[0].RatedDocuments[i].Name,
-                                                      castedResult[0].RatedDocuments[i].LabeledClassifier,
-                                                      (truthfulCount > deceitfulCount)));
+                ClassifiedDocuments.Add(new RatedDocument(castedResult[0].RatedDocuments[i].Name,
+                    castedResult[0].RatedDocuments[i].LabeledClassifier,
+                    (truthfulCount > deceitfulCount)));
             }
 
-            return new ClassifierResult(judgedDocuments);
+            return new ClassifierResult(ClassifiedDocuments);
         }
     }
 }

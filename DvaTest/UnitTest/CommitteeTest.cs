@@ -1,47 +1,47 @@
-﻿using DvaCore;
-using DvaCore.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DvaAnalysis.Committees;
+using DvaAnalysis.Models;
 
 namespace DvaTest.UnitTest
 {
     [TestFixture]
-    public class JudgeTest
+    public class CommitteeTest
     {
         [Test]
-        public void CheckIfSameObjectIsReturnedDummyJudge()
+        public void CheckIfSameObjectIsReturnedDummyCommittee()
         {
             //Arrange
             IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
-            IJudge judge = new DummyJudge();
+            ICommittee committee = new DummyCommittee();
 
             //Act
-            actualResult = judge.JudgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );
+            actualResult = committee.ClassifyResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0") );
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
-        public void CheckIfSameObjectIsReturnedMajorityJudge()
+        public void CheckIfSameObjectIsReturnedMajorityCommittee()
         {
             //Arrange
             IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
-            IJudge judge = new MajorityJudge();
+            ICommittee committee = new MajorityCommittee();
 
             //Act
-            actualResult = judge.JudgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
+            actualResult = committee.ClassifyResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
-        public void CheckIfSingleResultIsReturnedMajorityJudge()
+        public void CheckIfSingleResultIsReturnedMajorityCommittee()
         {
             //Arrange
             IResult expectedResult = new ClassifierResult("1.0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
@@ -49,25 +49,25 @@ namespace DvaTest.UnitTest
             IResult input1 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
             IResult input2 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0");
             IResult input3 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
-            IJudge judge = new MajorityJudge();
+            ICommittee committee = new MajorityCommittee();
 
             //Act
-            actualResult = judge.JudgeResults(new List<IResult>() { input1, input2, input3 });
+            actualResult = committee.ClassifyResults(new List<IResult>() { input1, input2, input3 });
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
-        public void CheckIfSameObjectIsReturnedWeightedJudge()
+        public void CheckIfSameObjectIsReturnedWeightedCommittee()
         {
             //Arrange
             IResult expectedResult = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0");
             IResult actualResult;
-            IJudge judge = new WeightedJudge(new List<double>() {1.0});
+            ICommittee committee = new WeightedCommittee(new List<double>() {1.0});
 
             //Act
-            actualResult = judge.JudgeResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
+            actualResult = committee.ClassifyResult(new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0"));
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -76,7 +76,7 @@ namespace DvaTest.UnitTest
         [TestCase("1.0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1", 3.0, 2.0)]
         [TestCase("0.0, 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0", 2.0, 3.0)]
         [TestCase("0.0, 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0", 5.0, 5.0)]
-        public void CheckIfExpectedObjectIsReturnedWeightedJudge(string inputString, double weight1, double weight2)
+        public void CheckIfExpectedObjectIsReturnedWeightedCommittee(string inputString, double weight1, double weight2)
         {
             // Arrange
             IResult expectedResult = new ClassifierResult(inputString);
@@ -84,17 +84,17 @@ namespace DvaTest.UnitTest
             IResult input1 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
             IResult input2 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0");
 
-            IJudge judge = new WeightedJudge(new List<double>() {weight1, weight2});
+            ICommittee committee = new WeightedCommittee(new List<double>() {weight1, weight2});
 
             //Act
-            actualResult = judge.JudgeResults(new List<IResult>() { input1, input2 });
+            actualResult = committee.ClassifyResults(new List<IResult>() { input1, input2 });
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
-        public void CheckIfExpectedObjectIsReturnedWeightedJudgeAdvanced()
+        public void CheckIfExpectedObjectIsReturnedWeightedCommitteeAdvanced()
         {
             // Arrange
             IResult expectedResult = new ClassifierResult("0.0, 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0");
@@ -105,10 +105,10 @@ namespace DvaTest.UnitTest
             IResult input4 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1");
             IResult input5 = new ClassifierResult("0, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0");
 
-            IJudge judge = new WeightedJudge(new List<double>() { 2.0, 3.0, 5.0, 1.5, 2.5 });
+            ICommittee committee = new WeightedCommittee(new List<double>() { 2.0, 3.0, 5.0, 1.5, 2.5 });
 
             //Act
-            actualResult = judge.JudgeResults(new List<IResult>() { input1, input2, input3, input4, input5 });
+            actualResult = committee.ClassifyResults(new List<IResult>() { input1, input2, input3, input4, input5 });
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);

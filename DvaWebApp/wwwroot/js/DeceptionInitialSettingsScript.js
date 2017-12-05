@@ -1,5 +1,5 @@
-﻿$(document).on('change', '#JudgeDropDown', function () {
-    var FeatureValue = $('#JudgeDropDown').val();
+﻿$(document).on('change', '#CommitteeDropDown', function () {
+    var FeatureValue = $('#CommitteeDropDown').val();
     var ClassificationValue = $('#AlgorithmCountDropDown').val();
 
     if (FeatureValue !== "" && ClassificationValue !== "")
@@ -9,7 +9,7 @@
 });
 
 $(document).on('change', '#AlgorithmCountDropDown', function () {
-    var FeatureValue = $('#JudgeDropDown').val();
+    var FeatureValue = $('#CommitteeDropDown').val();
     var ClassificationValue = $('#AlgorithmCountDropDown').val();
 
     if (FeatureValue !== "" && ClassificationValue !== "")

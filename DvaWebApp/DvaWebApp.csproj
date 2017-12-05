@@ -11,7 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DvaAnalysis\DvaAnalysis.csproj" />
-    <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
     <ProjectReference Include="..\DvaDataImporter\DvaDataImporter.csproj" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DvaCore.Models
+namespace DvaAnalysis.Models
 {
     public interface IResult
     {

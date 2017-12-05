@@ -1,12 +1,12 @@
-﻿using DvaCore;
-using DvaCore.Models;
+﻿using DvaAnalysis.Models;
 using System.Collections.Generic;
+using DvaAnalysis.Committees;
 
 namespace DvaAnalysis
 {
     public interface IAnalysisRunner
     {
-        IResult RunAnalysis(AnalysisConfiguration config, IJudge judge);
-        IResult RunAnalysis(List<AnalysisConfiguration> configs, IJudge judge);
+        IResult RunAnalysis(AnalysisConfiguration config, ICommittee committee);
+        IResult RunAnalysis(List<AnalysisConfiguration> configs, ICommittee committee);
     }
 }

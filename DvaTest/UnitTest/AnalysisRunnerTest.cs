@@ -1,8 +1,8 @@
 ﻿using DvaAnalysis;
-using DvaCore;
-using DvaCore.Models;
 using NUnit.Framework;
 using System.Collections.Generic;
+using DvaAnalysis.Committees;
+using DvaAnalysis.Models;
 
 namespace DvaTest.UnitTest
 {
@@ -14,7 +14,7 @@ namespace DvaTest.UnitTest
         public void RunLinearSvmBigramPlusReturnsCorrectSvmResult()
         {
             //Arrange
-            IJudge j = new DummyJudge();
+            ICommittee j = new DummyCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);
 
@@ -30,7 +30,7 @@ namespace DvaTest.UnitTest
         public void Run3LinearSvmsInSequence()
         {
             //Arrange
-            IJudge j = new MajorityJudge();
+            ICommittee j = new MajorityCommittee();
             IAnalysisRunner ar = new AnalysisRunner();
             PythonConfiguration config1 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.Unigram);
             PythonConfiguration config2 = new PythonConfiguration(Classification.LinearSVC, FeatureSet.BigramPlus);

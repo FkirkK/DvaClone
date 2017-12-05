@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using DvaAnalysis;
-using DvaCore;
-using DvaCore.Models;
+using DvaAnalysis.Committees;
+using DvaAnalysis.Models;
 using NUnit.Framework;
 
 namespace DvaTest.AcceptanceTest
@@ -12,13 +12,13 @@ namespace DvaTest.AcceptanceTest
     class U9Test
     {
 
-        public IJudge j { get; set; }
+        public ICommittee j { get; set; }
         public IAnalysisRunner ar { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            j = new DummyJudge();
+            j = new DummyCommittee();
             ar = new AnalysisRunner();
         }
 

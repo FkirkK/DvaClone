@@ -14,7 +14,7 @@ namespace DvaWebApp.Models
             AlgorithmSettings = new List<SingleAlgorithmSettings>();
         }
         public List<SingleAlgorithmSettings> AlgorithmSettings { get; set; }
-        public string SelectedJudge { get; set; }
+        public string SelectedCommittee { get; set; }
     }
 
     public class SingleAlgorithmSettings

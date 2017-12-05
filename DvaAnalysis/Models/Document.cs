@@ -1,4 +1,4 @@
-﻿namespace DvaCore.Models
+﻿namespace DvaAnalysis.Models
 {
     public class Document
     {
@@ -18,7 +18,7 @@
 
         public override bool Equals(object obj)
         {
-            var otherDoc = (Document) obj;
+            var otherDoc = (Document)obj;
 
             return Name.Equals(otherDoc.Name);
         }

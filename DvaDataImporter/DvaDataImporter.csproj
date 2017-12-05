@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DvaCore\DvaCore.csproj" />
+    <ProjectReference Include="..\DvaAnalysis\DvaAnalysis.csproj" />
   </ItemGroup>
 
 </Project>

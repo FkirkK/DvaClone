@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using DvaCore;
 using Microsoft.AspNetCore.Mvc;
-using DvaCore.Models;
 using DvaWebApp.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using DvaAnalysis;
 using System.Collections.Generic;
-using System.Linq;
+using DvaAnalysis.Committees;
 
 namespace DvaWebApp.Controllers
 {
@@ -33,7 +30,7 @@ namespace DvaWebApp.Controllers
                 model.AlgorithmSettings.Add(new SingleAlgorithmSettings());
             }
 
-            model.SelectedJudge = dism.SelectedJudge;
+            model.SelectedCommittee = dism.SelectedCommittee;
 
             return View(model);
         }
@@ -42,7 +39,7 @@ namespace DvaWebApp.Controllers
         public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
             var v = ViewBag;
-            Judge selectedJudge = (Judge)Enum.Parse(typeof(Judge), asm.SelectedJudge);
+            Committee selectedCommittee = (Committee)Enum.Parse(typeof(Committee), asm.SelectedCommittee);
             IAnalysisRunner runner = new AnalysisRunner();
             List<AnalysisConfiguration> configs = new List<AnalysisConfiguration>();
 
@@ -55,25 +52,25 @@ namespace DvaWebApp.Controllers
                 configs.Add(config);
             }
 
-            IJudge judge;
+            ICommittee committee;
 
-            switch (selectedJudge)
+            switch (selectedCommittee)
             {
-                case Judge.DummyJudge:
-                    judge = new DummyJudge();
+                case Committee.DummyCommittee:
+                    committee = new DummyCommittee();
                     break;
-                case Judge.MajorityJudge:
-                    judge = new MajorityJudge();
+                case Committee.MajorityCommittee:
+                    committee = new MajorityCommittee();
                     break;
-                case Judge.WeightedJudge:
+                case Committee.WeightedCommittee:
                     var weightList = asm.AlgorithmSettings.ConvertAll(x => x.SelectedWeight);
-                    judge = new WeightedJudge(weightList);
+                    committee = new WeightedCommittee(weightList);
                     break;
                 default:
-                    throw new ArgumentNullException("No valid judge selected.");
+                    throw new ArgumentNullException("No valid committee selected.");
             }
 
-            var result = runner.RunAnalysis(configs, judge); 
+            var result = runner.RunAnalysis(configs, committee); 
             ViewBag.ClassifierResult = result;
 
             return View();

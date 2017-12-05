@@ -1,7 +1,7 @@
-﻿using DvaCore;
-using DvaCore.Models;
+﻿using DvaAnalysis.Models;
 using System;
 using System.Collections.Generic;
+using DvaAnalysis.Committees;
 
 namespace DvaAnalysis
 {
@@ -15,19 +15,18 @@ namespace DvaAnalysis
             
         }
 
-        public IResult RunAnalysis(AnalysisConfiguration config, IJudge judge)
+        public IResult RunAnalysis(AnalysisConfiguration config, ICommittee committee)
         {
             string analysisReturnString = RunConfiguration(config);
 
             if (analysisReturnString == null)
                 throw new Exception("The analysis result was null");
 
-            
-            IResult judgedResult = judge.JudgeResult(new ClassifierResult(analysisReturnString));
-            return judgedResult;
+            IResult result = committee.ClassifyResult(new ClassifierResult(analysisReturnString));
+            return result;
         }
 
-        public IResult RunAnalysis(List<AnalysisConfiguration> configs, IJudge judge)
+        public IResult RunAnalysis(List<AnalysisConfiguration> configs, ICommittee committee)
         {
             List<IResult> resultList = new List<IResult>();
             foreach (var config in configs)
@@ -41,8 +40,8 @@ namespace DvaAnalysis
             }
             
 
-            IResult judgedResult = judge.JudgeResults(resultList);
-            return judgedResult;
+            IResult result = committee.ClassifyResults(resultList);
+            return result;
         }
 
         private string RunConfiguration(AnalysisConfiguration config)

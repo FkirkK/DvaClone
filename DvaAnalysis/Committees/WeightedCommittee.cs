@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DvaCore.Models;
+using DvaAnalysis.Models;
 
-namespace DvaCore
+namespace DvaAnalysis.Committees
 {
-    public class WeightedJudge : IJudge
+    public class WeightedCommittee : ICommittee
     {
-        public WeightedJudge(List<double> weights)
+        public WeightedCommittee(List<double> weights)
         {
             _weights = weights;
         }
 
         private List<double> _weights;
 
-        public IResult JudgeResult(IResult result)
+        public IResult ClassifyResult(IResult result)
         {
             return result;
         }
 
-        public IResult JudgeResults(List<IResult> result)
+        public IResult ClassifyResults(List<IResult> result)
         {
             if (result.Count != _weights.Count)
-                throw new ArgumentException("WeigtedJudge arity mismatch between weights provided and number of results.");
+                throw new ArgumentException("WeigtedCommittee arity mismatch between weights provided and number of results.");
 
             var castedResult = result.Cast<ClassifierResult>().ToList(); //TODO: Remove IResult interface
-            List<RatedDocument> judgedDocuments = new List<RatedDocument>();
+            List<RatedDocument> classifiedDocuments = new List<RatedDocument>();
 
             for (int i = 0; i < castedResult[0].RatedDocuments.Count; i++)
             {
@@ -39,12 +39,12 @@ namespace DvaCore
                         deceitfulScore += (1.0 * _weights[j]);
                 }
 
-                judgedDocuments.Add(new RatedDocument(castedResult[0].RatedDocuments[i].Name,
+                classifiedDocuments.Add(new RatedDocument(castedResult[0].RatedDocuments[i].Name,
                     castedResult[0].RatedDocuments[i].LabeledClassifier,
                     (truthfulScore > deceitfulScore)));
             }
 
-            return new ClassifierResult(judgedDocuments);
+            return new ClassifierResult(classifiedDocuments);
         }
     }
 }

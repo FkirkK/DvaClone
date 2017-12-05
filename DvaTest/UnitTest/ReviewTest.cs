@@ -1,5 +1,5 @@
 ﻿using System;
-using DvaCore.Models;
+using DvaAnalysis.Models;
 using NUnit.Framework;
 
 namespace DvaTest.UnitTest
