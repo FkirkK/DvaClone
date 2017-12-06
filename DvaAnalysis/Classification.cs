@@ -14,6 +14,8 @@ namespace DvaAnalysis
         DecisionTree,
         NaiveBayes,
         MultiLayerPerceptron,
-        NearestNeighbors
+        NearestNeighbors,
+        AdaBoost,
+        Bagging
     }
 }
