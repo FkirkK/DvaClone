@@ -49,6 +49,7 @@ class DvaOpSpamMainTests(TestCase):
 
         # Act
         result = self.dvaLinearSVM.Do5FoldValidation()
+        actualValue = (result.trueTruthful + result.trueDeceitful) / 1600
 
         # Assert
-        self.assertAlmostEqual(expectedValue, result.precision, delta=0.05)
+        self.assertAlmostEqual(expectedValue, actualValue, delta=0.05)

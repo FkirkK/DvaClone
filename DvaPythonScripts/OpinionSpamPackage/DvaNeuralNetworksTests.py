@@ -20,11 +20,17 @@ class DvaMLPClassifierTests(TestCase):
 
     def test_returns_valid_classifierResult(self):
         # Arrange
+        expectedCount = 1600
 
         # Act
-        classifierResult = self.mLPClassifier.Do5FoldValidation()
+        result = self.mLPClassifier.Do5FoldValidation()
+        actualCount = result.trueTruthful + result.falseTruthful + result.trueDeceitful + result.falseDeceitful
 
         # Assert
-        self.assertTrue(type(classifierResult) is ClassifierResult)
-        self.assertTrue(0 <= classifierResult.precision <= 1)
+        self.assertTrue(type(result) is ClassifierResult)
+        self.assertEqual(expectedCount, actualCount)
+        self.assertTrue(result.trueTruthful <= 800)
+        self.assertTrue(result.falseTruthful <= 800)
+        self.assertTrue(result.trueDeceitful <= 800)
+        self.assertTrue(result.falseDeceitful <= 800)
 

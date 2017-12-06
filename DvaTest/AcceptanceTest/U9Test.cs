@@ -35,7 +35,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.840, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.840, linearSvmResult.Accuracy, 0.001);
         }
 
         /* 2
@@ -51,7 +51,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.669, linearSvmResult.OverallPrecision, 0.1);
+            Assert.AreEqual(0.669, linearSvmResult.Accuracy, 0.1);
         }
 
         /* 3
@@ -67,7 +67,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.838, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.838, linearSvmResult.Accuracy, 0.001);
         }
 
         /* 4
@@ -83,7 +83,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.501, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.501, linearSvmResult.Accuracy, 0.001);
         }
 
         /* 5
@@ -99,7 +99,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.754, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.754, linearSvmResult.Accuracy, 0.001);
         }
 
         /* 6
@@ -115,7 +115,7 @@ namespace DvaTest.AcceptanceTest
             var linearSvmResult = (ClassifierResult)ar.RunAnalysis(config, j);
 
             //Assert
-            Assert.AreEqual(0.757, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.757, linearSvmResult.Accuracy, 0.001);
         }
     }
 }

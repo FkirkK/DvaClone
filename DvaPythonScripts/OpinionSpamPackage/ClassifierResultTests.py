@@ -6,11 +6,11 @@ class ClassifierResultTests(TestCase):
 
     def setUp(self):
         self.resultList = []
-        self.resultList.append(ClassifierResult(fold=1, precision=80.0, fakePositives=11.0, fakeNegatives=11.0, reviewList=[]))
-        self.resultList.append(ClassifierResult(fold=2, precision=90.0, fakePositives=13.0, fakeNegatives=5.0, reviewList=[]))
-        self.resultList.append(ClassifierResult(fold=3, precision=83.0, fakePositives=9.0, fakeNegatives=10.0, reviewList=[]))
-        self.resultList.append(ClassifierResult(fold=4, precision=87.0, fakePositives=15.0, fakeNegatives=6.0, reviewList=[]))
-        self.resultList.append(ClassifierResult(fold=5, precision=85.0, fakePositives=12.0, fakeNegatives=8.0, reviewList=[]))
+        self.resultList.append(ClassifierResult(trueTruthful=130, falseTruthful=25, trueDeceitful=140, falseDeceitful=25, reviewList=[]))
+        self.resultList.append(ClassifierResult(trueTruthful=160, falseTruthful=0, trueDeceitful=160, falseDeceitful=0, reviewList=[]))
+        self.resultList.append(ClassifierResult(trueTruthful=150, falseTruthful=20, trueDeceitful=140, falseDeceitful=10, reviewList=[]))
+        self.resultList.append(ClassifierResult(trueTruthful=155, falseTruthful=10, trueDeceitful=155, falseDeceitful=0, reviewList=[]))
+        self.resultList.append(ClassifierResult(trueTruthful=110, falseTruthful=80, trueDeceitful=120, falseDeceitful=10, reviewList=[]))
         self.aggregatedResult = ClassifierResult.AggregateResults(self.resultList)
 
     def test_aggregate_returns_new_classifierResult(self):
@@ -22,62 +22,46 @@ class ClassifierResultTests(TestCase):
         # Assert
         self.assertEqual(type(self.aggregatedResult) is ClassifierResult, expectedValue)
 
-    def test_aggregates_precision_correctly(self):
+    def test_aggregates_trueTruthful_correctly(self):
         # Arrange
-        expectedPrecision = 85.0
+        expectedCount = 705
 
         # Act
 
         # Assert
-        self.assertAlmostEqual(self.aggregatedResult.precision, expectedPrecision, delta=0.001)
+        self.assertEqual(self.aggregatedResult.trueTruthful, expectedCount)
 
-    def test_aggregates_fake_positives_correctly(self):
+    def test_aggregates_falseTruthful_correctly(self):
         # Arrange
-        expectedFakePositiveResult = 12
+        expectedCount = 135
 
         # Act
 
         # Assert
-        self.assertAlmostEqual(self.aggregatedResult.fakePositives, expectedFakePositiveResult, delta=0.001)
+        self.assertEqual(self.aggregatedResult.falseTruthful, expectedCount)
 
-    def test_aggregates_fake_negatives_correctly(self):
+    def test_aggregates_trueDeceitful_correctly(self):
         # Arrange
-        expectedFakeNegativeResult = 8
+        expectedCount = 715
 
         # Act
 
         # Assert
-        self.assertAlmostEqual(self.aggregatedResult.fakeNegatives, expectedFakeNegativeResult, delta=0.001)
+        self.assertEqual(self.aggregatedResult.trueDeceitful, expectedCount)
 
-    def test_aggregate_assigns_correct_worst_fold(self):
+    def test_aggregates_falseDeceitful_correctly(self):
         # Arrange
-        expectedFNFold = 1
-        expectedFPFold = 4
-        expectedPrecisionFold = 1
+        expectedCount = 45
 
         # Act
 
         # Assert
-        self.assertEqual(self.aggregatedResult.fakeNegativesWorstFold, expectedFNFold)
-        self.assertEqual(self.aggregatedResult.fakePositivesWorstFold, expectedFPFold)
-        self.assertEqual(self.aggregatedResult.precisionWorstFold, expectedPrecisionFold)
+        self.assertEqual(self.aggregatedResult.falseDeceitful, expectedCount)
 
-    def test_aggregate_assigns_correct_best_fold(self):
-        # Arrange
-        expectedFNFold = 2
-        expectedFPFold = 3
-        expectedPrecisionFold = 2
-
-        # Act
-
-        # Assert
-        self.assertEqual(self.aggregatedResult.fakeNegativesBestFold, expectedFNFold)
-        self.assertEqual(self.aggregatedResult.fakePositivesBestFold, expectedFPFold)
-        self.assertEqual(self.aggregatedResult.precisionBestFold, expectedPrecisionFold)
 
     def test_print_has_correct_amount_of_fields(self):
         # Arrange
-        expectedFieldCount = 9
+        expectedFieldCount = 4
 
         # Act
         string = self.aggregatedResult.__str__()
@@ -88,7 +72,7 @@ class ClassifierResultTests(TestCase):
 
     def test_print_has_correct_amount_of_fields_with_reviews(self):
         # Arrange
-        expectedFieldCount = 15
+        expectedFieldCount = 10
         self.aggregatedResult.reviews.append(("t_hilton_1.txt", True, False))
         self.aggregatedResult.reviews.append(("t_hilton_5.txt", True, True))
 
@@ -101,12 +85,12 @@ class ClassifierResultTests(TestCase):
 
     def test_prints_reviews_correctly(self):
         # Arrange
-        expectedField9String = " t_hilton_1.txt"
-        expectedField10String = " 1"
-        expectedField11String = " 0"
-        expectedField12String = " t_hilton_5.txt"
-        expectedField13String = " 1"
-        expectedField14String = " 1"
+        expectedField4String = " t_hilton_1.txt"
+        expectedField5String = " 1"
+        expectedField6String = " 0"
+        expectedField7String = " t_hilton_5.txt"
+        expectedField8String = " 1"
+        expectedField9String = " 1"
         self.aggregatedResult.reviews.append(("t_hilton_1.txt", True, False))
         self.aggregatedResult.reviews.append(("t_hilton_5.txt", True, True))
 
@@ -115,10 +99,10 @@ class ClassifierResultTests(TestCase):
         splitFields = string.split(",")
 
         # Assert
+        self.assertEqual(expectedField4String, splitFields[4])
+        self.assertEqual(expectedField5String, splitFields[5])
+        self.assertEqual(expectedField6String, splitFields[6])
+        self.assertEqual(expectedField7String, splitFields[7])
+        self.assertEqual(expectedField8String, splitFields[8])
         self.assertEqual(expectedField9String, splitFields[9])
-        self.assertEqual(expectedField10String, splitFields[10])
-        self.assertEqual(expectedField11String, splitFields[11])
-        self.assertEqual(expectedField12String, splitFields[12])
-        self.assertEqual(expectedField13String, splitFields[13])
-        self.assertEqual(expectedField14String, splitFields[14])
 

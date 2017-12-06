@@ -44,7 +44,7 @@ class DvaGeneralClassifier:
         numberOfFolds = 5
         listOfResults = []
 
-        for i in range(1, numberOfFolds+1):  # 1-indexing because it must be human-readable
+        for i in range(1, numberOfFolds+1): # 1 indexing for human readability of fold numbers
             reviewIndexListForValidation = self.__ConstructReviewIndexListFromFolds([i])
             reviewIndexListForTraining = self.__ConstructReviewIndexListFromFolds([j for j in range(1, numberOfFolds+1) if j != i])
             validationReviews = [review for review in self.reviewList if review.fold == i]
@@ -54,9 +54,10 @@ class DvaGeneralClassifier:
 
             # Prepare variables for prediction
             validationReviewCount = len(validationReviews)
-            correctPredictionCount = 0
-            fakePositiveCount = 0
-            fakeNegativeCount = 0
+            trueTruthfulCount = 0
+            falseTruthfulCount = 0
+            trueDeceitfulCount = 0
+            falseDeceitfulCount = 0
             classifierResultList = []
 
             # Use model to predict validationReviews
@@ -64,17 +65,18 @@ class DvaGeneralClassifier:
                 review = self.reviewList[reviewIndex]
                 reviewVector = self.dimensionalizer.GetFeatureSet(reviewIndexList=[reviewIndex])
                 prediction = self.model.predict(reviewVector)
-                if prediction[0] == review.isTruthful:
-                    correctPredictionCount += 1
-                elif prediction[0]:
-                    fakePositiveCount += 1
-                else:
-                    fakeNegativeCount += 1
+                if prediction[0] and review.isTruthful:
+                    trueTruthfulCount += 1
+                elif prediction[0] and not review.isTruthful:
+                    falseTruthfulCount += 1
+                elif not prediction[0] and not review.isTruthful:
+                    trueDeceitfulCount += 1
+                elif not prediction[0] and review.isTruthful:
+                    falseDeceitfulCount += 1
                 classifierResultList.append((review.title, review.isTruthful, prediction[0]))
 
-            classifierResult = ClassifierResult(fold=i, precision=correctPredictionCount/validationReviewCount,
-                                                fakePositives=fakePositiveCount/validationReviewCount,
-                                                fakeNegatives=fakeNegativeCount/validationReviewCount,
+            classifierResult = ClassifierResult(trueTruthful=trueTruthfulCount, falseTruthful=falseTruthfulCount,
+                                                trueDeceitful=trueDeceitfulCount, falseDeceitful=falseDeceitfulCount,
                                                 reviewList=classifierResultList)
             listOfResults.append(classifierResult)
 

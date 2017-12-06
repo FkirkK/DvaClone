@@ -20,26 +20,35 @@ class DvaAdaBoostClassifierTests(TestCase):
 
     def test_returns_valid_classifierResult(self):
         # Arrange
+        expectedCount = 1600
 
         # Act
-        classifierResult = self.adaBoostClassifier.Do5FoldValidation()
+        result = self.adaBoostClassifier.Do5FoldValidation()
+        actualCount = result.trueTruthful + result.falseTruthful + result.trueDeceitful + result.falseDeceitful
 
         # Assert
-        self.assertTrue(type(classifierResult) is ClassifierResult)
-        self.assertTrue(0 <= classifierResult.precision <= 1)
+        self.assertTrue(type(result) is ClassifierResult)
+        self.assertEqual(expectedCount, actualCount)
+        self.assertTrue(result.trueTruthful <= 800)
+        self.assertTrue(result.falseTruthful <= 800)
+        self.assertTrue(result.trueDeceitful <= 800)
+        self.assertTrue(result.falseDeceitful <= 800)
 
     def test_returns_expected_result_on_unigram(self):
         # Arrange
-        expectedResult = 0.7975
+        expectedTrueTruthfulCount = 635
+        expectedFalseTruthfulCount = 159
+        expectedTrueDeceitfulCount = 641
+        expectedFalseDeceitfulCount = 165
 
         # Act
         classifierResult = self.adaBoostClassifier.Do5FoldValidation()
 
         # Assert
-        self.assertEqual(expectedResult, classifierResult.precision)
-
-from unittest import TestCase
-from OpinionSpamPackage import DvaNaiveBayesClassifier, OpSpamReader, ClassifierResult
+        self.assertEqual(expectedTrueTruthfulCount, classifierResult.trueTruthful)
+        self.assertEqual(expectedFalseTruthfulCount, classifierResult.falseTruthful)
+        self.assertEqual(expectedTrueDeceitfulCount, classifierResult.trueDeceitful)
+        self.assertEqual(expectedFalseDeceitfulCount, classifierResult.falseDeceitful)
 
 
 class DvaBaggingClassifierTests(TestCase):
@@ -60,20 +69,16 @@ class DvaBaggingClassifierTests(TestCase):
 
     def test_returns_valid_classifierResult(self):
         # Arrange
+        expectedCount = 1600
 
         # Act
-        classifierResult = self.baggingClassifier.Do5FoldValidation()
+        result = self.baggingClassifier.Do5FoldValidation()
+        actualCount = result.trueTruthful + result.falseTruthful + result.trueDeceitful + result.falseDeceitful
 
         # Assert
-        self.assertTrue(type(classifierResult) is ClassifierResult)
-        self.assertTrue(0 <= classifierResult.precision <= 1)
-
-    def test_returns_expected_result_on_unigram(self):
-        # Arrange
-        expectedResultLower = 0.69
-
-        # Act
-        classifierResult = self.baggingClassifier.Do5FoldValidation()
-
-        # Assert
-        self.assertTrue(expectedResultLower <= classifierResult.precision <= 1)
+        self.assertTrue(type(result) is ClassifierResult)
+        self.assertEqual(expectedCount, actualCount)
+        self.assertTrue(result.trueTruthful <= 800)
+        self.assertTrue(result.falseTruthful <= 800)
+        self.assertTrue(result.trueDeceitful <= 800)
+        self.assertTrue(result.falseDeceitful <= 800)

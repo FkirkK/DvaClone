@@ -23,7 +23,7 @@ namespace DvaTest.UnitTest
 
             //Assert 
             Assert.AreEqual(linearSvmResult.RatedDocuments.Count, 1600); // Where 1600 is the number of files read
-            Assert.AreEqual(0.859, linearSvmResult.OverallPrecision, 0.001);
+            Assert.AreEqual(0.859, linearSvmResult.Accuracy, 0.001);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace DvaTest.UnitTest
             var result = (ClassifierResult)ar.RunAnalysis(new List<AnalysisConfiguration>() { config1, config2, config3 }, j);
 
             //Assert
-            Assert.AreEqual(0.859, result.OverallPrecision, 0.001);
+            Assert.AreEqual(0.859, result.Accuracy, 0.001);
         }
 
 

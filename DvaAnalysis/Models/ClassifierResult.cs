@@ -19,35 +19,69 @@ namespace DvaAnalysis.Models
 
         public ClassifierResult(List<RatedDocument> docList)
         {
-            int correctCount = 0;
-            int falsePositiveCount = 0;
-            int falseNegativeCount = 0;
+            int trueTruthful = 0;
+            int falseTruthful = 0;
+            int trueDeceitul = 0;
+            int falseDeceitful = 0;
 
             foreach (RatedDocument doc in docList)
             {
-                if (doc.LabeledClassifier == doc.OurClassifier)
-                    correctCount++;
-                else if (doc.LabeledClassifier == false && doc.OurClassifier == true)
-                    falsePositiveCount++;
-                else if (doc.LabeledClassifier == true && doc.OurClassifier == false)
-                    falseNegativeCount++;
+                if (doc.LabeledClassifier && doc.OurClassifier)
+                    trueTruthful++;
+                else if (!doc.LabeledClassifier && doc.OurClassifier)
+                    falseTruthful++;
+                else if (!doc.LabeledClassifier && !doc.OurClassifier)
+                    trueDeceitul++;
+                else if (doc.LabeledClassifier && !doc.OurClassifier)
+                    falseDeceitful++;
             }
 
-            OverallPrecision = (double)correctCount / (double)docList.Count;
-            FalsePositives = (double)falsePositiveCount / (double)docList.Count;
-            FalseNegatives = (double)falseNegativeCount / (double)docList.Count;
+            TrueTruthful = trueTruthful;
+            FalseTruthful = falseTruthful;
+            TrueDeceitful = trueDeceitul;
+            FalseDeceitful = falseDeceitful;
             RatedDocuments = docList;
         }
 
-        public double OverallPrecision { get; private set; }
-        public int OverallBestFold { get; private set; }
-        public int OverallWorstFold { get; private set; }
-        public double FalsePositives { get; private set; }
-        public int FalsePositivesBestFold { get; private set; }
-        public int FalsePositivesWorstFold { get; private set; }
-        public double FalseNegatives { get; private set; }
-        public int FalseNegativesBestFold { get; private set; }
-        public int FalseNegativesWorstFold { get; private set; }
+        public double Accuracy
+        {
+            get
+            {
+                return (double)(TrueTruthful + TrueDeceitful) / (double)(TrueTruthful + FalseTruthful + TrueDeceitful + FalseDeceitful);
+            }
+        }
+        public double TruthfulPrecision
+        {
+            get
+            {
+                return (double)TrueTruthful / (double)(TrueTruthful + FalseTruthful);
+            }
+        }
+        public double TruthfulRecall
+        {
+            get
+            {
+                return (double)TrueTruthful / (double)(TrueTruthful + FalseDeceitful);
+            }
+        }
+        public double DeceitfulPrecision
+        {
+            get
+            {
+                return (double)TrueDeceitful / (double)(TrueDeceitful + FalseDeceitful);
+            }
+        }
+        public double DeceitfulRecall
+        {
+            get
+            {
+                return (double)TrueDeceitful / (double)(TrueDeceitful + FalseTruthful);
+            }
+        }
+        public int TrueTruthful { get; private set; }
+        public int FalseTruthful { get; private set; }
+        public int TrueDeceitful { get; private set; }
+        public int FalseDeceitful { get; private set; }
         public IList<RatedDocument> RatedDocuments { get; private set; }
 
         public override bool Equals(object obj)
@@ -58,15 +92,11 @@ namespace DvaAnalysis.Models
 
             var isSame = true;
 
-            isSame &= OverallPrecision.Equals(svmResult.OverallPrecision);
-            isSame &= OverallBestFold.Equals(svmResult.OverallBestFold);
-            isSame &= OverallWorstFold.Equals(svmResult.OverallWorstFold);
-            isSame &= FalsePositives.Equals(svmResult.FalsePositives);
-            isSame &= FalsePositivesBestFold.Equals(svmResult.FalsePositivesBestFold);
-            isSame &= FalsePositivesWorstFold.Equals(svmResult.FalsePositivesWorstFold);
-            isSame &= FalseNegatives.Equals(svmResult.FalseNegatives);
-            isSame &= FalseNegativesBestFold.Equals(svmResult.FalseNegativesBestFold);
-            isSame &= FalseNegativesWorstFold.Equals(svmResult.FalseNegativesWorstFold);
+            isSame &= Accuracy.Equals(svmResult.Accuracy);
+            isSame &= TrueTruthful.Equals(svmResult.TrueTruthful);
+            isSame &= FalseTruthful.Equals(svmResult.FalseTruthful);
+            isSame &= TrueDeceitful.Equals(svmResult.TrueDeceitful);
+            isSame &= FalseDeceitful.Equals(svmResult.FalseDeceitful);
             isSame &= RatedDocuments.Count == svmResult.RatedDocuments.Count;
 
             if (isSame)
@@ -83,20 +113,15 @@ namespace DvaAnalysis.Models
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var splitInput = input.Split(',');
 
-            if (splitInput.Length >= 9 && splitInput.Length % 3 == 0)
+            if (splitInput.Length >= 4 && splitInput.Length % 3 == 1)
             {
-                OverallPrecision = double.Parse(splitInput[0]);
-                OverallBestFold = int.Parse(splitInput[1]);
-                OverallWorstFold = int.Parse(splitInput[2]);
-                FalsePositives = double.Parse(splitInput[3]);
-                FalsePositivesBestFold = int.Parse(splitInput[4]);
-                FalsePositivesWorstFold = int.Parse(splitInput[5]);
-                FalseNegatives = double.Parse(splitInput[6]);
-                FalseNegativesBestFold = int.Parse(splitInput[7]);
-                FalseNegativesWorstFold = int.Parse(splitInput[8]);
+                TrueTruthful = int.Parse(splitInput[0]);
+                FalseTruthful = int.Parse(splitInput[1]);
+                TrueDeceitful = int.Parse(splitInput[2]);
+                FalseDeceitful = int.Parse(splitInput[3]);
 
                 var docList = new List<RatedDocument>();
-                for (int i = 9; i < splitInput.Length; i += 3)
+                for (int i = 4; i < splitInput.Length; i += 3)
                 {
                     string name = splitInput[i].Trim();
                     bool deceptive = splitInput[i + 1].Trim() == "1";
