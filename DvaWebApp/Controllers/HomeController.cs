@@ -38,9 +38,6 @@ namespace DvaWebApp.Controllers
         [HttpPost]
         public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
             var v = ViewBag;
             Committee selectedCommittee = CommitteeExtension.Deprettify(asm.SelectedCommittee);
             IAnalysisRunner runner = new AnalysisRunner();
@@ -72,7 +69,6 @@ namespace DvaWebApp.Controllers
 
             var result = runner.RunAnalysis(configs, committee); 
             ViewBag.ClassifierResult = result;
-            ViewBag.StopwatchTime = sw.Elapsed.ToString();
 
             return View();
         }
