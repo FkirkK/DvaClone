@@ -1,4 +1,5 @@
 ﻿@model DvaWebApp.Models.AlgorithmSettingsModel
+@using DvaAnalysis.Committees
 
 @{
     ViewBag.Title = "Choose algorithms";
@@ -41,7 +42,7 @@
                 @(Html.DropDownListFor(x => x.AlgorithmSettings[i].SelectedClassification, Model.AlgorithmSettings[i].ClassificationList, "Select Classification", new {@class = "form-control", @id = "ClassificationDropDown"+i}))
             </div>
         </div>
-        if (Model.SelectedCommittee == "WeightedCommittee")
+        if (CommitteeExtension.Deprettify(Model.SelectedCommittee).ToString() == "WeightedCommittee")
         {
              <div class="row">
                  <div class="col-md-4 col-md-offset-2">

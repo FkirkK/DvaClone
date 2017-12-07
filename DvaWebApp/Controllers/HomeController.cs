@@ -39,7 +39,7 @@ namespace DvaWebApp.Controllers
         public IActionResult DeceptionAnalysisResult(AlgorithmSettingsModel asm)
         {
             var v = ViewBag;
-            Committee selectedCommittee = (Committee)Enum.Parse(typeof(Committee), asm.SelectedCommittee);
+            Committee selectedCommittee = CommitteeExtension.Deprettify(asm.SelectedCommittee);
             IAnalysisRunner runner = new AnalysisRunner();
             List<AnalysisConfiguration> configs = new List<AnalysisConfiguration>();
 
