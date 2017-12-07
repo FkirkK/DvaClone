@@ -22,7 +22,8 @@ namespace DvaWebApp.Models
         public SingleAlgorithmSettings()
         {
             FeatureSetList = new SelectList(Enum.GetNames(typeof(FeatureSet)));
-            ClassificationList = new SelectList(Enum.GetNames(typeof(Classification)));
+
+            ClassificationList = GetPrettyClassificationList();
         }
 
         public SelectList FeatureSetList { get; set; }
@@ -30,5 +31,18 @@ namespace DvaWebApp.Models
         public string SelectedFeatureSet { get; set; }
         public string SelectedClassification { get; set; }
         public double SelectedWeight { get; set; }
+
+        private SelectList GetPrettyClassificationList()
+        {
+            var listOfClassifications = Enum.GetValues(typeof(Classification));
+            List<string> prettyClassificationList = new List<string>();
+
+            foreach (var c in listOfClassifications)
+            {
+                prettyClassificationList.Add(((Classification)c).Prettify());
+            }
+
+            return new SelectList(prettyClassificationList);
+        }
     }
 }

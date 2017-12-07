@@ -46,7 +46,7 @@ namespace DvaWebApp.Controllers
             foreach (var algSetting in asm.AlgorithmSettings)
             {
                 FeatureSet selectedFeatureSet = (FeatureSet)Enum.Parse(typeof(FeatureSet), algSetting.SelectedFeatureSet);
-                Classification selectedClassification = (Classification)Enum.Parse(typeof(Classification), algSetting.SelectedClassification);
+                Classification selectedClassification = ClassificationExtension.Deprettify(algSetting.SelectedClassification);
 
                 PythonConfiguration config = new PythonConfiguration(selectedClassification, selectedFeatureSet);
                 configs.Add(config);
