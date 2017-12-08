@@ -10,11 +10,7 @@
 </div>
 <div class="row">
     <div class="col-md-10">
-        <p style="font-size: 16px">A committee is a way to combine output from different classifiers given the same input to obtain a single better classification. 
-            It is possible to choose between a Majority Committee or Weighted Committee. The Majority Committee (ensemble averaging) runs each 
-            deception detection algorithm and decides the documents truthfulness based on what the majority of the algorithms classify. If the 
-            Weighted Committee is chosen, it assigns weights to the specific algorithms. So if an algorithm is known to be very precise, it is given 
-            a larger weight to let the algorithm dominate the results.</p>
+        <p style="font-size: 16px">A committee is a way to combine output from different analyses given the same input to obtain a single better analysis. It is possible to choose between a Majority Committee or Weighted Committee. The Majority Committee (ensemble averaging) runs each deception detection analysis and decides the documents truthfulness based on what the majority of the algorithms classify. Weighted Committee allows to manually assign weights to each analysis.</p>
     </div>
 </div>
 <br />
@@ -24,10 +20,10 @@
 <form method="post">
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
-            <h4>Select number of algorithms to run: </h4>
+            <h4>Select number of analyses to run: </h4>
         </div>
         <div class="col-md-4">
-            @(Html.DropDownListFor(x => x.SelectedAlgorithmCount, new SelectList(new string[] { "1", "2", "3", "4", "5" }), "Select number of algorithms to run", new { @id = "AlgorithmCountDropDown", @class = "form-control" }))
+            @(Html.DropDownListFor(x => x.SelectedAlgorithmCount, new SelectList(new string[] { "1", "2", "3", "4", "5" }), "Select number of analyses to run", new { @id = "AlgorithmCountDropDown", @class = "form-control" }))
         </div>
     </div>
     <div class="row">

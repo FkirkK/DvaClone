@@ -2,7 +2,7 @@
 @using DvaAnalysis.Committees
 
 @{
-    ViewBag.Title = "Choose algorithms";
+    ViewBag.Title = "Choose analyses";
 }
 
 
@@ -13,10 +13,7 @@
 </div>
 <div class="row">
     <div class="col-md-10">
-        <p style="font-size: 16px">Each deception detection algorithm is split into two parts, a dimensionalizer and a classifier. 
-            Each dimensionalizer and classifier are known from machine learning and can be combined as you wish.
-            A dimensionalizer is a method used to extract a feature set from a data set of labelled documents.
-            A classifier learns a model based on the output from a dimensionalizer and uses the model to classify unlabelled data.</p>
+        <p style="font-size: 16px">Each deception detection analysis is split into two parts, a dimensionalizer and a classifier. Any dimensionalizers can be used with any classifier. A dimensionalizer is a method used to extract a feature set from a data set of labelled documents. A classifier learns a model based on the output from a dimensionalizer and uses the model to classify unlabeled data.</p>
     </div>
 </div>
 <br/>
@@ -25,7 +22,7 @@
 <form method="post">
     @for (int i=0; i<Model.AlgorithmSettings.Count; i++)
     {
-        <h3>Algorithm @(i+1)</h3>
+        <h3>Analysis @(i+1)</h3>
         <div class="row">
             <div class="col-md-4 col-md-offset-2">
                 <h4>Select feature set: </h4>
