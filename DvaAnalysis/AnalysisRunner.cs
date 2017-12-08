@@ -20,9 +20,19 @@ namespace DvaAnalysis
             string analysisReturnString = RunConfiguration(config);
 
             if (analysisReturnString == null)
-                throw new Exception("The analysis result was null");
+                return null;
+            //throw new Exception("The analysis result was null");
+            IResult result;
+            try
+            {
+                result = committee.ClassifyResult(new ClassifierResult(analysisReturnString));
 
-            IResult result = committee.ClassifyResult(new ClassifierResult(analysisReturnString));
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
             return result;
         }
 

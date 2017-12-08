@@ -16,21 +16,33 @@ namespace DvaResultGenerator
             MajorityCommittee mc = new MajorityCommittee();
             Stopwatch sw = new Stopwatch();
 
+            int ignoreCount = 2, count = 0;
+
             foreach (Classification classifier in Enum.GetValues(typeof(Classification)))
             {
+                if (count < ignoreCount)
+                {
+                    count++;
+                    continue;
+                }
+
                 List<Tuple<IResult, TimeSpan>> results = new List<Tuple<IResult, TimeSpan>>();
                 foreach (FeatureSet feature in Enum.GetValues(typeof(FeatureSet)))
                 {
                     PythonConfiguration config = new PythonConfiguration(classifier, feature);
                     sw.Restart();
+                    var res = ar.RunAnalysis(config, mc);
 
-                    results.Add(new Tuple<IResult, TimeSpan>(ar.RunAnalysis(config, mc),sw.Elapsed));
+                    if (res == null)
+                        res = new ErrorResult("Error result was null");
+
+                    results.Add(new Tuple<IResult, TimeSpan>(res ,sw.Elapsed));
                 }
-                PrintLatexResults(results, sw.Elapsed, classifier.ToString());
+                PrintLatexResults(results, classifier.ToString());
             }
         }
 
-        static void PrintLatexResults(List<Tuple<IResult, TimeSpan>> res, TimeSpan time, string classifier)
+        static void PrintLatexResults(List<Tuple<IResult, TimeSpan>> res, string classifier)
         {
             using (StreamWriter file = new StreamWriter(@"C:\Users\marcb\Documents\GitHub\Dva\Results.txt", true))
             {
@@ -40,20 +52,25 @@ namespace DvaResultGenerator
                 file.WriteLine("\\label{test-result-AdaBoost}");
                 file.WriteLine("\\begin{tabular}{| l | r | r | r | r | r | r |}\\hline");
                 file.WriteLine("Dimensionalizer & Accuracy & T.Precision & T.Recall & D.Precision & D.Recall & Runtime \\\\ \\hline");
-                file.WriteLine("Unigram & " + PrintAlgorithmLine((ClassifierResult)res[0].Item1, res[0].Item2));
-                file.WriteLine("Bigram & " + PrintAlgorithmLine((ClassifierResult)res[1].Item1, res[1].Item2));
-                file.WriteLine("Trigram & " + PrintAlgorithmLine((ClassifierResult)res[2].Item1, res[2].Item2));
-                file.WriteLine("Bigram+ & " + PrintAlgorithmLine((ClassifierResult)res[3].Item1, res[3].Item2));
-                file.WriteLine("Trigram+ & " + PrintAlgorithmLine((ClassifierResult)res[4].Item1, res[4].Item2));
-                file.WriteLine("Doc2Vec & " + PrintAlgorithmLine((ClassifierResult)res[5].Item1, res[5].Item2));
+                file.WriteLine("Unigram & " + PrintAlgorithmLine(res[0].Item1, res[0].Item2));
+                file.WriteLine("Bigram & " + PrintAlgorithmLine(res[1].Item1, res[1].Item2));
+                file.WriteLine("Trigram & " + PrintAlgorithmLine(res[2].Item1, res[2].Item2));
+                file.WriteLine("Bigram+ & " + PrintAlgorithmLine(res[3].Item1, res[3].Item2));
+                file.WriteLine("Trigram+ & " + PrintAlgorithmLine(res[4].Item1, res[4].Item2));
+                file.WriteLine("Doc2Vec & " + PrintAlgorithmLine(res[5].Item1, res[5].Item2));
                 file.WriteLine("\\end{tabular}");
                 file.WriteLine("\\caption{"+ classifier +"}");
                 file.WriteLine("\\end{table}");
             }
         }
 
-        static string PrintAlgorithmLine(ClassifierResult res, TimeSpan time)
+        static string PrintAlgorithmLine(IResult result, TimeSpan time)
         {
+            if (result is ErrorResult res2)
+                return res2.Message + " & & & & & \\\\ \\hline";
+
+            var res = (ClassifierResult) result;
+
             return Math.Round(res.Accuracy * 100, 1) + "\\% & " + Math.Round(res.TruthfulPrecision * 100, 1) + "\\% & " + Math.Round(res.TruthfulRecall * 100, 1) + "\\% & " +
                    Math.Round(res.DeceitfulPrecision * 100, 1) + "\\% & " + Math.Round(res.DeceitfulRecall * 100, 1) + "\\% & " + time.Minutes + " : " + time.Seconds + " \\\\ \\hline";
         }
