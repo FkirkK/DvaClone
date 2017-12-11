@@ -12,6 +12,10 @@ namespace DvaResultGenerator
     {
         static void Main(string[] args)
         {
+
+
+            var derpface = Enum.GetValues(typeof(FeatureSet));
+
             AnalysisRunner ar = new AnalysisRunner();
             MajorityCommittee mc = new MajorityCommittee();
             Stopwatch sw = new Stopwatch();
@@ -54,8 +58,8 @@ namespace DvaResultGenerator
                 file.WriteLine("Dimensionalizer & Accuracy & T.Precision & T.Recall & D.Precision & D.Recall & Runtime \\\\ \\hline");
                 file.WriteLine("Unigram & " + PrintAlgorithmLine(res[0].Item1, res[0].Item2));
                 file.WriteLine("Bigram & " + PrintAlgorithmLine(res[1].Item1, res[1].Item2));
-                file.WriteLine("Trigram & " + PrintAlgorithmLine(res[2].Item1, res[2].Item2));
-                file.WriteLine("Bigram+ & " + PrintAlgorithmLine(res[3].Item1, res[3].Item2));
+                file.WriteLine("Trigram & " + PrintAlgorithmLine(res[3].Item1, res[3].Item2));
+                file.WriteLine("Bigram+ & " + PrintAlgorithmLine(res[2].Item1, res[2].Item2));
                 file.WriteLine("Trigram+ & " + PrintAlgorithmLine(res[4].Item1, res[4].Item2));
                 file.WriteLine("Doc2Vec & " + PrintAlgorithmLine(res[5].Item1, res[5].Item2));
                 file.WriteLine("\\end{tabular}");
