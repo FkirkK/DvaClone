@@ -22,6 +22,7 @@ namespace DvaResultGenerator
                 List<Tuple<IResult, TimeSpan>> results = new List<Tuple<IResult, TimeSpan>>();
                 foreach (FeatureSet feature in Enum.GetValues(typeof(FeatureSet)))
                 {
+                    Console.WriteLine("Doing: " + classifier.ToString() + "-" + feature.ToString());
                     PythonConfiguration config = new PythonConfiguration(classifier, feature);
                     sw.Restart();
                     var res = ar.RunAnalysis(config, mc);
@@ -45,7 +46,7 @@ namespace DvaResultGenerator
 
         static void PrintLatexResults(List<Tuple<IResult, TimeSpan>> res, string classifier)
         {
-            using (StreamWriter file = new StreamWriter(@"C:\Users\mathi\Documents\GitHub\Dva.txt", true))
+            using (StreamWriter file = new StreamWriter(@"/home/bs/Desktop/Results.txt", true))
             {
                 file.WriteLine("\\subsection *{" + classifier + "}");
                 file.WriteLine("\\begin{table}[H]");
