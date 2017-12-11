@@ -5,6 +5,7 @@ using System.IO;
 using DvaAnalysis;
 using DvaAnalysis.Committees;
 using DvaAnalysis.Models;
+using System.Linq;
 
 namespace DvaResultGenerator
 {
@@ -30,13 +31,21 @@ namespace DvaResultGenerator
 
                     results.Add(new Tuple<IResult, TimeSpan>(res ,sw.Elapsed));
                 }
+
+                List<IResult> readyForCommittee = new List<IResult>();
+                for (int i = 0; i < 5; i++)
+                {
+                    readyForCommittee.Add(results[i].Item1);
+                }
+                results.Add(new Tuple<IResult, TimeSpan>(mc.ClassifyResults(readyForCommittee), new TimeSpan()));
+
                 PrintLatexResults(results, classifier.ToString());
             }
         }
 
         static void PrintLatexResults(List<Tuple<IResult, TimeSpan>> res, string classifier)
         {
-            using (StreamWriter file = new StreamWriter(@"C:\Users\marcb\Documents\GitHub\Dva\Results.txt", true))
+            using (StreamWriter file = new StreamWriter(@"C:\Users\mathi\Documents\GitHub\Dva.txt", true))
             {
                 file.WriteLine("\\subsection *{" + classifier + "}");
                 file.WriteLine("\\begin{table}[H]");
@@ -50,6 +59,7 @@ namespace DvaResultGenerator
                 file.WriteLine("Bigram+ & " + PrintAlgorithmLine(res[2].Item1, res[2].Item2));
                 file.WriteLine("Trigram+ & " + PrintAlgorithmLine(res[4].Item1, res[4].Item2));
                 file.WriteLine("Doc2Vec & " + PrintAlgorithmLine(res[5].Item1, res[5].Item2));
+                file.WriteLine("Combined & " + PrintAlgorithmLine(res[6].Item1, res[6].Item2));
                 file.WriteLine("\\end{tabular}");
                 file.WriteLine("\\caption{"+ classifier +"}");
                 file.WriteLine("\\end{table}");

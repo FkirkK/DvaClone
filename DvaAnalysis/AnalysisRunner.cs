@@ -25,8 +25,7 @@ namespace DvaAnalysis
             IResult result;
             try
             {
-                result = committee.ClassifyResult(new ClassifierResult(analysisReturnString));
-
+                result = (new ClassifierResult(analysisReturnString));
             }
             catch (Exception e)
             {
