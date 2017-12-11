@@ -12,24 +12,12 @@ namespace DvaResultGenerator
     {
         static void Main(string[] args)
         {
-
-
-            var derpface = Enum.GetValues(typeof(FeatureSet));
-
             AnalysisRunner ar = new AnalysisRunner();
             MajorityCommittee mc = new MajorityCommittee();
             Stopwatch sw = new Stopwatch();
 
-            int ignoreCount = 2, count = 0;
-
             foreach (Classification classifier in Enum.GetValues(typeof(Classification)))
             {
-                if (count < ignoreCount)
-                {
-                    count++;
-                    continue;
-                }
-
                 List<Tuple<IResult, TimeSpan>> results = new List<Tuple<IResult, TimeSpan>>();
                 foreach (FeatureSet feature in Enum.GetValues(typeof(FeatureSet)))
                 {
