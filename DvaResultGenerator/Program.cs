@@ -51,7 +51,6 @@ namespace DvaResultGenerator
                 file.WriteLine("\\subsection *{" + classifier + "}");
                 file.WriteLine("\\begin{table}[H]");
                 file.WriteLine("\\centering");
-                file.WriteLine("\\label{test-result-AdaBoost}");
                 file.WriteLine("\\begin{tabular}{| l | r | r | r | r | r | r |}\\hline");
                 file.WriteLine("Dimensionalizer & Accuracy & T.Precision & T.Recall & D.Precision & D.Recall & Runtime \\\\ \\hline");
                 file.WriteLine("Unigram & " + PrintAlgorithmLine(res[0].Item1, res[0].Item2));
@@ -63,6 +62,7 @@ namespace DvaResultGenerator
                 file.WriteLine("Combined & " + PrintAlgorithmLine(res[6].Item1, res[6].Item2));
                 file.WriteLine("\\end{tabular}");
                 file.WriteLine("\\caption{"+ classifier +"}");
+                file.WriteLine("\\label{test-result-AdaBoost}");
                 file.WriteLine("\\end{table}");
             }
         }
