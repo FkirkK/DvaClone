@@ -26,7 +26,7 @@ namespace DvaResultGenerator
 
                     results.Add(new Tuple<IResult, TimeSpan>(ar.RunAnalysis(config, mc),sw.Elapsed));
                 }
-                PrintLatexResults(results, sw.Elapsed, classifier.ToString());
+                PrintLatexResults(results, sw.Elapsed, classifier.Prettify());
             }
         }
 
@@ -46,7 +46,7 @@ namespace DvaResultGenerator
                 file.WriteLine("Trigram+ & " + PrintAlgorithmLine((ClassifierResult)res[4].Item1, res[4].Item2));
                 file.WriteLine("Doc2Vec & " + PrintAlgorithmLine((ClassifierResult)res[5].Item1, res[5].Item2));
                 file.WriteLine("\\end{tabular}");
-                file.WriteLine("\\caption{"+ classifier +"}");
+                file.WriteLine("\\caption{"+ classifier +" results}");
                 file.WriteLine("\\label{test-result-AdaBoost}");
                 file.WriteLine("\\end{table}");
             }
