@@ -38,7 +38,7 @@ namespace DvaResultGenerator
                 file.WriteLine("\\begin{table}[H]");
                 file.WriteLine("\\centering");
                 file.WriteLine("\\begin{tabular}{| l | r | r | r | r | r | r |}\\hline");
-                file.WriteLine("Dimensionalizer & Accuracy & T.Precision & T.Recall & D.Precision & D.Recall & Runtime \\\\ \\hline");
+                file.WriteLine("Dim. & Accuracy & T.Precision & T.Recall & D.Precision & D.Recall & Runtime \\\\ \\hline");
                 file.WriteLine("Unigram & " + PrintAlgorithmLine((ClassifierResult)res[0].Item1, res[0].Item2));
                 file.WriteLine("Bigram & " + PrintAlgorithmLine((ClassifierResult)res[1].Item1, res[1].Item2));
                 file.WriteLine("Trigram & " + PrintAlgorithmLine((ClassifierResult)res[2].Item1, res[2].Item2));
